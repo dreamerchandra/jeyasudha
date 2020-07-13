@@ -1,0 +1,43 @@
+.nav {
+  --nav-width: 25rem;
+}
+
+.nav {
+  width: var(--nav-width);
+  /* margin-left: calc(-1 * var(--nav-width)); */
+  height: 100vh;
+  background-color: var(--blue5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  overflow-y: auto;
+  transition: margin-left .5s ease;
+}
+
+.open {
+  margin-left: 0;
+}
+
+.nav a {
+  z-index: 2;
+  width: 80%;
+  margin: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--blue5);
+  background-color: var(--blue1);
+}
+
+@media only screen and (max-width: 1100px) {
+  .nav {
+    width: 100vw;
+    height: 100vh;
+    margin-left: -100vw;
+    transition: margin-left .5s ease;
+  }
+
+  .open {
+    margin-left: 0;
+  }
+}

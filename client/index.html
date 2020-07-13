@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer form</title>
+</head>
+<link rel="stylesheet" href="./css/index.css">
+
+<body>
+
+  <header class="header flex center">
+    <h1>Jeyasudha Construction & Blue Metals</h1>
+  </header>
+
+  <div class="menu-container">
+    <div class="menu">
+      <div class="bar1"></div>
+      <div class="bar2"></div>
+      <div class="bar3"></div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="flex-c center">
+      <a href="" class="paper paper-raise-flatten btn">Billing</a>
+      <a href="" class="paper paper-raise-flatten btn">Accounts</a>
+      <a href="" class="paper paper-raise-flatten btn">Salary</a>
+      <a href="" class="paper paper-raise-flatten btn">Staff details</a>
+      <a href="" class="paper paper-raise-flatten btn">Customer details</a>
+      <a href="" class="paper paper-raise-flatten btn">Receipt</a>
+      <a href="" class="paper paper-raise-flatten btn">Database</a>
+      <a href="" class="paper paper-raise-flatten btn">Print Invoice</a>
+    </div>
+  </nav>
+
+  <main class="main-container">
+    <div class="main">
+      <p>Customer Name/ID</p>
+      <input type="text">
+      <p>Address</p>
+      <input type="text">
+      <p>Driver Name/Vehicle Name</p>
+      <input type="text">
+      <p>Particulars</p>
+      <input type="text">
+      <p>Unit</p>
+      <input type="text">
+      <p>Paid</p>
+      <input type="text">
+      <p>Balance</p>
+      <input type="text">
+    </div>
+  </main>
+
+  <section class="print">
+    <div class="print-container">
+      <h1 class="title">Bill Structure</h1>
+      <div class="print-content">
+        <table class="item">
+          <col>
+          <colgroup span="3"></colgroup>
+          <colgroup span="2"></colgroup>
+          <tr>
+            <th colspan="3"></th>
+            <th colspan="2">Price</th>
+          </tr>
+          <tr>
+            <th>S.No</th>
+            <th>Particulars</th>
+            <th>Unit</th>
+            <th>Rs</th>
+            <th>Paise</th>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </section>
+  <footer class="footer">
+    <button class="btn paper">Cash</button>
+    <button class="btn paper">Credit</button>
+    <button class="btn paper">Print</button>
+  </footer>
+</body>
+
+<script>
+  document.querySelector('.menu').addEventListener('click', () => {
+    if (document.querySelector('.menu').classList.contains('close')) {
+      document.querySelector('.menu').classList.remove('close')
+      document.querySelector('.nav').classList.remove('open');
+    } else {
+      document.querySelector('.menu').classList.add('close')
+      document.querySelector('.nav').classList.add('open');
+
+    }
+  })
+</script>
+
+</html>

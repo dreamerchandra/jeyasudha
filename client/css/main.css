@@ -1,0 +1,69 @@
+.main-container {
+  display: flex;
+  height: 80vh;
+  width: 75vw;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+.main {
+  display: grid;
+  gap: 2rem;
+  height: auto;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.main p {
+  justify-self: end;
+  text-align: right;
+  font-size: 1.5rem;
+  max-width: 30rem;
+  max-height: 4rem;
+  overflow: hidden;
+  color: var(--blue5);
+}
+
+.main input {
+  width: 30rem;
+  font-size: 1.5rem;
+  padding: 10px;
+  background-color: var(--blue2);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 1px solid grey;
+}
+
+
+@media only screen and (max-width: 650px) {
+  .main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main p {
+    margin: 0.5rem auto 0;
+  }
+
+  .main input {
+    margin: 0.5rem auto 0;
+  }
+
+  .main-container {
+    display: flex;
+    height: 80vh;
+    width: 60vw;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 auto;
+    overflow-y: auto;
+  }
+}
