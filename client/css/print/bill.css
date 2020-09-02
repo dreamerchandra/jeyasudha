@@ -1,0 +1,46 @@
+.bill {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  justify-content: space-around;
+}
+
+.bill>p {
+  max-height: 1.5rem;
+  overflow: hidden;
+}
+
+.bill>h5 {
+  padding: 2px;
+  box-sizing: content-box;
+
+}
+
+.bill>p {
+  padding: 10px;
+  box-sizing: content-box;
+}
+
+.bill-border-r {
+  border-right: 2px solid black;
+}
+
+.bill-border-l {
+  border-left: 2px solid black;
+}
+
+.bill-border-t {
+  border-top: 2px solid black;
+}
+
+.bill-border-b {
+  border-bottom: 2px solid black;
+}
+
+.super-center {
+  display: grid;
+  place-content: center;
+}
+
+.align-right {
+  text-align: right;
+}
