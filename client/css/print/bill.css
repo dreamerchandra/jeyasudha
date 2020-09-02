@@ -1,46 +1,84 @@
-.bill {
-  display: grid;
-  grid-template-columns: auto 1fr auto auto auto;
-  justify-content: space-around;
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  font-size: 62.5%
 }
 
-.bill>p {
-  max-height: 1.5rem;
-  overflow: hidden;
+.bill-table td,
+.bill-table th {
+  padding: 15px;
+  border-bottom: 1px solid #fff
 }
 
-.bill>h5 {
-  padding: 2px;
-  box-sizing: content-box;
-
+.bill-table th {
+  white-space: nowrap;
+  font-weight: 400;
+  font-size: 16px
 }
 
-.bill>p {
-  padding: 10px;
-  box-sizing: content-box;
+.bill-table td h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.2em;
+  text-align: right;
 }
 
-.bill-border-r {
-  border-right: 2px solid black;
+.bill-table .qty,
+.bill-table .total,
+.bill-table .unit {
+  text-align: right;
+  font-size: 1.2em
 }
 
-.bill-border-l {
-  border-left: 2px solid black;
+.bill-table .total {
+  text-align: center;
 }
 
-.bill-border-t {
-  border-top: 2px solid black;
+.bill-table .no {
+  font-size: 1.6em;
 }
 
-.bill-border-b {
+
+.bill-table tbody tr:last-child td {
+  border: none
+}
+
+.bill-table tbody {
   border-bottom: 2px solid black;
 }
 
-.super-center {
-  display: grid;
-  place-content: center;
+.bill-table tfoot td {
+  background: 0 0;
+  border-bottom: none;
+  white-space: nowrap;
+  text-align: right;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-top: 1px solid #aaa
 }
 
-.align-right {
-  text-align: right;
+.bill-table tfoot tr:first-child td {
+  border-top: none
+}
+
+.bill-table tfoot tr:last-child td {
+  font-size: 1.4em;
+}
+
+.bill-table tfoot tr td:first-child {
+  border: none
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-center {
+  text-align: center !important;
 }

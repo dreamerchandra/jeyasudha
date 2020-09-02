@@ -106,42 +106,73 @@
         </div>
         <code class='divider'></code>
         <div class="bill">
-          <!-- header starts -->
-          <h5 class="bill-border-r bill-border-b super-center" style="grid-row: 1/3;">S.No</h5>
-          <h5 class="super-center bill-border-r bill-border-b" style="grid-row: 1/3;">Particulars</h5>
-          <h5 class="super-center bill-border-b " style="grid-row: 1/3;">Unit</h5>
-          <h5 class="super-center bill-border-b bill-border-l " style="grid-column: 4 / 6;">Price</h5>
-          <h5 class="bill-border-l bill-border-b super-center">Rs</h5>
-          <h5 class="bill-border-l bill-border-b super-center">Paisa</h5>
-          <!-- header stops -->
-
-          <!-- material eg 1 starts-->
-          <p class="bill-border-r">1</p>
-          <p class="bill-border-r align-right">Bricks</p>
-          <p class="bill-border-r">23</p>
-          <p class="bill-border-r">253</p>
-          <p class="bill-border-r">10</p>
-          <!-- material eg 1 ends -->
-
-          <!-- material eg 2 starts -->
-          <p class="bill-border-r">2</p>
-          <p class="bill-border-r align-right">Cements and construction materials</p>
-          <p class="bill-border-r">3</p>
-          <p class="bill-border-r">3999</p>
-          <p class="bill-border-r">59</p>
-          <!-- material eg 2 ends -->
-
-          <!-- material eg 2 starts -->
-          <p class="bill-border-r">3</p>
-          <p class="bill-border-r align-right">Pipes</p>
-          <p class="bill-border-r">300</p>
-          <p class="bill-border-r">5000</p>
-          <p class="bill-border-r">99</p>
-          <!-- material eg 2 ends -->
+          <table border="0" cellspacing="0" cellpadding="0" class="bill-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th class="text-center">DESCRIPTION</th>
+                <th class="text-right">UNIT PRICE</th>
+                <th class="text-right">QUANTITY</th>
+                <th class="text-center">TOTAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="no">04</td>
+                <td class="text-left">
+                  <h3>Sand & Cement</h3>
+                </td>
+                <td class="unit">Rs.0.00</td>
+                <td class="qty">100</td>
+                <td class="total">Rs.0.00</td>
+              </tr>
+              <tr>
+                <td class="no">01</td>
+                <td class="text-left">
+                  <h3>Blue marble & tiling</h3>
+                </td>
+                <td class="unit">Rs.40.00</td>
+                <td class="qty">30</td>
+                <td class="total">Rs.1,200.00</td>
+              </tr>
+              <tr>
+                <td class="no">02</td>
+                <td class="text-left">
+                  <h3>Fabrication and transportation</h3>
+                </td>
+                <td class="unit">Rs.40.00</td>
+                <td class="qty">80</td>
+                <td class="total">Rs.3,200.00</td>
+              </tr>
+              <tr>
+                <td class="no">03</td>
+                <td class="text-left">
+                  <h3>Misc</h3>
+                </td>
+                <td class="unit">Rs.40.00</td>
+                <td class="qty">20</td>
+                <td class="total">Rs.800.00</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2"></td>
+                <td colspan="2">SUBTOTAL</td>
+                <td class="text-center">Rs.5,200.00</td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td colspan="2">TAX 25%</td>
+                <td class="text-center">Rs.1,300.00</td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td colspan="2">GRAND TOTAL</td>
+                <td class="text-center">Rs.6,500.00</td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
-        <code class='divider'></code>
-
-        <div class="footer"></div>
       </div>
     </div>
   </section>
