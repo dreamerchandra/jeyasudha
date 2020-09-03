@@ -1,0 +1,84 @@
+.bill-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  font-size: 62.5%
+}
+
+.bill-table td,
+.bill-table th {
+  padding: 15px;
+  border-bottom: 1px solid #fff
+}
+
+.bill-table th {
+  white-space: nowrap;
+  font-weight: 400;
+  font-size: 16px
+}
+
+.bill-table td h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.2em;
+  text-align: right;
+}
+
+.bill-table .qty,
+.bill-table .total,
+.bill-table .unit {
+  text-align: right;
+  font-size: 1.2em
+}
+
+.bill-table .total {
+  text-align: center;
+}
+
+.bill-table .no {
+  font-size: 1.6em;
+}
+
+
+.bill-table tbody tr:last-child td {
+  border: none
+}
+
+.bill-table tbody {
+  border-bottom: 2px solid black;
+}
+
+.bill-table tfoot td {
+  background: 0 0;
+  border-bottom: none;
+  white-space: nowrap;
+  text-align: right;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border-top: 1px solid #aaa
+}
+
+.bill-table tfoot tr:first-child td {
+  border-top: none
+}
+
+.bill-table tfoot tr:last-child td {
+  font-size: 1.4em;
+}
+
+.bill-table tfoot tr td:first-child {
+  border: none
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}

@@ -1,0 +1,11 @@
+.bill-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100px;
+  overflow: hidden;
+  margin: 15px 15px 25px;
+}
+
+.bill-info>span {
+  margin: 5px;
+}

@@ -1,0 +1,40 @@
+.bill-body {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+  border-radius: 10px;
+}
+
+.print-header {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  justify-content: space-between;
+  justify-items: center;
+}
+
+.print-header>h3 {
+  align-self: center;
+  transform: translate(-18px, 3px);
+}
+
+.print-header>* {
+  font-size: 80%;
+}
+
+.bill-body>.print-header>.print-header-items>p {
+  font-size: 8px;
+}
+
+.bill-body>.title {
+  align-self: center;
+  margin: 20px 0;
+  padding: 7px 125px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.bill-body>.title>h2 {
+  font-size: 16px;
+}
