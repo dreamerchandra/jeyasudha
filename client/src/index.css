@@ -105,3 +105,11 @@ h4 {
 }
 
 /* ----END PAPER RAISED EFFECT----  */
+
+/* ----PAPER BUTTON DISBALED------ */
+
+.disabled-btn {
+  background-color: #EAEAEA !important;
+  color: #A8A8A8 !important;
+  cursor: auto;
+}

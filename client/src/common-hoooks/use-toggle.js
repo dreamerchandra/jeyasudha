@@ -6,8 +6,11 @@ export default function useToggle ({
   defaultValue = false,
 }) {
   const [toggle, _setToggle] = useState(defaultValue);
-  const onToggleRef = useRef(onToggle);
-  useDidUpdateEffect(onToggleRef.current.bind(null, toggle), [toggle]);
-  const toggler = () => _setToggle((val) => !val);
+  useDidUpdateEffect(() => {
+    onToggle(toggle);
+  }, [toggle]);
+  const toggler = () => {
+    _setToggle((val) => !val)
+  };
   return { toggler };
 }

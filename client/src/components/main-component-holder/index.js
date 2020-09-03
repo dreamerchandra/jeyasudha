@@ -4,7 +4,7 @@ import './index.css'
 const MainComponentHolder = ({ children }) => {
   return (
     <main className="main-container">
-      {children}
+      <>{children}</>
     </main>
   )
 }

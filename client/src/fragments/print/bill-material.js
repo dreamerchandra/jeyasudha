@@ -3,7 +3,7 @@ import React from 'react';
 
 const BillMaterials = () => (
   <div className="bill">
-    <table border="0" cellspacing="0" cellpadding="0" className="bill-table">
+    <table border="0" cellSpacing="0" cellPadding="0" className="bill-table">
       <thead>
         <tr>
           <th>#</th>
@@ -53,18 +53,18 @@ const BillMaterials = () => (
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="2"></td>
-          <td colspan="2">SUBTOTAL</td>
+          <td colSpan="2"></td>
+          <td colSpan="2">SUBTOTAL</td>
           <td className="text-center">Rs.5,200.00</td>
         </tr>
         <tr>
-          <td colspan="2"></td>
-          <td colspan="2">TAX 25%</td>
+          <td colSpan="2"></td>
+          <td colSpan="2">TAX 25%</td>
           <td className="text-center">Rs.1,300.00</td>
         </tr>
         <tr>
-          <td colspan="2"></td>
-          <td colspan="2">GRAND TOTAL</td>
+          <td colSpan="2"></td>
+          <td colSpan="2">GRAND TOTAL</td>
           <td className="text-center">Rs.6,500.00</td>
         </tr>
       </tfoot>

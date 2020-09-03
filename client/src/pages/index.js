@@ -1,19 +1,14 @@
 import React from 'react';
-import NavBar from '../fragments/nav';
-import Header from '../components/header';
 import Billing from '../fragments/billing';
-import Print from '../fragments/print';
-import Footer from '../fragments/footer';
+import PageFragment from '../fragments/page-fragment';
 
-const MainPage = () => (
-  <>
-    <Header />
-    <NavBar />
-    <Billing />
-    <Print />
-    <Footer />
-  </>
-)
+const MainPage = () => {
+  return (
+    <PageFragment>
+      <Billing />
+    </PageFragment>
+  )
+}
 
 
 export default MainPage;
