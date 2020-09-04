@@ -1,6 +1,5 @@
 import React from 'react';
 import './index.css';
-import useToToggleClassName from '../../common-hoooks/use-toggle-class-name';
 
 const Menu = ({ className, onClick }) => {
   return (

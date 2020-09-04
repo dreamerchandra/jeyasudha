@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './index.css'
 import Input from '../input'
+import { loginWithEmail, signupWithEmail } from '../../js/firebase-auth';
 
 const useToLogin = ({ onLogin, onSignup }) => {
   const [email, _setEmail] = useState('');
@@ -17,7 +18,7 @@ const useToLogin = ({ onLogin, onSignup }) => {
   return { setEmail: setEmail, setPassword: setPassword, loginCb, signupCb }
 }
 
-function LoginView ({ onSignup, onLogin }) {
+function LoginView ({ onSignup = signupWithEmail, onLogin = loginWithEmail }) {
   const { setEmail, setPassword, loginCb, signupCb } = useToLogin({ onSignup, onLogin });
   return (
     <section className="login-page">

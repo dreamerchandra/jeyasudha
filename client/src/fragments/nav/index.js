@@ -28,7 +28,7 @@ const NavBar = () => {
   return (
     <>
       <Menu className={className.menuCx} onClick={toggler} />
-      <Sidebar className={className.sideBarCx} />
+      <Sidebar className={className.sideBarCx} onClick={toggler} />
     </>
   )
 }

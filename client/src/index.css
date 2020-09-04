@@ -112,4 +112,18 @@ h4 {
   background-color: #EAEAEA !important;
   color: #A8A8A8 !important;
   cursor: auto;
+  transition: none;
+}
+
+.disabled-btn::before {
+  box-shadow: none;
+  border-color: #EAEAEA !important;
+}
+
+.disabled-btn:hover {
+  border-color: #EAEAEA !important;
+}
+
+.disabled-btn:hover::before {
+  box-shadow: none;
 }

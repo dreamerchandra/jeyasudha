@@ -1,8 +1,8 @@
 .footer {
-  position: fixed;
-  bottom: 5px;
   display: flex;
-  width: 100vw;
+  width: 50vw;
+  margin: auto;
+  align-content: center;
   height: auto;
   justify-content: center;
   align-items: center;
