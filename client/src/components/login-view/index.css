@@ -19,14 +19,26 @@
 .login-wrapper {
   display: flex;
   flex-direction: column;
+  width: 400px;
 }
 
 .login-page-button-wrapper {
   align-self: flex-end;
   display: flex;
+  user-select: none;
 }
 
 .lp-button {
   width: 100px;
-  margin: 10px 50px;
+  margin: 0 10px;
+}
+
+.password-reset {
+  margin: 15px;
+  font-size: 1.25rem;
+  align-self: flex-end;
+  color: var(--blue5);
+  text-decoration: underline;
+  cursor: pointer;
+  user-select: none;
 }

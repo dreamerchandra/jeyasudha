@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './index.css'
 import Input from '../input'
-import { loginWithEmail, signupWithEmail } from '../../js/firebase-auth';
+import { loginWithEmail, signupWithEmail, sendPasswordResetEmail } from '../../js/firebase-auth';
 
-const useToLogin = ({ onLogin, onSignup }) => {
+const useToLogin = ({ onLogin, onSignup, sendPasswordReset }) => {
   const [email, _setEmail] = useState('');
   const [password, _setPassword] = useState('');
   const loginCb = () => {
@@ -12,14 +12,14 @@ const useToLogin = ({ onLogin, onSignup }) => {
   const signupCb = () => {
     onSignup({ email, password });
   }
-  useEffect(() => console.log(email), [email])
-  const setEmail = () => (event) => _setEmail(event.target.value);
-  const setPassword = () => (event) => _setPassword(event.target.value);
-  return { setEmail: setEmail, setPassword: setPassword, loginCb, signupCb }
+  const setEmail = (event) => _setEmail(event.target.value);
+  const setPassword = (event) => _setPassword(event.target.value);
+  const onResetPassword = () => sendPasswordReset({ email });
+  return { setEmail: setEmail, setPassword: setPassword, loginCb, signupCb, onResetPassword }
 }
 
-function LoginView ({ onSignup = signupWithEmail, onLogin = loginWithEmail }) {
-  const { setEmail, setPassword, loginCb, signupCb } = useToLogin({ onSignup, onLogin });
+function LoginView ({ onSignup = signupWithEmail, onLogin = loginWithEmail, sendPasswordReset = sendPasswordResetEmail }) {
+  const { setEmail, setPassword, loginCb, signupCb, onResetPassword } = useToLogin({ onSignup, onLogin, sendPasswordReset });
   return (
     <section className="login-page">
       <div className="login-wrapper">
@@ -29,6 +29,7 @@ function LoginView ({ onSignup = signupWithEmail, onLogin = loginWithEmail }) {
           <button className="btn paper lp-button" onClick={signupCb}>Signup</button>
           <button className="btn paper lp-button" onClick={loginCb}>Login</button>
         </div>
+        <a className="password-reset" onClick={onResetPassword}>Reset my password</a>
       </div>
     </section >
   )

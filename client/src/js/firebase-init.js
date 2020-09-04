@@ -11,5 +11,5 @@ export default function initializeFirebase () {
     appId: "1:913579087424:web:f9ff1e7c725cd02d30f1a5"
   };
   console.log('initalizing app')
-  initializeApp(firebaseConfig);
+  window.firebase = initializeApp(firebaseConfig);
 }

@@ -42,10 +42,22 @@
 }
 
 .input:focus~label,
-.input:valid~label {
+.input:valid~label,
+.input-given~label {
   top: -20px;
   font-size: 14px;
   color: #5264AE;
+}
+
+.input-none {
+  top: 10px !important;
+  font-size: 18px !important;
+  color: #999 !important;
+}
+
+
+.input-error {
+  color: red;
 }
 
 .input:focus~.input-highlight {

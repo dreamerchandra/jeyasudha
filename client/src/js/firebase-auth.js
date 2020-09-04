@@ -11,3 +11,9 @@ export const signupWithEmail = ({ email, password }) => {
 export const logout = () => {
   auth().signOut();
 };
+
+export const sendPasswordResetEmail = ({ email }) => {
+  auth().sendPasswordResetEmail(email, {
+    url: window.location.href
+  });
+}
