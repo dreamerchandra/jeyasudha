@@ -127,3 +127,7 @@ h4 {
 .disabled-btn:hover::before {
   box-shadow: none;
 }
+
+.hide {
+  display: none;
+}

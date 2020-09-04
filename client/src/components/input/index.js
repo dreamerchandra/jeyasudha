@@ -2,43 +2,49 @@ import React, { useEffect, useRef } from 'react'
 import './index.css';
 
 const useInput = () => {
-  const ref = useRef();
-  const inputValue = ref.current?.value;
+  const inputRef = useRef();
+  const errorRef = useRef();
+  const inputValue = inputRef.current?.value;
+
   useEffect(() => {
     const blurCb = (event) => {
       if (!event.target.validity.valid) {
-        ref.current.classList.add('input-error');
+        inputRef.current.classList.add('input-error');
+        errorRef.current.classList.remove('hide');
       } else {
-        ref.current.classList.remove('input-error');
+        inputRef.current.classList.remove('input-error');
+        errorRef.current.classList.add('hide');
       }
     }
-    ref.current.addEventListener('blur', blurCb);
+    inputRef.current.addEventListener('blur', blurCb);
     return () => {
-      ref.current.removeEventListener('blur', blurCb);
+      inputRef.current.removeEventListener('blur', blurCb);
     }
   }, [])
+
   useEffect(() => {
-    ref.current.classList.remove('input-error');
+    inputRef.current.classList.remove('input-error');
     if (inputValue) {
-      ref.current.classList.add('input-given')
+      inputRef.current.classList.add('input-given')
     } else {
-      ref.current.classList.remove('input-given')
+      inputRef.current.classList.remove('input-given')
     }
   }, [inputValue]);
 
-  return { ref };
+  return { inputRef, errorRef };
 }
 
 
 
-export default function Input ({ title, inputType = 'title', onChange: _onChange }) {
-  const { ref } = useInput();
+export default function Input ({ title, inputType = 'title', onChange: _onChange, errorComponent = "Invalid/Required" }) {
+  const { inputRef, errorRef } = useInput();
   return (
     <span className="input-group">
-      <input className="input" type={inputType} required onChange={_onChange} ref={ref} />
+      <input className="input" type={inputType} required={true} onChange={_onChange} ref={inputRef} />
       <span className="input-highlight"></span>
       <span className="input-bar"></span>
       <label>{title}</label>
+      <div className="input-error hide" ref={errorRef}>{errorComponent}</div>
     </span>
   )
 }

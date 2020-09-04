@@ -7,10 +7,14 @@ const useToLogin = ({ onLogin, onSignup, sendPasswordReset }) => {
   const [email, _setEmail] = useState('');
   const [password, _setPassword] = useState('');
   const loginCb = () => {
-    onLogin({ email, password });
+    if (email && password) {
+      onLogin({ email, password });
+    }
   }
   const signupCb = () => {
-    onSignup({ email, password });
+    if (email && password) {
+      onSignup({ email, password });
+    }
   }
   const setEmail = (event) => _setEmail(event.target.value);
   const setPassword = (event) => _setPassword(event.target.value);
@@ -24,7 +28,7 @@ function LoginView ({ onSignup = signupWithEmail, onLogin = loginWithEmail, send
     <section className="login-page">
       <div className="login-wrapper">
         <Input title="Email" inputType="email" onChange={setEmail} />
-        <Input title="Password" inputType="password" onChange={setPassword} />
+        <Input title="Password" inputType="password" onChange={setPassword} errorComponent='Required' />
         <div className="login-page-button-wrapper">
           <button className="btn paper lp-button" onClick={signupCb}>Signup</button>
           <button className="btn paper lp-button" onClick={loginCb}>Login</button>
