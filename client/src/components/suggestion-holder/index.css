@@ -1,0 +1,15 @@
+.suggestion-holder {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--blue5);
+  flex-direction: column;
+  width: 100%;
+  border-radius: 5px;
+  overflow: scroll;
+  max-height: 170px;
+}
+
+.suggestion-wrapper {
+  position: relative;
+}

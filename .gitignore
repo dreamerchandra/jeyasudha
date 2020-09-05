@@ -63,3 +63,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+arudino1-sa.json
+backup.json
+jeyasudha-sa.json
+client/public/google-services.json

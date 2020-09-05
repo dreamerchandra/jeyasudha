@@ -15,7 +15,10 @@ const AuthenticatedView = ({
   Loader = AuthenticatingUser,
   NonLoggedIn = LoginView,
 }) => {
-  const [user, loading, error] = useAuthState(auth());
+  // const [user, loading, error] = useAuthState(auth());
+  const loading = false;
+  const user = true;
+  const error = false;
   const isNonLoggedIn = !(user || loading || error)
   return (
     <>

@@ -20,7 +20,7 @@
 }
 
 .main input {
-  width: 30rem;
+  width: 100%;
   font-size: 1.5rem;
   padding: 10px;
   background-color: var(--blue2);

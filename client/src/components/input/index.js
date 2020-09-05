@@ -7,18 +7,19 @@ const useInput = () => {
   const inputValue = inputRef.current?.value;
 
   useEffect(() => {
+    const inputNode = inputRef.current;
     const blurCb = (event) => {
       if (!event.target.validity.valid) {
-        inputRef.current.classList.add('input-error');
+        inputNode.classList.add('input-error');
         errorRef.current.classList.remove('hide');
       } else {
-        inputRef.current.classList.remove('input-error');
+        inputNode.classList.remove('input-error');
         errorRef.current.classList.add('hide');
       }
     }
-    inputRef.current.addEventListener('blur', blurCb);
+    inputNode.addEventListener('blur', blurCb);
     return () => {
-      inputRef.current.removeEventListener('blur', blurCb);
+      inputNode.removeEventListener('blur', blurCb);
     }
   }, [])
 
