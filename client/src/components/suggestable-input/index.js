@@ -10,7 +10,7 @@ const SUGGESTION_STATE = {
   ERROR: 'error',
 }
 
-export default class SuggestableInput extends Component {
+export default class SuggestibleInput extends Component {
   fetchSearchResult = debounceFunction({
     callBack: this._fetchSearchResult,
     delay: TYPING_SPEED.SLOW,
@@ -97,7 +97,10 @@ export default class SuggestableInput extends Component {
               <SuggestionItem
                 suggestionList={suggestionList}
                 isLoading={loading}
-                onItemSelected={onSuggestionItemSelected}
+                onItemSelected={(itemId, item) => {
+                  this.setSuggestionVisibility(false)
+                  onSuggestionItemSelected(itemId, item)
+                }}
               />
             </SuggestionHolder>
           )}
