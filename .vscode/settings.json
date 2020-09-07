@@ -1,7 +1,14 @@
 {
-  "liveServer.settings.port": 5501,
-  "editor.formatOnSave": true,
   "cSpell.words": [
     "Jeyasudha"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll": true,
+  },
+  "javascript.format.enable": false,
+  "prettier.eslintIntegration": true,
+  "eslint.workingDirectories": [
+    "./client"
+  ],
 }
