@@ -1,28 +1,9 @@
-import { ref } from "./firebase-helper";
+import { ref, getDataFromQuerySnapShot } from "./firebase-helper";
 
 export function getQueryForCustomerSearch (searchString) {
   return ref().customer.where('name', '>=', searchString).where('name', '<=', `${searchString}~`)
 }
 
-
-const getDataFromQuerySnapShot = (idKey, documentData) => {
-  let returnResult = [];
-  documentData.forEach((doc) => {
-    const data = doc.data();
-    const id = doc.id;
-    if (idKey) {
-      returnResult.push({
-        ...data,
-        [idKey]: id,
-      })
-    } else {
-      returnResult.push({
-        ...data,
-      })
-    }
-  })
-  return returnResult;
-}
 
 /**
  * 

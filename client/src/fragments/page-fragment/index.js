@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from '../nav';
 import Header from '../../components/header';
 import Print from '../print';
-import Footer from '../footer';
 import AuthenticatedView from '../../components/authenticated-view';
 
 const PageFragment = ({ children }) => {
@@ -12,7 +11,6 @@ const PageFragment = ({ children }) => {
       <NavBar />
       <>{children}</>
       <Print />
-      <Footer />
     </AuthenticatedView >
   )
 }

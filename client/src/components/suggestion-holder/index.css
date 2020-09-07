@@ -6,7 +6,7 @@
   flex-direction: column;
   width: 100%;
   border-radius: 5px;
-  overflow: scroll;
+  overflow: auto;
   max-height: 170px;
 }
 

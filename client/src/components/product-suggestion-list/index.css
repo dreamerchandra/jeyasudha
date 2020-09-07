@@ -1,0 +1,33 @@
+.suggestion-item {
+  background-color: #ffffff8c;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: left;
+  margin: 5px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.green {
+  color: green !important;
+}
+
+.red {
+  color: red !important;
+}
+
+@media only screen and (max-width: 650px) {
+  .suggestion-item {
+    flex-direction: column;
+  }
+
+  .suggestion-item h3 {
+    display: none;
+  }
+
+  .suggestion-item div {
+    text-align: left;
+    align-self: flex-start;
+  }
+}

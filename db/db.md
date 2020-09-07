@@ -10,7 +10,7 @@
   }
   ledger: {
     <ledger-id>: {
-      timestamp: <server_time>,
+      createdAt: <server_time>,
       customerId: <customer-id>,
       staffId: <user-id>,
       amount: <number>,
@@ -19,13 +19,13 @@
       paidFor: <MATERIALS: 0, DUE: 1>
     }
   },
-  billId: {
+  billing: {
     <bill-id>: {
       customerId: <customer-id>,
       name: <string>,
       address: <string>,
       vehicleNumber: <string>,
-      timestamp: <timestamp>,
+      createdAt: <timestamp>,
       orders: [
         {
           particular: {
@@ -42,5 +42,12 @@
       cgstCost: <number>,
       netTotal: <number>,
     },
+  },
+  productPricing: {
+    <product-id>: {
+      uniqueName: <string>,
+      fixedPrice: <string>,
+      actualPrice: <string>,
+    }
   }
 }

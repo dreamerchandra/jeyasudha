@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MainComponentHolder from '../../components/main-component-holder';
 import SuggestionHolder from '../../components/suggestion-holder';
 import './index.css';
-import SuggestionItem from '../../components/suggestion-item';
+import SuggestionItem from '../../components/user-suggestion-list';
 import { getQueryForCustomerSearch, getCollectionData } from '../../js/firebase-query';
 import { TYPING_SPEED } from '../../js/common-config';
 import debounceFunction from '../../js/helper/debounce';
@@ -83,25 +83,25 @@ class Billing extends Component {
         <div className="main">
           <p>Customer Name/ID</p>
           <div>
-            <input type="text" value={this.state.name} onChange={this.onInputChange} onKeyUp={this.debouncedSearchCustomer}></input>
+            <input type="text" value={this.state.name} onChange={this.onInputChange} onKeyUp={this.debouncedSearchCustomer} autoComplete={''}></input>
             {this.state.suggestion.show && <SuggestionHolder>
               <SuggestionItem usersInfo={this.state.suggestion.list} isLoading={loading} />
             </SuggestionHolder>}
           </div>
           <p>Address</p>
-          <input type="text"></input>
+          <input type="text" autoComplete={false}></input>
           <p>Driver Name/Vehicle Name</p>
-          <input type="text"></input>
+          <input type="text" autoComplete={false}></input>
           <p>Phone number</p>
-          <input type="text"></input>
+          <input type="text" autoComplete={false}></input>
           <p>Particulars</p>
-          <input type="text"></input>
+          <input type="text" autoComplete={false}></input>
           <p>Unit</p>
-          <input type="text"></input>
+          <input type="text" autoComplete={false}></input>
           <p>Paid</p>
-          <input type="text"></input>
+          <input type="text" autoComplete={false}></input>
           <p>Balance</p>
-          <input type="text"></input>
+          <input type="text" autoComplete={false}></input>
         </div>
       </MainComponentHolder >
     )
