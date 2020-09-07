@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.css';
+import React from 'react'
+import './index.css'
 
 const Header = () => (
   <header className="header flex center">
@@ -7,4 +7,4 @@ const Header = () => (
   </header>
 )
 
-export default Header;
+export default Header

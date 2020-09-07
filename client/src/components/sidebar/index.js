@@ -1,17 +1,22 @@
-import React from 'react';
-import './index.css';
-import { NavLink } from 'react-router-dom';
-import routerConfig from '../../js/routing-config';
+import React from 'react'
+import './index.css'
+import { NavLink } from 'react-router-dom'
+import routerConfig from '../../js/routing-config'
 
 const Sidebar = ({ className, onClick }) => {
   return (
     <nav className={className}>
       <div className="flex-c center">
-        {
-          routerConfig.map((router) => (
-            <NavLink to={router.path} className="paper paper-raise-flatten btn" onClick={onClick} activeClassName='disabled-btn'>{router.linkName}</NavLink>
-          ))
-        }
+        {routerConfig.map((router) => (
+          <NavLink
+            to={router.path}
+            className="paper paper-raise-flatten btn"
+            onClick={onClick}
+            activeClassName="disabled-btn"
+          >
+            {router.linkName}
+          </NavLink>
+        ))}
         {/* <NavLink to='/receipt' className="paper paper-raise-flatten btn" onClick={onClick} activeClassName='disabled-btn'>Receipt</NavLink>
         <NavLink to='/customer' className="paper paper-raise-flatten btn" onClick={onClick} activeClassName='disabled-btn'>Customer details</NavLink>
         <NavLink to='/update-price' className="paper paper-raise-flatten btn" onClick={onClick} activeClassName='disabled-btn'>Price Update</NavLink>
@@ -24,4 +29,4 @@ const Sidebar = ({ className, onClick }) => {
   )
 }
 
-export default Sidebar;
+export default Sidebar

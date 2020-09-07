@@ -1,17 +1,17 @@
-import Billing from "../fragments/billing";
-import PriceUpdate from "../fragments/price-update";
+import Billing from '../fragments/billing'
+import PriceUpdate from '../fragments/price-update'
 
 const routerConfig = [
   {
-    path: "/billing",
+    path: '/billing',
     component: Billing,
     linkName: 'BILLING',
   },
   {
-    path: "/update-price",
+    path: '/update-price',
     component: PriceUpdate,
-    linkName: 'PRICE UPDATE'
-  }
+    linkName: 'PRICE UPDATE',
+  },
 ]
 
-export default routerConfig;
+export default routerConfig

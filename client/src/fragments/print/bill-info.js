@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React from 'react'
 
 const BillInfo = () => (
   <div className="bill-info">
@@ -21,13 +20,10 @@ const BillInfo = () => (
     </span>
     <span>
       <h6>Address</h6>
-      <p>Shrimati Purnima Chattarjee
-      W/o Shri S.N. Chatterjee
-      Village Govindpur
-      PO Karimnagar
-      PRASARPUR
-      Bankura District
-              West bengal 748 027</p>
+      <p>
+        Shrimati Purnima Chattarjee W/o Shri S.N. Chatterjee Village Govindpur PO
+        Karimnagar PRASARPUR Bankura District West bengal 748 027
+      </p>
     </span>
     <span>
       <h6>Vehicle Number/Driver Name</h6>
@@ -36,4 +32,4 @@ const BillInfo = () => (
   </div>
 )
 
-export default BillInfo;
+export default BillInfo

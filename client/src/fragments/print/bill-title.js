@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const BillTitle = () => (
   <div className="title">
@@ -6,5 +6,4 @@ const BillTitle = () => (
   </div>
 )
 
-
-export default BillTitle;
+export default BillTitle

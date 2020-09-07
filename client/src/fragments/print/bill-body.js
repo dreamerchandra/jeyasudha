@@ -1,18 +1,18 @@
-import React from 'react';
-import BillHeader from './bill-header';
-import BillTitle from './bill-title';
-import BillInfo from './bill-info';
-import BillMaterials from './bill-material';
+import React from 'react'
+import BillHeader from './bill-header'
+import BillTitle from './bill-title'
+import BillInfo from './bill-info'
+import BillMaterials from './bill-material'
 
 const BillBody = () => (
   <div className="bill-body">
     <BillHeader />
     <BillTitle />
-    <code className='divider'></code>
+    <code className="divider" />
     <BillInfo />
-    <code className='divider'></code>
+    <code className="divider" />
     <BillMaterials />
   </div>
 )
 
-export default BillBody;
+export default BillBody

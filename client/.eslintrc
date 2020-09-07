@@ -12,11 +12,14 @@
   ],
   "rules": {
     "semi": 0,
+    "import/prefer-default-export": "off",
+    "react/prop-types": "warn",
     "react/jsx-filename-extension": [1, {
       "extensions": [".js", ".jsx"]
     }],
     "no-underscore-dangle": "off",
     "no-console": "off",
+    "react/jsx-props-no-spreading": "off",
     "prettier/prettier": [
       "error", {
         "printWidth": 85,
@@ -27,15 +30,4 @@
       }
     ]
   },
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "map": [
-          ["@Components", "./src/components"],
-          ["@Fragments", "./src/fragments"]
-        ],
-        "extensions": [".js", ".jsx"]
-      }
-    }
-  }
 }

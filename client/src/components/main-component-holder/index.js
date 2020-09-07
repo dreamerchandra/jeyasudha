@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import './index.css'
 
 const MainComponentHolder = ({ children }) => {
@@ -9,4 +9,4 @@ const MainComponentHolder = ({ children }) => {
   )
 }
 
-export default MainComponentHolder;
+export default MainComponentHolder

@@ -1,19 +1,18 @@
-
-import { auth } from 'firebase';
+import { auth } from 'firebase'
 
 export const loginWithEmail = ({ email, password }) => {
-  auth().signInWithEmailAndPassword(email, password);
-};
+  auth().signInWithEmailAndPassword(email, password)
+}
 
 export const signupWithEmail = ({ email, password }) => {
-  auth().createUserWithEmailAndPassword(email, password);
+  auth().createUserWithEmailAndPassword(email, password)
 }
 export const logout = () => {
-  auth().signOut();
-};
+  auth().signOut()
+}
 
 export const sendPasswordResetEmail = ({ email }) => {
   auth().sendPasswordResetEmail(email, {
-    url: window.location.href
-  });
+    url: window.location.href,
+  })
 }

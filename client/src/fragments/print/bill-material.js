@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React from 'react'
 
 const BillMaterials = () => (
   <div className="bill">
@@ -53,17 +52,17 @@ const BillMaterials = () => (
       </tbody>
       <tfoot>
         <tr>
-          <td colSpan="2"></td>
+          <td colSpan="2" />
           <td colSpan="2">SUBTOTAL</td>
           <td className="text-center">Rs.5,200.00</td>
         </tr>
         <tr>
-          <td colSpan="2"></td>
+          <td colSpan="2" />
           <td colSpan="2">TAX 25%</td>
           <td className="text-center">Rs.1,300.00</td>
         </tr>
         <tr>
-          <td colSpan="2"></td>
+          <td colSpan="2" />
           <td colSpan="2">GRAND TOTAL</td>
           <td className="text-center">Rs.6,500.00</td>
         </tr>
@@ -72,4 +71,4 @@ const BillMaterials = () => (
   </div>
 )
 
-export default BillMaterials;
+export default BillMaterials

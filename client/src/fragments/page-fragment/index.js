@@ -1,19 +1,18 @@
-import React from 'react';
-import NavBar from '../nav';
-import Header from '../../components/header';
-import Print from '../print';
-import AuthenticatedView from '../../components/authenticated-view';
+import React from 'react'
+import NavBar from '../nav'
+import Header from '../../components/header'
+import Print from '../print'
+import AuthenticatedView from '../../components/authenticated-view'
 
 const PageFragment = ({ children }) => {
   return (
-    <AuthenticatedView >
+    <AuthenticatedView>
       <Header />
       <NavBar />
       <>{children}</>
       <Print />
-    </AuthenticatedView >
+    </AuthenticatedView>
   )
 }
 
-
-export default PageFragment;
+export default PageFragment

@@ -1,8 +1,8 @@
-import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from 'firebase';
-import LoaderHoc from '../loading';
-import LoginView from '../login-view';
+import React from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from 'firebase'
+import LoaderHoc from '../loading'
+import LoginView from '../login-view'
 
 const AuthenticatingUser = () => (
   <LoaderHoc>
@@ -15,20 +15,24 @@ const AuthenticatedView = ({
   Loader = AuthenticatingUser,
   NonLoggedIn = LoginView,
 }) => {
-  // const [user, loading, error] = useAuthState(auth());
-  const loading = false;
-  const user = true;
-  const error = false;
+  const [user, loading, error] = useAuthState(auth())
   const isNonLoggedIn = !(user || loading || error)
   return (
     <>
-      {loading && <><Loader /></>}
+      {loading && (
+        <>
+          <Loader />
+        </>
+      )}
       {error && console.log('error while auth', error)}
       {user && <>{children}</>}
-      {isNonLoggedIn && <><NonLoggedIn /></>}
+      {isNonLoggedIn && (
+        <>
+          <NonLoggedIn />
+        </>
+      )}
     </>
   )
 }
 
-
-export default AuthenticatedView;
+export default AuthenticatedView

@@ -1,13 +1,13 @@
-import React from 'react';
-import './index.css';
+import React from 'react'
+import './index.css'
 
-export default function LoaderHoc ({ children }) {
+export default function LoaderHoc({ children }) {
   return (
-    <div className='loading'>
-      <div className='spinner-wrapper'>
-        <div className="spinner"></div>
+    <div className="loading">
+      <div className="spinner-wrapper">
+        <div className="spinner" />
       </div>
-      {typeof (children) !== "undefined" && children}
+      {typeof children !== 'undefined' && children}
     </div>
   )
 }

@@ -1,30 +1,33 @@
 import React, { useState } from 'react'
+import cx from 'classnames'
 import Sidebar from '../../components/sidebar'
 import Menu from '../../components/menu'
-import useToggle from '../../common-hoooks/use-toggle';
-import cx from 'classnames';
+import useToggle from '../../common-hoooks/use-toggle'
 
 const useStyle = () => {
-  const [className, setClassName] = useState({ menuCx: 'menu-container', sideBarCx: 'nav' })
+  const [className, setClassName] = useState({
+    menuCx: 'menu-container',
+    sideBarCx: 'nav',
+  })
 
   const onToggle = (isOpened) => {
     setClassName(() => {
       const menu = cx('menu-container', {
-        'close': isOpened,
+        close: isOpened,
       })
       const sideBar = cx('nav', {
-        'open': isOpened
+        open: isOpened,
       })
       return { menuCx: menu, sideBarCx: sideBar }
     })
   }
 
-  const { toggler } = useToggle({ onToggle });
-  return { className, toggler };
+  const { toggler } = useToggle({ onToggle })
+  return { className, toggler }
 }
 
 const NavBar = () => {
-  const { className, toggler } = useStyle();
+  const { className, toggler } = useStyle()
   return (
     <>
       <Menu className={className.menuCx} onClick={toggler} />
@@ -33,4 +36,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar;
+export default NavBar

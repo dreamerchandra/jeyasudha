@@ -1,5 +1,5 @@
-import React from 'react';
-import './index.css';
+import React from 'react'
+import './index.css'
 
 const Footer = ({ children }) => (
   <footer className="footer">
@@ -7,4 +7,4 @@ const Footer = ({ children }) => (
   </footer>
 )
 
-export default Footer;
+export default Footer

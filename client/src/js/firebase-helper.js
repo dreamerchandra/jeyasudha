@@ -1,8 +1,7 @@
-import * as firebase from 'firebase';
-
+import * as firebase from 'firebase'
 
 export const ref = () => {
-  let db = firebase.firestore();
+  const db = firebase.firestore()
   // if (window.location.hostname === "localhost") {
   //   db.settings({
   //     host: "localhost:8080",
@@ -18,12 +17,11 @@ export const ref = () => {
   }
 }
 
-
 export const getDataFromQuerySnapShot = (idKey, documentData) => {
-  let returnResult = [];
+  const returnResult = []
   documentData.forEach((doc) => {
-    const data = doc.data();
-    const id = doc.id;
+    const data = doc.data()
+    const { id } = doc
     if (idKey) {
       returnResult.push({
         ...data,
@@ -35,5 +33,5 @@ export const getDataFromQuerySnapShot = (idKey, documentData) => {
       })
     }
   })
-  return returnResult;
+  return returnResult
 }

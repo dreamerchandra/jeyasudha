@@ -1,30 +1,28 @@
-import React, { useEffect, useRef } from 'react';
-import useDidUpdateEffect from '../../common-hoooks/use-did-update-hooks';
-import useTimeout from '../../common-hoooks/use-timeout';
-import useToggle from '../../common-hoooks/use-toggle';
+import React, { useRef } from 'react'
+import useDidUpdateEffect from '../../common-hoooks/use-did-update-hooks'
+import useTimeout from '../../common-hoooks/use-timeout'
+import useToggle from '../../common-hoooks/use-toggle'
 
-const Toast = ({
-  time, children, hideImmediately = false
-}) => {
-  const ref = useRef();
-  ref.current = children;
+const Toast = ({ time, children, hideImmediately = false }) => {
+  const ref = useRef()
+  ref.current = children
 
   const { toggler } = useToggle({
     onToggle: (shouldHide) => {
-      ref.current = shouldHide ? null : ref.current;
+      ref.current = shouldHide ? null : ref.current
     },
-    defaultValue: hideImmediately
+    defaultValue: hideImmediately,
   })
 
   useDidUpdateEffect(() => {
-    toggler();
-  }, [hideImmediately]);
+    toggler()
+  }, [hideImmediately])
 
   useTimeout(() => {
-    toggler();
-  }, [time]);
+    toggler()
+  }, [time])
 
-  return <> {ref.current} </>;
-};
+  return <> {ref.current} </>
+}
 
-export default Toast;
+export default Toast
