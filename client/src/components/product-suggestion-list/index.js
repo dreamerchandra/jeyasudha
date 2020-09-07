@@ -5,7 +5,11 @@ import React from 'react'
 import './index.css'
 import Skeleton from 'react-loading-skeleton'
 
-export default function SuggestionItem({ productInfo, isLoading, onItemSelected }) {
+export default function SuggestionItem({
+  suggestionList,
+  isLoading,
+  onItemSelected,
+}) {
   return (
     <ul>
       {isLoading && (
@@ -21,15 +25,19 @@ export default function SuggestionItem({ productInfo, isLoading, onItemSelected 
         </li>
       )}
       {!isLoading &&
-        productInfo.map((product) => (
-          <li key={product.id} className="suggestion-item">
-            <div onClick={() => onItemSelected(product.id, product)} role="listitem">
-              <h3>{product.uniqueName}</h3>
-              <p>Fixed price: {product.fixedPrice}</p>
+        suggestionList &&
+        suggestionList.map((suggestionItem) => (
+          <li key={suggestionItem.id} className="suggestion-item">
+            <div
+              onClick={() => onItemSelected(suggestionItem.id, suggestionItem)}
+              role="listitem"
+            >
+              <h3>{suggestionItem.uniqueName}</h3>
+              <p>Fixed price: {suggestionItem.fixedPrice}</p>
             </div>
             <div>
               <h3>Actual Pricing</h3>
-              <p className="green">{product.actualPrice}</p>
+              <p className="green">{suggestionItem.actualPrice}</p>
             </div>
           </li>
         ))}

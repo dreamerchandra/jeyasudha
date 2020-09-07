@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react'
+import OutsideClickHandler from 'react-outside-click-handler'
 import MainComponentHolder from '../../components/main-component-holder'
 import { getProductDetailBasedOnSearchString } from '../../js/firebase-pricing-query'
 import SuggestionHolder from '../../components/suggestion-holder'
@@ -28,7 +29,7 @@ export default class PriceUpdate extends Component {
       suggestion: {
         state: SUGGESTION_STATE.IDLE,
         list: [],
-        show: false,
+        show: true,
       },
       fixedPrice: null,
       actualPrice: null,
@@ -47,12 +48,6 @@ export default class PriceUpdate extends Component {
     })
     if (name.length >= 3) {
       this.fetchSearchResult(name)
-    } else {
-      this.setState({
-        suggestion: {
-          show: false,
-        },
-      })
     }
   }
 
@@ -95,16 +90,29 @@ export default class PriceUpdate extends Component {
     })
   }
 
+  setSuggestionVisibility = (shouldVisible) => {
+    const {
+      suggestion: { list, state },
+    } = this.state
+    this.setState({
+      suggestion: {
+        show: shouldVisible,
+        list,
+        state,
+      },
+    })
+  }
+
   async _fetchSearchResult(searchString) {
     const {
-      suggestion: { list },
+      suggestion: { list, show },
     } = this.state
 
     this.setState({
       suggestion: {
         state: SUGGESTION_STATE.FETCHING,
         list,
-        show: true,
+        show,
       },
     })
     console.log('PRICE_UPDATE: fetching search result for ', searchString)
@@ -116,7 +124,7 @@ export default class PriceUpdate extends Component {
       suggestion: {
         state: SUGGESTION_STATE.IDLE,
         list: suggestionItem,
-        show: true,
+        show,
       },
     })
   }
@@ -135,22 +143,26 @@ export default class PriceUpdate extends Component {
         <MainComponentHolder>
           <div className="main">
             <p>Particulars</p>
-            <div>
-              <input
-                type="text"
-                ref={this.productRef}
-                onChange={this.onInputChange}
-              />
-              {showSuggestion && (
-                <SuggestionHolder>
-                  <SuggestionItem
-                    productInfo={suggestionList}
-                    isLoading={loading}
-                    onItemSelected={this.onSuggestionItemSelected}
-                  />
-                </SuggestionHolder>
-              )}
-            </div>
+            <OutsideClickHandler
+              onOutsideClick={() => this.setSuggestionVisibility(false)}
+            >
+              <div onFocus={() => this.setSuggestionVisibility(true)}>
+                <input
+                  type="text"
+                  ref={this.productRef}
+                  onChange={this.onInputChange}
+                />
+                {showSuggestion && (
+                  <SuggestionHolder>
+                    <SuggestionItem
+                      suggestionList={suggestionList}
+                      isLoading={loading}
+                      onItemSelected={this.onSuggestionItemSelected}
+                    />
+                  </SuggestionHolder>
+                )}
+              </div>
+            </OutsideClickHandler>
             <p>Fixed unit price</p>
             <input
               type="text"

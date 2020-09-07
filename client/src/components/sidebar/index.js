@@ -13,6 +13,7 @@ const Sidebar = ({ className, onClick }) => {
             className="paper paper-raise-flatten btn"
             onClick={onClick}
             activeClassName="disabled-btn"
+            key={router.path}
           >
             {router.linkName}
           </NavLink>

@@ -30,7 +30,7 @@ class Billing extends Component {
       suggestion: {
         state: SUGGESTION_STATE.IDLE,
         list: [],
-        show: false,
+        show: true,
       },
       // address: '',
       // drive: '',
@@ -105,7 +105,7 @@ class Billing extends Component {
               value={name}
               onChange={this.onInputChange}
               onKeyUp={this.debouncedSearchCustomer}
-              autoComplete=""
+              autoComplete="nope"
             />
             {showSuggestion && (
               <SuggestionHolder>
