@@ -19,7 +19,8 @@
   color: var(--blue5);
 }
 
-.main input {
+.main input,
+.main select {
   width: 100%;
   font-size: 1.5rem;
   padding: 10px;
@@ -31,7 +32,6 @@ textarea:focus,
 select:focus {
   outline: 1px solid grey;
 }
-
 
 @media only screen and (max-width: 650px) {
   .main {
@@ -49,5 +49,4 @@ select:focus {
     width: 100%;
     margin-bottom: 10px;
   }
-
 }

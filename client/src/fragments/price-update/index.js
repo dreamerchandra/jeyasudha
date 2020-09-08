@@ -67,7 +67,7 @@ export default class PriceUpdate extends Component {
           <div className="main">
             <p>Particulars</p>
             <SuggestibleInput
-              productRef={this.productRef}
+              inputRef={this.productRef}
               onSuggestionItemSelected={this.onSuggestionItemSelected}
               SuggestionItem={SuggestionItem}
               fetchDetailsBasedOnSearchString={getProductDetailBasedOnSearchString}

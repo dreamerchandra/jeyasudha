@@ -84,14 +84,19 @@ export default class SuggestibleInput extends Component {
         list: suggestionList,
       },
     } = this.state
-    const { productRef, onSuggestionItemSelected, SuggestionItem } = this.props
+    const { inputRef, onSuggestionItemSelected, SuggestionItem } = this.props
     const loading = suggestionState === SUGGESTION_STATE.FETCHING
     return (
       <OutsideClickHandler
         onOutsideClick={() => this.setSuggestionVisibility(false)}
       >
         <div onFocus={() => this.setSuggestionVisibility(true)}>
-          <input type="text" ref={productRef} onChange={this.onInputChange} />
+          <input
+            type="text"
+            ref={inputRef}
+            onChange={this.onInputChange}
+            autoComplete="nope"
+          />
           {showSuggestion && (
             <SuggestionHolder>
               <SuggestionItem

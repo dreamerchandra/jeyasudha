@@ -1,21 +1,14 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
 import './index.css'
 import Skeleton from 'react-loading-skeleton'
-/**
- * @typedef {Object} UserInfo
- * @property {String} name
- * @property {String} primaryAddress
- * @property {String} phoneNumber
- * @property {String} vehicleNumber
- * @property {String} id
- * @property {Number} overallDue
- */
 
-/**
- *
- * @param {{usersInfo: UserInfo[], isLoading: Boolean}} param0
- */
-export default function SuggestionItem({ usersInfo, isLoading }) {
+export default function SuggestionItem({
+  suggestionList,
+  isLoading,
+  onItemSelected,
+}) {
   return (
     <ul>
       {isLoading && (
@@ -31,9 +24,10 @@ export default function SuggestionItem({ usersInfo, isLoading }) {
         </li>
       )}
       {!isLoading &&
-        usersInfo.map((user) => (
+        suggestionList &&
+        suggestionList.map((user) => (
           <li key={user.id} className="suggestion-item">
-            <div>
+            <div onClick={() => onItemSelected(user.id, user)}>
               <h3>{user.name}</h3>
               <p>{user.phoneNumber}</p>
             </div>

@@ -1,4 +1,5 @@
 # Calculating methods
+cross verification is only based upon ledger data
 `Material cash` isn't considered for calculating overall due
 `Material credit` and `due credit` will increase overall due
 `due cash` will decrease overall due
