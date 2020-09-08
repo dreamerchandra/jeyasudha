@@ -9,6 +9,8 @@ import {
 } from '../../js/firebase-query'
 import { TYPING_SPEED } from '../../js/common-config'
 import debounceFunction from '../../js/helper/debounce'
+import Footer from '../../components/footer'
+import Notification from '../../components/notification-view'
 
 const SUGGESTION_STATE = {
   IDLE: 'idle',
@@ -96,39 +98,47 @@ class Billing extends Component {
     } = this.state
     const loading = suggestionState === SUGGESTION_STATE.FETCHING
     return (
-      <MainComponentHolder>
-        <div className="main">
-          <p>Customer Name/ID</p>
-          <div>
-            <input
-              type="text"
-              value={name}
-              onChange={this.onInputChange}
-              onKeyUp={this.debouncedSearchCustomer}
-              autoComplete="nope"
-            />
-            {showSuggestion && (
-              <SuggestionHolder>
-                <SuggestionItem usersInfo={suggestionList} isLoading={loading} />
-              </SuggestionHolder>
-            )}
+      <>
+        <MainComponentHolder>
+          <div className="main">
+            <p>Customer Name/ID</p>
+            <div>
+              <input
+                type="text"
+                value={name}
+                onChange={this.onInputChange}
+                onKeyUp={this.debouncedSearchCustomer}
+                autoComplete="nope"
+              />
+              {showSuggestion && (
+                <SuggestionHolder>
+                  <SuggestionItem usersInfo={suggestionList} isLoading={loading} />
+                </SuggestionHolder>
+              )}
+            </div>
+            <p>Address</p>
+            <input type="text" autoComplete="nope" />
+            <p>Driver Name/Vehicle Name</p>
+            <input type="text" autoComplete="nope" />
+            <p>Phone number</p>
+            <input type="text" autoComplete="nope" />
+            <p>Particulars</p>
+            <input type="text" autoComplete="nope" />
+            <p>Unit</p>
+            <input type="text" autoComplete="nope" />
+            <p>Paid</p>
+            <input type="text" autoComplete="nope" />
+            <p>Balance</p>
+            <input type="text" autoComplete="nope" />
           </div>
-          <p>Address</p>
-          <input type="text" autoComplete={false} />
-          <p>Driver Name/Vehicle Name</p>
-          <input type="text" autoComplete={false} />
-          <p>Phone number</p>
-          <input type="text" autoComplete={false} />
-          <p>Particulars</p>
-          <input type="text" autoComplete={false} />
-          <p>Unit</p>
-          <input type="text" autoComplete={false} />
-          <p>Paid</p>
-          <input type="text" autoComplete={false} />
-          <p>Balance</p>
-          <input type="text" autoComplete={false} />
-        </div>
-      </MainComponentHolder>
+        </MainComponentHolder>
+        <Footer>
+          <button className="btn paper" onClick={this.updateProduct} type="button">
+            Update
+          </button>
+        </Footer>
+        <Notification />
+      </>
     )
   }
 }

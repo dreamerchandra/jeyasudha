@@ -1,4 +1,5 @@
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { ref } from './firebase-helper'
 
 export const PAYMENT_TYPE = {

@@ -1,14 +1,20 @@
 import React, { Component, createRef } from 'react'
+import cx from 'classnames'
+import { toast } from 'react-toastify'
 import MainComponentHolder from '../../components/main-component-holder'
 import { getProductDetailBasedOnSearchString } from '../../js/firebase-pricing-query'
 import SuggestionItem from '../../components/product-suggestion-list'
 import Footer from '../../components/footer'
 import { upsertProduct } from '../../js/firebase-pricing-mutation'
 import SuggestibleInput from '../../components/suggestable-input'
+import Notification from '../../components/notification-view'
 
 export default class PriceUpdate extends Component {
   constructor() {
     super()
+    this.state = {
+      disableUpdate: false,
+    }
     this.productRef = createRef()
     this.acutalPriceRef = createRef()
     this.fixedPriceRef = createRef()
@@ -27,6 +33,12 @@ export default class PriceUpdate extends Component {
     const uniqueName = this.productRef.current.value
     const actualPrice = this.acutalPriceRef.current.value
     const fixedPrice = this.fixedPriceRef.current.value
+    if (!uniqueName) {
+      return toast(<Notification text="Missing details" showSuccessIcon={false} />)
+    }
+    this.setState({
+      disableUpdate: true,
+    })
     await upsertProduct({
       productDetails: {
         actualPrice: Number(actualPrice),
@@ -35,9 +47,20 @@ export default class PriceUpdate extends Component {
       },
     })
     console.log('product updated')
+    this.acutalPriceRef.current.value = null
+    this.fixedPriceRef.current.value = null
+    this.productRef.current.value = null
+    this.setState({
+      disableUpdate: false,
+    })
+    return toast(<Notification text="Product updated" showSuccessIcon />)
   }
 
   render() {
+    const { disableUpdate } = this.state
+    const updateButtonCx = cx('btn paper', {
+      'disabled-btn': disableUpdate,
+    })
     return (
       <>
         <MainComponentHolder>
@@ -56,8 +79,13 @@ export default class PriceUpdate extends Component {
           </div>
         </MainComponentHolder>
         <Footer>
-          <button className="btn paper" onClick={this.updateProduct} type="button">
-            Update
+          <button
+            className={updateButtonCx}
+            onClick={this.updateProduct}
+            type="button"
+            disabled={disableUpdate}
+          >
+            {disableUpdate ? 'Updating' : 'Update'}
           </button>
         </Footer>
       </>

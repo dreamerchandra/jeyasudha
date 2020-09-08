@@ -1,18 +1,19 @@
-import { auth } from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 export const loginWithEmail = ({ email, password }) => {
-  auth().signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
 }
 
 export const signupWithEmail = ({ email, password }) => {
-  auth().createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
 }
 export const logout = () => {
-  auth().signOut()
+  firebase.auth().signOut()
 }
 
 export const sendPasswordResetEmail = ({ email }) => {
-  auth().sendPasswordResetEmail(email, {
+  firebase.auth().sendPasswordResetEmail(email, {
     url: window.location.href,
   })
 }
