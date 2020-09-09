@@ -12,6 +12,7 @@ import ProductPricingList from '../../js/ProductPricingList'
 import LoaderHoc from '../../components/loading'
 import { PAYMENT_TYPE } from '../../js/LedgerData'
 import Notification from '../../components/notification-view'
+import Print from '../print'
 
 class Billing extends Component {
   constructor() {
@@ -27,6 +28,7 @@ class Billing extends Component {
       listOfParticulars: [],
       loadingParticulars: true,
       updatingDetails: false,
+      printDetails: { showPrintPreview: false, billDetails: null },
     }
   }
 
@@ -77,15 +79,16 @@ class Billing extends Component {
       this.setState({ updatingDetails: false })
       return toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
     }
+    this.clearValues()
+    toast(<Notification text="Updated Successfully" showSuccessIcon />)
     this.setState({ updatingDetails: false })
-    this.driveNameRef.current.value = ''
-    this.phNumRef.current.value = ''
-    this.nameRef.current.value = ''
-    this.unitRef.current.value = ''
-    this.addressRef.current.value = ''
-    this.vehicleRef.current.value = ''
+    if (billingData.shouldGenerateBill()) {
+      this.setState({
+        printDetails: { showPrintPreview: true, billDetails: billingData },
+      })
+    }
     console.log('transaction recorded successfully')
-    return toast(<Notification text="Updated Successfully" showSuccessIcon />)
+    return null
   }
 
   getInputCb = ({ target: { value } }) => value
@@ -101,8 +104,22 @@ class Billing extends Component {
     this.addressRef.current.value = primaryAddress
   }
 
+  clearValues() {
+    this.driveNameRef.current.value = ''
+    this.phNumRef.current.value = ''
+    this.nameRef.current.value = ''
+    this.unitRef.current.value = ''
+    this.addressRef.current.value = ''
+    this.vehicleRef.current.value = ''
+  }
+
   render() {
-    const { loadingParticulars, listOfParticulars, updatingDetails } = this.state
+    const {
+      loadingParticulars,
+      listOfParticulars,
+      updatingDetails,
+      printDetails: { showPrintPreview, billDetails },
+    } = this.state
     return (
       <>
         {loadingParticulars && (
@@ -139,6 +156,7 @@ class Billing extends Component {
             <input type="text" autoComplete="nope" ref={this.unitRef} />
           </div>
         </MainComponentHolder>
+        {showPrintPreview && <Print billDetails={billDetails} />}
         <Footer>
           <button
             className="btn paper"

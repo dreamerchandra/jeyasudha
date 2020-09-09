@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { ref } from './firebase-helper'
+import { PAYMENT_TYPE } from './LedgerData'
 
 const CGST = 5
 const SGST = 5
@@ -13,7 +14,9 @@ export default class BillingData {
     this.orderDetails = orderDetails
     this.subTotal = total
     this.typeOfPayment = typeOfPayment
-    this.grandTotal = total + (CGST * total) / 100 + (SGST * total) / 100
+    this.cgstTotal = (CGST * total) / 100
+    this.sgstTotal = (SGST * total) / 100
+    this.grandTotal = total + this.cgstTotal + this.sgstTotal
   }
 
   isFieldsValid() {
@@ -25,18 +28,23 @@ export default class BillingData {
     )
   }
 
+  shouldGenerateBill() {
+    return this.typeOfPayment === PAYMENT_TYPE.CASH
+  }
+
   linkCustomerId(customerId) {
     this.customerId = customerId
   }
 
   convertThisToFirestore = () => {
+    this.createdAt = firebase.firestore.FieldValue.serverTimestamp()
     return {
       customerId: this.customerId,
       name: this.name,
       address: this.address,
       vehicleNumber: this.vehicleNumber,
       paymentType: this.typeOfPayment,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: this.createdAt,
       orders: [
         {
           particular: this.orderDetails.particularDetails,

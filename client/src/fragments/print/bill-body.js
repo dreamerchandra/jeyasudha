@@ -4,14 +4,14 @@ import BillTitle from './bill-title'
 import BillInfo from './bill-info'
 import BillMaterials from './bill-material'
 
-const BillBody = () => (
+const BillBody = ({ billDetails }) => (
   <div className="bill-body">
     <BillHeader />
     <BillTitle />
     <code className="divider" />
-    <BillInfo />
+    <BillInfo billDetails={billDetails} />
     <code className="divider" />
-    <BillMaterials />
+    <BillMaterials billDetails={billDetails} />
   </div>
 )
 

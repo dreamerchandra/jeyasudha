@@ -2,17 +2,17 @@ import React from 'react'
 import BillBody from './bill-body'
 import './print/index.css'
 
-const PrintContainer = () => (
+const PrintContainer = ({ billDetails }) => (
   <div className="print-container">
     <h1>Bill Structure</h1>
-    <BillBody />
+    <BillBody billDetails={billDetails} />
   </div>
 )
 
-const Print = () => {
+const Print = ({ billDetails = { orders: [] } }) => {
   return (
     <section className="print" style={{ display: 'none' }}>
-      <PrintContainer />
+      <PrintContainer billDetails={billDetails} />
     </section>
   )
 }

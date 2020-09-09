@@ -1,6 +1,7 @@
 import React from 'react'
+import { floatToMoney } from '../../js/helper/utils'
 
-const BillMaterials = () => (
+const BillMaterials = ({ billDetails }) => (
   <div className="bill">
     <table border="0" cellSpacing="0" cellPadding="0" className="bill-table">
       <thead>
@@ -14,57 +15,40 @@ const BillMaterials = () => (
       </thead>
       <tbody>
         <tr>
-          <td className="no">04</td>
-          <td className="text-left">
-            <h3>Sand & Cement</h3>
-          </td>
-          <td className="unit">Rs.0.00</td>
-          <td className="qty">100</td>
-          <td className="total">Rs.0.00</td>
-        </tr>
-        <tr>
           <td className="no">01</td>
           <td className="text-left">
-            <h3>Blue marble & tiling</h3>
+            <h3>{billDetails.orderDetails.particularDetails.uniqueName}</h3>
           </td>
-          <td className="unit">Rs.40.00</td>
-          <td className="qty">30</td>
-          <td className="total">Rs.1,200.00</td>
-        </tr>
-        <tr>
-          <td className="no">02</td>
-          <td className="text-left">
-            <h3>Fabrication and transportation</h3>
+          <td className="unitRs text-right">
+            Rs.
+            {floatToMoney(billDetails.orderDetails.particularDetails.actualPrice)}
           </td>
-          <td className="unit">Rs.40.00</td>
-          <td className="qty">80</td>
-          <td className="total">Rs.3,200.00</td>
-        </tr>
-        <tr>
-          <td className="no">03</td>
-          <td className="text-left">
-            <h3>Misc</h3>
+          <td className="qty">{billDetails.orderDetails.unit}</td>
+          <td className="total">
+            Rs.{floatToMoney(billDetails.orderDetails.total)}
           </td>
-          <td className="unit">Rs.40.00</td>
-          <td className="qty">20</td>
-          <td className="total">Rs.800.00</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td colSpan="2" />
           <td colSpan="2">SUBTOTAL</td>
-          <td className="text-center">Rs.5,200.00</td>
+          <td className="text-center">Rs.{floatToMoney(billDetails.subTotal)}</td>
         </tr>
         <tr>
           <td colSpan="2" />
-          <td colSpan="2">TAX 25%</td>
-          <td className="text-center">Rs.1,300.00</td>
+          <td colSpan="2">CGST 5%</td>
+          <td className="text-center">Rs.{floatToMoney(billDetails.cgstTotal)}</td>
+        </tr>
+        <tr>
+          <td colSpan="2" />
+          <td colSpan="2">SGST 5%</td>
+          <td className="text-center">Rs.{floatToMoney(billDetails.sgstTotal)}</td>
         </tr>
         <tr>
           <td colSpan="2" />
           <td colSpan="2">GRAND TOTAL</td>
-          <td className="text-center">Rs.6,500.00</td>
+          <td className="text-center">Rs.{floatToMoney(billDetails.grandTotal)}</td>
         </tr>
       </tfoot>
     </table>
