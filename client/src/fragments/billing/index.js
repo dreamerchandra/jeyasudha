@@ -7,7 +7,7 @@ import { getCustomerDetailBasedOnSearchString } from '../../js/firebase-billing-
 import Footer from '../../components/footer'
 import SuggestibleInput from '../../components/suggestable-input'
 import { updateBillingData } from '../../js/firebase-billing-mutation'
-import { paymentAdapterForCashMode } from '../../js/billGeneratorAdapter'
+import { paymentAdapterForMaterials } from '../../js/billGeneratorAdapter'
 import ProductPricingList from '../../js/ProductPricingList'
 import LoaderHoc from '../../components/loading'
 import { PAYMENT_TYPE } from '../../js/LedgerData'
@@ -55,7 +55,7 @@ class Billing extends Component {
     const [selectedParticularDetail] = listOfParticulars.filter(
       (detail) => detail.id === userSelectedParticularId
     )
-    const { billingData, ledgerData, userData } = paymentAdapterForCashMode({
+    const { billingData, ledgerData, userData } = paymentAdapterForMaterials({
       name,
       primaryAddress,
       vehicleNumber,

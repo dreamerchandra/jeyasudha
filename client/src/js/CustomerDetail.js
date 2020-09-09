@@ -10,7 +10,7 @@ export default class CustomerDetail {
     phoneNumber
   ) {
     this.name = name
-    this.currentDue = currentDue
+    this.currentDue = Number(currentDue)
     this.primaryAddress = primaryAddress
     this.vehicleNumber = vehicleNumber
     this.driverName = driverName
@@ -22,7 +22,7 @@ export default class CustomerDetail {
   }
 
   updateCurrentDue(currentDue) {
-    this.currentDue = currentDue
+    this.currentDue = Number(currentDue)
   }
 
   getUserDetailsFromDb = async (transaction) => {

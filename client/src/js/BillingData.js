@@ -19,6 +19,10 @@ export default class BillingData {
     this.grandTotal = total + this.cgstTotal + this.sgstTotal
   }
 
+  static getGrandTotal(total) {
+    return total + (CGST * total) / 100 + (SGST * total) / 100
+  }
+
   isFieldsValid() {
     return (
       this.grandTotal &&
@@ -38,24 +42,27 @@ export default class BillingData {
 
   convertThisToFirestore = () => {
     this.createdAt = firebase.firestore.FieldValue.serverTimestamp()
-    return {
+    const snapshot = {
       customerId: this.customerId,
       name: this.name,
       address: this.address,
       vehicleNumber: this.vehicleNumber,
       paymentType: this.typeOfPayment,
       createdAt: this.createdAt,
-      orders: [
-        {
-          particular: this.orderDetails.particularDetails,
-          quantity: this.orderDetails.unit,
-        },
-      ],
       subTotal: this.subTotal,
       sgstCost: (SGST * this.subTotal) / 100,
       cgstCost: (CGST * this.subTotal) / 100,
       grandTotal: this.grandTotal,
     }
+    if (this.orderDetails) {
+      snapshot.orders = [
+        {
+          particular: this.orderDetails.particularDetails,
+          quantity: this.orderDetails.unit,
+        },
+      ]
+    }
+    return snapshot
   }
 
   pushToDb = (transaction) => {
