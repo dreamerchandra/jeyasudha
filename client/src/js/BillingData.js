@@ -33,18 +33,18 @@ export default class BillingData {
         },
       ],
       total: this.total,
-      sgstCost: SGST * this.total,
-      cgstCost: CGST * this.total,
+      sgstCost: (SGST * this.total) / 100,
+      cgstCost: (CGST * this.total) / 100,
       netTotal: this.netTotal,
     }
   }
 
   pushToDb = async (transaction) => {
     const newBillingRef = ref().billing.doc()
-    await transaction.set(newBillingRef, this.convertThisToFirestore())
+    transaction.set(newBillingRef, this.convertThisToFirestore())
     this.billingDbRef = newBillingRef
     this.billId = this.billingDbRef.id
-    console.log('pushed billing data to db')
+    console.log('pushed billing data to db', this.billId)
     return this.billingDbRef.id
   }
 }

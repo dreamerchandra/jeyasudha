@@ -3,7 +3,7 @@ import BillingData from './BillingData'
 import LedgerData, { PAYMENT_TYPE, PAID_FOR } from './LedgerData'
 import OrderDetail from './OrderDetail'
 
-export function billGeneratorAdapterForCashMode({
+export function paymentAdapterForCashMode({
   name,
   primaryAddress,
   vehicleNumber,
@@ -11,6 +11,7 @@ export function billGeneratorAdapterForCashMode({
   phoneNumber,
   particularDetails,
   unit,
+  typeOfPayment,
 }) {
   const userData = new CustomerDetail(
     name,
@@ -23,6 +24,9 @@ export function billGeneratorAdapterForCashMode({
   console.log('customer details created', userData)
   const orderDetails = new OrderDetail(particularDetails, unit)
   console.log('order details created', orderDetails)
+  if (typeOfPayment === PAYMENT_TYPE.CREDIT) {
+    userData.updateCurrentDue(orderDetails.total)
+  }
   const billingData = new BillingData(
     name,
     primaryAddress,
@@ -34,7 +38,7 @@ export function billGeneratorAdapterForCashMode({
   const ledgerData = new LedgerData(
     orderDetails.total,
     billingData.netTotal,
-    PAYMENT_TYPE.CASH,
+    typeOfPayment,
     PAID_FOR.MATERIALS
   )
   console.log('ledger data created', ledgerData)

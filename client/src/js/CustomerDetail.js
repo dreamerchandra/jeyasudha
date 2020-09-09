@@ -17,6 +17,10 @@ export default class CustomerDetail {
     this.phoneNumber = phoneNumber
   }
 
+  updateCurrentDue(currentDue) {
+    this.currentDue = currentDue
+  }
+
   getUserDetailsFromDb = async (transaction) => {
     const userData = await transaction.get(
       ref().customer.where('phoneNumber', '==', this.phoneNumber).get()
@@ -65,13 +69,9 @@ export default class CustomerDetail {
    * @param {firebase.firestore.Transaction} transaction
    */
   pushToDb = async (transaction) => {
-    await transaction.set(
-      ref().customer.doc(this.userId),
-      this.convertThisToFirestore(),
-      {
-        merge: true,
-      }
-    )
-    console.log('pushed user data to db')
+    transaction.set(ref().customer.doc(this.userId), this.convertThisToFirestore(), {
+      merge: true,
+    })
+    console.log('pushed user data to db', this.userId)
   }
 }

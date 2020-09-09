@@ -8,10 +8,12 @@ function _updateBillingData({ userData, billingData, ledgerData }) {
   return ref().db.runTransaction(async (transaction) => {
     await userData.updateDueAndUserIdFromDb()
     await userData.pushToDb(transaction)
-    billingData.linkCustomerId(userData.userId)
-    await billingData.pushToDb(transaction)
+    if (ledgerData.shouldGenerateBill()) {
+      billingData.linkCustomerId(userData.userId)
+      await billingData.pushToDb(transaction)
+      ledgerData.linkBillId(billingData.billId)
+    }
     ledgerData.linkCustomerId(userData.userId)
-    ledgerData.linkBillId(billingData.billId)
     ledgerData.pushToDb(transaction)
   })
 }

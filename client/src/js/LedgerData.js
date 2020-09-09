@@ -21,6 +21,10 @@ export default class LedgerData {
     this.paidFor = paidFor
   }
 
+  shouldGenerateBill() {
+    return this.paymentType === PAYMENT_TYPE.CASH
+  }
+
   linkBillId(billId) {
     this.billId = billId
   }
@@ -30,21 +34,24 @@ export default class LedgerData {
   }
 
   convertThisToFirestore = () => {
-    return {
+    const snapshot = {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       customerId: this.customerId,
       staffId: firebase.auth().currentUser.uid,
       total: this.total,
       netTotal: this.netTotal,
-      billId: this.billId,
       paymentType: this.paymentType,
       paidFor: this.paidFor,
     }
+    if (this.billId) {
+      snapshot.billId = this.billId
+    }
+    return snapshot
   }
 
-  pushToDb = async (transaction) => {
+  pushToDb = (transaction) => {
     const newLedgerRef = ref().ledger.doc()
-    await transaction.set(newLedgerRef, this.convertThisToFirestore())
-    console.log('pushed ledger data to db')
+    transaction.set(newLedgerRef, this.convertThisToFirestore())
+    console.log('pushed ledger data to db', newLedgerRef.id)
   }
 }

@@ -6,9 +6,10 @@ import { getCustomerDetailBasedOnSearchString } from '../../js/firebase-billing-
 import Footer from '../../components/footer'
 import SuggestibleInput from '../../components/suggestable-input'
 import { updateBillingData } from '../../js/firebase-billing-mutation'
-import { billGeneratorAdapterForCashMode } from '../../js/billGeneratorAdapter'
+import { paymentAdapterForCashMode } from '../../js/billGeneratorAdapter'
 import ProductPricingList from '../../js/ProductPricingList'
 import LoaderHoc from '../../components/loading'
+import { PAYMENT_TYPE } from '../../js/LedgerData'
 
 class Billing extends Component {
   constructor() {
@@ -36,7 +37,7 @@ class Billing extends Component {
     })
   }
 
-  updateAsCash = async () => {
+  recordTransaction = async (typeOfPayment) => {
     const phoneNumber = this.phNumRef.current.value
     const name = this.nameRef.current.value
     const driverName = this.driveNameRef.current.value
@@ -48,7 +49,7 @@ class Billing extends Component {
     const [selectedParticularDetail] = listOfParticulars.filter(
       (detail) => detail.id === userSelectedParticularId
     )
-    const { billingData, ledgerData, userData } = billGeneratorAdapterForCashMode({
+    const { billingData, ledgerData, userData } = paymentAdapterForCashMode({
       name,
       primaryAddress,
       vehicleNumber,
@@ -56,12 +57,14 @@ class Billing extends Component {
       particularDetails: selectedParticularDetail,
       phoneNumber,
       unit,
+      typeOfPayment,
     })
     await updateBillingData({
       userData,
       billingData,
       ledgerData,
     })
+    console.log('transaction recorded successfully')
   }
 
   getInputCb = ({ target: { value } }) => value
@@ -106,7 +109,9 @@ class Billing extends Component {
             <p>Particulars</p>
             <select ref={this.particularsRef}>
               {listOfParticulars.map((details) => (
-                <option value={details.id}>{details.uniqueName}</option>
+                <option key={details.id} value={details.id}>
+                  {details.uniqueName}
+                </option>
               ))}
             </select>
             <p>Unit</p>
@@ -114,10 +119,18 @@ class Billing extends Component {
           </div>
         </MainComponentHolder>
         <Footer>
-          <button className="btn paper" onClick={this.updateAsCash} type="button">
+          <button
+            className="btn paper"
+            onClick={() => this.recordTransaction(PAYMENT_TYPE.CASH)}
+            type="button"
+          >
             Cash
           </button>
-          <button className="btn paper" onClick={this.updateProduct} type="button">
+          <button
+            className="btn paper"
+            onClick={() => this.recordTransaction(PAYMENT_TYPE.CREDIT)}
+            type="button"
+          >
             Credit
           </button>
         </Footer>
