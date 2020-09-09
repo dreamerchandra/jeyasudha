@@ -12,20 +12,23 @@ export default class BillingData {
     this.address = address
     this.vehicleNumber = vehicleNumber
     this.orderDetails = orderDetails
-    this.subTotal = total
+    this.subTotal = Number(total)
     this.typeOfPayment = typeOfPayment
-    this.cgstTotal = (CGST * total) / 100
-    this.sgstTotal = (SGST * total) / 100
-    this.grandTotal = total + this.cgstTotal + this.sgstTotal
+    this.cgstTotal = Number((CGST * total) / 100)
+    this.sgstTotal = Number((SGST * total) / 100)
+    this.grandTotal = Number(total + this.cgstTotal + this.sgstTotal)
   }
 
   static getGrandTotal(total) {
-    return total + (CGST * total) / 100 + (SGST * total) / 100
+    const totalInNumber = Number(total)
+    return Number(
+      totalInNumber + (CGST * totalInNumber) / 100 + (SGST * totalInNumber) / 100
+    )
   }
 
   isFieldsValid() {
     return (
-      this.grandTotal &&
+      typeof this.grandTotal === 'number' &&
       this.name &&
       this.address &&
       typeof this.typeOfPayment === 'number'
@@ -49,10 +52,10 @@ export default class BillingData {
       vehicleNumber: this.vehicleNumber,
       paymentType: this.typeOfPayment,
       createdAt: this.createdAt,
-      subTotal: this.subTotal,
-      sgstCost: (SGST * this.subTotal) / 100,
-      cgstCost: (CGST * this.subTotal) / 100,
-      grandTotal: this.grandTotal,
+      subTotal: Number(this.subTotal),
+      sgstCost: Number((SGST * this.subTotal) / 100),
+      cgstCost: Number((CGST * this.subTotal) / 100),
+      grandTotal: Number(this.grandTotal),
     }
     if (this.orderDetails) {
       snapshot.orders = [

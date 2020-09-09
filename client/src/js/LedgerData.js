@@ -15,15 +15,15 @@ export const PAID_FOR = {
 
 export default class LedgerData {
   constructor(total, netTotal, paymentType, paidFor) {
-    this.total = total
+    this.total = Number(total)
     this.paymentType = paymentType
-    this.netTotal = netTotal
+    this.netTotal = Number(netTotal)
     this.paidFor = paidFor
   }
 
   isFieldsValid() {
     return (
-      this.netTotal &&
+      typeof this.netTotal === 'number' &&
       typeof this.paymentType === 'number' &&
       typeof this.paidFor === 'number'
     )
@@ -46,8 +46,8 @@ export default class LedgerData {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       customerId: this.customerId,
       staffId: firebase.auth().currentUser.uid,
-      total: this.total,
-      netTotal: this.netTotal,
+      total: Number(this.total),
+      netTotal: Number(this.netTotal),
       paymentType: this.paymentType,
       paidFor: this.paidFor,
     }

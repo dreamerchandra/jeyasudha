@@ -60,7 +60,7 @@ export default class CustomerDetail {
   convertThisToFirestore() {
     return {
       name: this.name,
-      overallDue: this.currentDue,
+      overallDue: Number(this.currentDue),
       primaryAddress: this.primaryAddress,
       vehicleNumber: this.vehicleNumber,
       driverName: this.driverName,
