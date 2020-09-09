@@ -15,6 +15,10 @@ export default class BillingData {
     this.netTotal = total + (CGST * total) / 100 + (SGST * total) / 100
   }
 
+  isFieldsValid() {
+    return this.netTotal && this.name && this.address
+  }
+
   linkCustomerId(customerId) {
     this.customerId = customerId
   }

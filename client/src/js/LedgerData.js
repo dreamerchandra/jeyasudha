@@ -21,6 +21,14 @@ export default class LedgerData {
     this.paidFor = paidFor
   }
 
+  isFieldsValid() {
+    return (
+      this.netTotal &&
+      typeof this.paymentType === 'number' &&
+      typeof this.paidFor === 'number'
+    )
+  }
+
   shouldGenerateBill() {
     return this.paymentType === PAYMENT_TYPE.CASH
   }

@@ -1,4 +1,5 @@
 import React, { Component, createRef } from 'react'
+import { toast } from 'react-toastify'
 import MainComponentHolder from '../../components/main-component-holder'
 import './index.css'
 import SuggestionItem from '../../components/user-suggestion-list'
@@ -10,6 +11,7 @@ import { paymentAdapterForCashMode } from '../../js/billGeneratorAdapter'
 import ProductPricingList from '../../js/ProductPricingList'
 import LoaderHoc from '../../components/loading'
 import { PAYMENT_TYPE } from '../../js/LedgerData'
+import Notification from '../../components/notification-view'
 
 class Billing extends Component {
   constructor() {
@@ -24,6 +26,7 @@ class Billing extends Component {
     this.state = {
       listOfParticulars: [],
       loadingParticulars: true,
+      updatingDetails: false,
     }
   }
 
@@ -38,6 +41,7 @@ class Billing extends Component {
   }
 
   recordTransaction = async (typeOfPayment) => {
+    this.setState({ updatingDetails: true })
     const phoneNumber = this.phNumRef.current.value
     const name = this.nameRef.current.value
     const driverName = this.driveNameRef.current.value
@@ -59,12 +63,29 @@ class Billing extends Component {
       unit,
       typeOfPayment,
     })
-    await updateBillingData({
-      userData,
-      billingData,
-      ledgerData,
-    })
+    if (
+      billingData.isFieldsValid() &&
+      ledgerData.isFieldsValid() &&
+      userData.isFieldsValid()
+    ) {
+      await updateBillingData({
+        userData,
+        billingData,
+        ledgerData,
+      })
+    } else {
+      this.setState({ updatingDetails: false })
+      return toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
+    }
+    this.setState({ updatingDetails: false })
+    this.driveNameRef.current.value = ''
+    this.phNumRef.current.value = ''
+    this.nameRef.current.value = ''
+    this.unitRef.current.value = ''
+    this.addressRef.current.value = ''
+    this.vehicleRef.current.value = ''
     console.log('transaction recorded successfully')
+    return toast(<Notification text="Updated Successfully" showSuccessIcon />)
   }
 
   getInputCb = ({ target: { value } }) => value
@@ -81,7 +102,7 @@ class Billing extends Component {
   }
 
   render() {
-    const { loadingParticulars, listOfParticulars } = this.state
+    const { loadingParticulars, listOfParticulars, updatingDetails } = this.state
     return (
       <>
         {loadingParticulars && (
@@ -123,6 +144,7 @@ class Billing extends Component {
             className="btn paper"
             onClick={() => this.recordTransaction(PAYMENT_TYPE.CASH)}
             type="button"
+            disabled={updatingDetails}
           >
             Cash
           </button>
@@ -130,6 +152,7 @@ class Billing extends Component {
             className="btn paper"
             onClick={() => this.recordTransaction(PAYMENT_TYPE.CREDIT)}
             type="button"
+            disabled={updatingDetails}
           >
             Credit
           </button>

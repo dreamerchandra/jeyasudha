@@ -4,4 +4,8 @@ export default class OrderDetail {
     this.unit = Number(unit)
     this.total = Number(particularDetails.actualPrice * this.unit)
   }
+
+  isFieldsValid() {
+    return this.unit && this.total
+  }
 }
