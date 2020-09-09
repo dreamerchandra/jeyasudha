@@ -11,7 +11,7 @@ const PrintContainer = ({ billDetails }) => (
 
 const Print = ({ billDetails = { orders: [] } }) => {
   return (
-    <section className="print" style={{ display: 'none' }}>
+    <section className="print">
       <PrintContainer billDetails={billDetails} />
     </section>
   )

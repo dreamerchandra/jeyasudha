@@ -18,7 +18,7 @@ export default class CustomerDetail {
   }
 
   isFieldsValid() {
-    return this.name && this.primaryAddress && this.phoneNumber
+    return this.name && this.phoneNumber
   }
 
   updateCurrentDue(currentDue) {
@@ -44,6 +44,13 @@ export default class CustomerDetail {
     if (userDoc?.id) {
       userData = userDoc
       this.userId = userDoc.id
+      this.primaryAddress = this.primaryAddress
+        ? this.primaryAddress
+        : userDoc.primaryAddress
+      this.vehicleNumber = this.vehicleNumber
+        ? this.vehicleNumber
+        : userDoc.vehicleNumber
+      this.name = this.name ? this.name : userDoc.name
       console.log(
         'found existing customer based on phone number and user id:',
         userDoc.id
