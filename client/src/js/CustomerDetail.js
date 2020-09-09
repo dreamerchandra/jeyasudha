@@ -72,7 +72,7 @@ export default class CustomerDetail {
    *
    * @param {firebase.firestore.Transaction} transaction
    */
-  pushToDb = async (transaction) => {
+  pushToDb = (transaction) => {
     transaction.set(ref().customer.doc(this.userId), this.convertThisToFirestore(), {
       merge: true,
     })

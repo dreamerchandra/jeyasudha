@@ -9,10 +9,12 @@ const PrintContainer = () => (
   </div>
 )
 
-const Print = () => (
-  <section className="print" style={{ display: 'none' }}>
-    <PrintContainer />
-  </section>
-)
+const Print = () => {
+  return (
+    <section className="print" style={{ display: 'none' }}>
+      <PrintContainer />
+    </section>
+  )
+}
 
 export default Print

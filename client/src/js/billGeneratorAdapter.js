@@ -32,12 +32,13 @@ export function paymentAdapterForCashMode({
     primaryAddress,
     vehicleNumber,
     orderDetails,
-    orderDetails.total
+    orderDetails.total,
+    typeOfPayment
   )
   console.log('bill details created', billingData)
   const ledgerData = new LedgerData(
     orderDetails.total,
-    billingData.netTotal,
+    billingData.grandTotal,
     typeOfPayment,
     PAID_FOR.MATERIALS
   )

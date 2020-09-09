@@ -22,12 +22,13 @@
     }
   },
   billing: {
-    <bill-id>: { // for credit bill won't be generated
+    <bill-id>: { // for credit billing data will be created in DB for order reference but bill won't be generated
       customerId: <customer-id>,
       name: <string>,
       address: <string>,
       vehicleNumber: <string>,
       createdAt: <timestamp>,
+      paymentType: <CASH: 0, CREDIT: 1>
       orders: [
         {
           particular: {
@@ -39,10 +40,10 @@
           quantity: <number>,
         },
       ],
-      total: <number>, 
+      subTotal: <number>, 
       sgstCost: <number>,
       cgstCost: <number>,
-      netTotal: <number>,
+      grandTotal: <number>,
     },
   },
   productPricing: {

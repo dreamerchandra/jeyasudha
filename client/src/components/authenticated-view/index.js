@@ -3,7 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import LoaderHoc from '../loading'
-import LoginView from '../login-view'
+import EmailLoginView from '../login-view'
 
 const AuthenticatingUser = () => (
   <LoaderHoc>
@@ -11,10 +11,16 @@ const AuthenticatingUser = () => (
   </LoaderHoc>
 )
 
+const ErrorView = ({ message }) => (
+  <LoaderHoc>
+    <h1>{message}</h1>
+  </LoaderHoc>
+)
+
 const AuthenticatedView = ({
   children,
   Loader = AuthenticatingUser,
-  NonLoggedIn = LoginView,
+  NonLoggedIn = EmailLoginView,
 }) => {
   const [user, loading, error] = useAuthState(firebase.auth())
   const isNonLoggedIn = !(user || loading || error)
@@ -25,7 +31,7 @@ const AuthenticatedView = ({
           <Loader />
         </>
       )}
-      {error && console.log('error while auth', error)}
+      {error && <ErrorView message={error.message} />}
       {user && <>{children}</>}
       {isNonLoggedIn && (
         <>

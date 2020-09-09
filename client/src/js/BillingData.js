@@ -6,17 +6,23 @@ const CGST = 5
 const SGST = 5
 
 export default class BillingData {
-  constructor(name, address, vehicleNumber, orderDetails, total) {
+  constructor(name, address, vehicleNumber, orderDetails, total, typeOfPayment) {
     this.name = name
     this.address = address
     this.vehicleNumber = vehicleNumber
     this.orderDetails = orderDetails
-    this.total = total
-    this.netTotal = total + (CGST * total) / 100 + (SGST * total) / 100
+    this.subTotal = total
+    this.typeOfPayment = typeOfPayment
+    this.grandTotal = total + (CGST * total) / 100 + (SGST * total) / 100
   }
 
   isFieldsValid() {
-    return this.netTotal && this.name && this.address
+    return (
+      this.grandTotal &&
+      this.name &&
+      this.address &&
+      typeof this.typeOfPayment === 'number'
+    )
   }
 
   linkCustomerId(customerId) {
@@ -29,6 +35,7 @@ export default class BillingData {
       name: this.name,
       address: this.address,
       vehicleNumber: this.vehicleNumber,
+      paymentType: this.typeOfPayment,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       orders: [
         {
@@ -36,14 +43,14 @@ export default class BillingData {
           quantity: this.orderDetails.unit,
         },
       ],
-      total: this.total,
-      sgstCost: (SGST * this.total) / 100,
-      cgstCost: (CGST * this.total) / 100,
-      netTotal: this.netTotal,
+      subTotal: this.subTotal,
+      sgstCost: (SGST * this.subTotal) / 100,
+      cgstCost: (CGST * this.subTotal) / 100,
+      grandTotal: this.grandTotal,
     }
   }
 
-  pushToDb = async (transaction) => {
+  pushToDb = (transaction) => {
     const newBillingRef = ref().billing.doc()
     transaction.set(newBillingRef, this.convertThisToFirestore())
     this.billingDbRef = newBillingRef

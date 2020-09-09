@@ -35,7 +35,7 @@ const useToLogin = ({ onLogin, onSignup, sendPasswordReset }) => {
   }
 }
 
-function LoginView({
+function EmailLoginView({
   onSignup = signupWithEmail,
   onLogin = loginWithEmail,
   sendPasswordReset = sendPasswordResetEmail,
@@ -71,4 +71,4 @@ function LoginView({
   )
 }
 
-export default LoginView
+export default EmailLoginView
