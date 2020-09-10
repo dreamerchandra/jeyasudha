@@ -43,51 +43,57 @@ class Billing extends Component {
   }
 
   recordTransaction = async (typeOfPayment) => {
-    this.setState({ updatingDetails: true })
-    const phoneNumber = this.phNumRef.current.value
-    const name = this.nameRef.current.value
-    const driverName = this.driveNameRef.current.value
-    const userSelectedParticularId = this.particularsRef.current.value
-    const unit = Number(this.unitRef.current.value)
-    const primaryAddress = this.addressRef.current.value
-    const vehicleNumber = this.vehicleRef.current.value
-    const { listOfParticulars } = this.state
-    const [selectedParticularDetail] = listOfParticulars.filter(
-      (detail) => detail.id === userSelectedParticularId
-    )
-    const { billingData, ledgerData, userData } = paymentAdapterForMaterials({
-      name,
-      primaryAddress,
-      vehicleNumber,
-      driverName,
-      particularDetails: selectedParticularDetail,
-      phoneNumber,
-      unit,
-      typeOfPayment,
-    })
-    if (
-      billingData.isFieldsValid() &&
-      ledgerData.isFieldsValid() &&
-      userData.isFieldsValid()
-    ) {
-      await updateBillingData({
-        userData,
-        billingData,
-        ledgerData,
+    try {
+      this.setState({ updatingDetails: true })
+      const phoneNumber = this.phNumRef.current.value
+      const name = this.nameRef.current.value
+      const driverName = this.driveNameRef.current.value
+      const userSelectedParticularId = this.particularsRef.current.value
+      const unit = Number(this.unitRef.current.value)
+      const primaryAddress = this.addressRef.current.value
+      const vehicleNumber = this.vehicleRef.current.value
+      const { listOfParticulars } = this.state
+      const [selectedParticularDetail] = listOfParticulars.filter(
+        (detail) => detail.id === userSelectedParticularId
+      )
+      const { billingData, ledgerData, userData } = paymentAdapterForMaterials({
+        name,
+        primaryAddress,
+        vehicleNumber,
+        driverName,
+        particularDetails: selectedParticularDetail,
+        phoneNumber,
+        unit,
+        typeOfPayment,
       })
-    } else {
+      if (
+        billingData.isFieldsValid() &&
+        ledgerData.isFieldsValid() &&
+        userData.isFieldsValid()
+      ) {
+        await updateBillingData({
+          userData,
+          billingData,
+          ledgerData,
+        })
+      } else {
+        this.setState({ updatingDetails: false })
+        return toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
+      }
+      this.clearValues()
+      toast(<Notification text="Updated Successfully" showSuccessIcon />)
       this.setState({ updatingDetails: false })
-      return toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
+      if (billingData.shouldGenerateBill()) {
+        this.setState({
+          printDetails: { showPrintPreview: true, billDetails: billingData },
+        })
+      }
+      console.log('transaction recorded successfully')
+    } catch (err) {
+      console.error('error while updating data', err)
+      this.setState({ updatingDetails: false })
+      toast(<Notification text="Invalid field" showSuccessIcon={false} />)
     }
-    this.clearValues()
-    toast(<Notification text="Updated Successfully" showSuccessIcon />)
-    this.setState({ updatingDetails: false })
-    if (billingData.shouldGenerateBill()) {
-      this.setState({
-        printDetails: { showPrintPreview: true, billDetails: billingData },
-      })
-    }
-    console.log('transaction recorded successfully')
     return null
   }
 

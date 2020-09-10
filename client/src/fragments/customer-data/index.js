@@ -33,28 +33,35 @@ export default class CustomerData extends Component {
   }
 
   recordTransaction = async () => {
-    const name = this.nameRef.current.value
-    const phoneNumber = this.phoneNumRef.current.value
-    const primaryAddress = this.addressRef.current.value
-    const amount = this.dueRef.current.value
-    const { ledgerData, userData } = paymentAdapterForCustomer({
-      name,
-      primaryAddress,
-      phoneNumber,
-      typeOfPayment: PAYMENT_TYPE.CREDIT,
-      amount,
-      paidFor: PAID_FOR.DUE,
-    })
-    this.setState({ updatingDetails: true })
-    if (ledgerData.isFieldsValid() && userData.isFieldsValid()) {
-      await updateCustomerDue({ userData, ledgerData })
-    } else {
+    try {
+      const name = this.nameRef.current.value
+      const phoneNumber = this.phoneNumRef.current.value
+      const primaryAddress = this.addressRef.current.value
+      const amount = this.dueRef.current.value
+      const { ledgerData, userData } = paymentAdapterForCustomer({
+        name,
+        primaryAddress,
+        phoneNumber,
+        typeOfPayment: PAYMENT_TYPE.CREDIT,
+        amount,
+        paidFor: PAID_FOR.DUE,
+      })
+      this.setState({ updatingDetails: true })
+      if (ledgerData.isFieldsValid() && userData.isFieldsValid()) {
+        await updateCustomerDue({ userData, ledgerData })
+      } else {
+        this.setState({ updatingDetails: false })
+        return toast(<Notification text="Invalid Field" showSuccessIcon={false} />)
+      }
       this.setState({ updatingDetails: false })
-      return toast(<Notification text="Invalid Field" showSuccessIcon={false} />)
+      toast(<Notification text="Updated Successfully" showSuccessIcon />)
+      this.clearValues()
+    } catch (err) {
+      console.log('error while updating customer data', err)
+      this.setState({ updatingDetails: false })
+      toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
     }
-    this.setState({ updatingDetails: false })
-    toast(<Notification text="Updated Successfully" showSuccessIcon />)
-    return this.clearValues()
+    return null
   }
 
   clearValues() {

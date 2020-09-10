@@ -31,25 +31,32 @@ export default class Receipt extends Component {
   }
 
   recordTransaction = async () => {
-    const name = this.nameRef.current.value
-    const phoneNumber = this.phoneNumRef.current.value
-    const amount = this.amountRef.current.value
-    const { ledgerData, userData } = paymentAdapterForCustomer({
-      name,
-      phoneNumber,
-      typeOfPayment: PAYMENT_TYPE.CASH,
-      amount,
-      paidFor: PAID_FOR.DUE,
-    })
-    this.setState({ updatingDetails: true })
-    if (ledgerData.isFieldsValid() && userData.isFieldsValid()) {
-      await updateCustomerDue({ userData, ledgerData })
-    } else {
-      toast(<Notification text="Invalid Field" showSuccessIcon={false} />)
+    try {
+      const name = this.nameRef.current.value
+      const phoneNumber = this.phoneNumRef.current.value
+      const amount = this.amountRef.current.value
+      const { ledgerData, userData } = paymentAdapterForCustomer({
+        name,
+        phoneNumber,
+        typeOfPayment: PAYMENT_TYPE.CASH,
+        amount,
+        paidFor: PAID_FOR.DUE,
+      })
+      this.setState({ updatingDetails: true })
+      if (ledgerData.isFieldsValid() && userData.isFieldsValid()) {
+        await updateCustomerDue({ userData, ledgerData })
+      } else {
+        toast(<Notification text="Invalid Field" showSuccessIcon={false} />)
+      }
+      this.setState({ updatingDetails: false })
+      toast(<Notification text="Updated Successfully" showSuccessIcon />)
+      this.clearValues()
+    } catch (err) {
+      console.error('error while updating receipt', err)
+      this.setState({ updatingDetails: false })
+      toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
     }
-    this.setState({ updatingDetails: false })
-    toast(<Notification text="Updated Successfully" showSuccessIcon />)
-    return this.clearValues()
+    return null
   }
 
   clearValues() {

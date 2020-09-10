@@ -30,30 +30,39 @@ export default class PriceUpdate extends Component {
   }
 
   updateProduct = async () => {
-    const uniqueName = this.productRef.current.value
-    const actualPrice = this.acutalPriceRef.current.value
-    const fixedPrice = this.fixedPriceRef.current.value
-    if (!uniqueName) {
-      return toast(<Notification text="Missing details" showSuccessIcon={false} />)
+    try {
+      const uniqueName = this.productRef.current.value
+      const actualPrice = this.acutalPriceRef.current.value
+      const fixedPrice = this.fixedPriceRef.current.value
+      if (!uniqueName) {
+        return toast(<Notification text="Missing details" showSuccessIcon={false} />)
+      }
+      this.setState({
+        disableUpdate: true,
+      })
+      await upsertProduct({
+        productDetails: {
+          actualPrice: Number(actualPrice),
+          fixedPrice: Number(fixedPrice),
+          uniqueName,
+        },
+      })
+      console.log('product updated')
+      this.acutalPriceRef.current.value = null
+      this.fixedPriceRef.current.value = null
+      this.productRef.current.value = null
+      this.setState({
+        disableUpdate: false,
+      })
+      toast(<Notification text="Product updated" showSuccessIcon />)
+    } catch (err) {
+      console.error('error while updating pricing', err)
+      this.setState({
+        disableUpdate: false,
+      })
+      toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
     }
-    this.setState({
-      disableUpdate: true,
-    })
-    await upsertProduct({
-      productDetails: {
-        actualPrice: Number(actualPrice),
-        fixedPrice: Number(fixedPrice),
-        uniqueName,
-      },
-    })
-    console.log('product updated')
-    this.acutalPriceRef.current.value = null
-    this.fixedPriceRef.current.value = null
-    this.productRef.current.value = null
-    this.setState({
-      disableUpdate: false,
-    })
-    return toast(<Notification text="Product updated" showSuccessIcon />)
+    return null
   }
 
   render() {
