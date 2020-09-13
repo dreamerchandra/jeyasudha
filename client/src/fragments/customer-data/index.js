@@ -43,8 +43,8 @@ export default class CustomerData extends Component {
         primaryAddress,
         phoneNumber,
         typeOfPayment: PAYMENT_TYPE.CREDIT,
-        amount,
         paidFor: PAID_FOR.DUE,
+        grandTotal: amount,
       })
       this.setState({ updatingDetails: true })
       if (ledgerData.isFieldsValid() && userData.isFieldsValid()) {

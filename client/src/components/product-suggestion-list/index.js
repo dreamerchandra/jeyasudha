@@ -33,11 +33,11 @@ export default function SuggestionItem({
               role="listitem"
             >
               <h3>{suggestionItem.uniqueName}</h3>
-              <p>Fixed price: {suggestionItem.fixedPrice}</p>
+              <p>Selling price: {suggestionItem.govtPrice}</p>
             </div>
             <div>
-              <h3>Actual Pricing</h3>
-              <p className="green">{suggestionItem.actualPrice}</p>
+              <h3>Billing Price</h3>
+              <p className="green">{suggestionItem.billingPrice}</p>
             </div>
           </li>
         ))}

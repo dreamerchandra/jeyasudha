@@ -39,14 +39,15 @@ export default class Receipt extends Component {
         name,
         phoneNumber,
         typeOfPayment: PAYMENT_TYPE.CASH,
-        amount,
+        grandTotal: amount,
         paidFor: PAID_FOR.DUE,
       })
       this.setState({ updatingDetails: true })
       if (ledgerData.isFieldsValid() && userData.isFieldsValid()) {
         await updateCustomerDue({ userData, ledgerData })
       } else {
-        toast(<Notification text="Invalid Field" showSuccessIcon={false} />)
+        this.setState({ updatingDetails: false })
+        return toast(<Notification text="Invalid Field" showSuccessIcon={false} />)
       }
       this.setState({ updatingDetails: false })
       toast(<Notification text="Updated Successfully" showSuccessIcon />)

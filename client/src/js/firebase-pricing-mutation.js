@@ -7,7 +7,7 @@ import { getProductDetailBasedOnUniqueName } from './firebase-pricing-query'
  */
 export async function updateProductPrice({ productRef, productDetails }) {
   return productRef.set(productDetails, {
-    mergeFields: ['fixedPrice', 'actualPrice'],
+    mergeFields: ['billingPrice', 'govtPrice', 'cgstPercent', 'sgstPercent'],
   })
 }
 

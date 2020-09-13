@@ -27,6 +27,9 @@
   background-color: var(--blue2);
 }
 
+.main input:disabled {
+  background-color: #63708170;
+}
 input:focus,
 textarea:focus,
 select:focus {

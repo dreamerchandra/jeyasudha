@@ -16,24 +16,28 @@ export default class PriceUpdate extends Component {
       disableUpdate: false,
     }
     this.productRef = createRef()
-    this.acutalPriceRef = createRef()
-    this.fixedPriceRef = createRef()
+    this.billingPriceRef = createRef()
+    this.govtPriceRef = createRef()
+    this.cgstPercent = createRef()
+    this.sgstPercent = createRef()
   }
 
   getInputCb = ({ target: { value } }) => value
 
   onSuggestionItemSelected = (itemId, item) => {
-    const { uniqueName, fixedPrice, actualPrice } = item
+    const { uniqueName, billingPrice, govtPrice } = item
     this.productRef.current.value = uniqueName
-    this.fixedPriceRef.current.value = fixedPrice
-    this.acutalPriceRef.current.value = actualPrice
+    this.govtPriceRef.current.value = govtPrice
+    this.billingPriceRef.current.value = billingPrice
   }
 
   updateProduct = async () => {
     try {
       const uniqueName = this.productRef.current.value
-      const actualPrice = this.acutalPriceRef.current.value
-      const fixedPrice = this.fixedPriceRef.current.value
+      const billingPrice = this.billingPriceRef.current.value
+      const govtPrice = this.govtPriceRef.current.value
+      const cgst = this.cgstPercent.current.value
+      const sgst = this.sgstPercent.current.value
       if (!uniqueName) {
         return toast(<Notification text="Missing details" showSuccessIcon={false} />)
       }
@@ -42,14 +46,16 @@ export default class PriceUpdate extends Component {
       })
       await upsertProduct({
         productDetails: {
-          actualPrice: Number(actualPrice),
-          fixedPrice: Number(fixedPrice),
+          billingPrice: Number(billingPrice),
+          govtPrice: Number(govtPrice),
+          cgstPercent: Number(cgst),
+          sgstPercent: Number(sgst),
           uniqueName,
         },
       })
       console.log('product updated')
-      this.acutalPriceRef.current.value = null
-      this.fixedPriceRef.current.value = null
+      this.billingPriceRef.current.value = null
+      this.govtPriceRef.current.value = null
       this.productRef.current.value = null
       this.setState({
         disableUpdate: false,
@@ -81,10 +87,14 @@ export default class PriceUpdate extends Component {
               SuggestionItem={SuggestionItem}
               fetchDetailsBasedOnSearchString={getProductDetailBasedOnSearchString}
             />
-            <p>Fixed unit price</p>
-            <input type="text" ref={this.fixedPriceRef} />
-            <p>Actual Unit price</p>
-            <input type="text" ref={this.acutalPriceRef} />
+            <p>Government Price</p>
+            <input type="text" ref={this.govtPriceRef} />
+            <p>Billing Price</p>
+            <input type="text" ref={this.billingPriceRef} />
+            <p>CGST percentage</p>
+            <input type="text" ref={this.cgstPercent} defaultValue={5} />
+            <p>SGST percentage</p>
+            <input type="text" ref={this.sgstPercent} defaultValue={5} />
           </div>
         </MainComponentHolder>
         <Footer>

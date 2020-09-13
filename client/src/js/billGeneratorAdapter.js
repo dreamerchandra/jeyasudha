@@ -11,43 +11,47 @@ export function paymentAdapterForMaterials({
   phoneNumber,
   particularDetails,
   unit,
-  typeOfPayment,
+  amountPaid,
 }) {
+  const orderDetails = new OrderDetail(particularDetails, unit)
+  const due = orderDetails.netBillingCost - amountPaid
+  console.log('order details created', orderDetails)
   const userData = new CustomerDetail(
     name,
-    0,
+    due,
     primaryAddress,
     vehicleNumber,
     driverName,
     phoneNumber
   )
-  console.log('customer details created', userData)
-  const orderDetails = new OrderDetail(particularDetails, unit)
-  console.log('order details created', orderDetails)
-  if (typeOfPayment === PAYMENT_TYPE.CREDIT) {
-    userData.updateCurrentDue(orderDetails.total)
-  }
   const billingData = new BillingData(
     name,
     primaryAddress,
     vehicleNumber,
     orderDetails,
-    orderDetails.total,
-    typeOfPayment
+    orderDetails.govtPrice,
+    orderDetails.netGovtCost,
+    orderDetails.govtCgstCost,
+    orderDetails.govtSgstCost
   )
   console.log('bill details created', billingData)
-  const ledgerData = new LedgerData(
-    orderDetails.total,
-    billingData.grandTotal,
-    typeOfPayment,
+  const ledgerDataForMaterials = new LedgerData(
+    amountPaid,
+    PAYMENT_TYPE.CASH,
     PAID_FOR.MATERIALS
   )
-  console.log('ledger data created', ledgerData)
+  const ledgerDataForCredit = new LedgerData(
+    due,
+    PAYMENT_TYPE.CREDIT,
+    PAID_FOR.MATERIALS
+  )
+  console.log('ledger data created', ledgerDataForMaterials)
   return {
     userData,
     orderDetails,
     billingData,
-    ledgerData,
+    ledgerDataForMaterials,
+    ledgerDataForCredit,
   }
 }
 
@@ -57,36 +61,19 @@ export function paymentAdapterForCustomer({
   phoneNumber,
   typeOfPayment,
   paidFor,
-  amount,
+  grandTotal,
 }) {
   const userData = new CustomerDetail(name, 0, primaryAddress, '', '', phoneNumber)
   console.log('customer details created', userData)
-  let billingData = null
   if (typeOfPayment === PAYMENT_TYPE.CASH) {
-    userData.updateCurrentDue(-1 * amount)
-    billingData = new BillingData(
-      name,
-      primaryAddress,
-      '',
-      null,
-      amount,
-      typeOfPayment
-    )
-    console.log('bill details created', billingData)
+    userData.updateCurrentDue(-1 * grandTotal)
   } else {
-    userData.updateCurrentDue(amount)
+    userData.updateCurrentDue(grandTotal)
   }
-
-  const ledgerData = new LedgerData(
-    amount,
-    BillingData.getGrandTotal(amount),
-    typeOfPayment,
-    paidFor
-  )
+  const ledgerData = new LedgerData(grandTotal, typeOfPayment, paidFor)
   console.log('ledger data created', ledgerData)
   return {
     userData,
-    billingData,
     ledgerData,
   }
 }

@@ -10,9 +10,9 @@ import { updateBillingData } from '../../js/firebase-billing-mutation'
 import { paymentAdapterForMaterials } from '../../js/billGeneratorAdapter'
 import ProductPricingList from '../../js/ProductPricingList'
 import LoaderHoc from '../../components/loading'
-import { PAYMENT_TYPE } from '../../js/LedgerData'
 import Notification from '../../components/notification-view'
 import Print from '../print'
+import { getGrandTotalFromSubTotal } from '../../js/helper/taxhelper'
 
 class Billing extends Component {
   constructor() {
@@ -24,6 +24,8 @@ class Billing extends Component {
     this.particularsRef = createRef()
     this.unitRef = createRef()
     this.vehicleRef = createRef()
+    this.referenceTotalRef = createRef()
+    this.amountPaidRef = createRef()
     this.state = {
       listOfParticulars: [],
       loadingParticulars: true,
@@ -42,7 +44,22 @@ class Billing extends Component {
     })
   }
 
-  recordTransaction = async (typeOfPayment) => {
+  isAmountValidToRecord = (recordCb) => {
+    const referenceToal = this.calculateReferenceTotal()
+    const amountPaid = Number(this.amountPaidRef.current.value)
+    if (amountPaid > referenceToal) {
+      toast(
+        <Notification
+          text="Amount paid can't be higher than grand total"
+          showSuccessIcon={false}
+        />
+      )
+      return
+    }
+    recordCb()
+  }
+
+  recordTransaction = async () => {
     try {
       this.setState({ updatingDetails: true })
       const phoneNumber = this.phNumRef.current.value
@@ -52,11 +69,17 @@ class Billing extends Component {
       const unit = Number(this.unitRef.current.value)
       const primaryAddress = this.addressRef.current.value
       const vehicleNumber = this.vehicleRef.current.value
+      const amountPaid = this.amountPaidRef.current.value
       const { listOfParticulars } = this.state
       const [selectedParticularDetail] = listOfParticulars.filter(
         (detail) => detail.id === userSelectedParticularId
       )
-      const { billingData, ledgerData, userData } = paymentAdapterForMaterials({
+      const {
+        billingData,
+        userData,
+        ledgerDataForCredit,
+        ledgerDataForMaterials,
+      } = paymentAdapterForMaterials({
         name,
         primaryAddress,
         vehicleNumber,
@@ -64,17 +87,19 @@ class Billing extends Component {
         particularDetails: selectedParticularDetail,
         phoneNumber,
         unit,
-        typeOfPayment,
+        amountPaid,
       })
       if (
         billingData.isFieldsValid() &&
-        ledgerData.isFieldsValid() &&
-        userData.isFieldsValid()
+        ledgerDataForCredit.isFieldsValid() &&
+        userData.isFieldsValid() &&
+        ledgerDataForMaterials.isFieldsValid()
       ) {
         await updateBillingData({
           userData,
           billingData,
-          ledgerData,
+          ledgerDataForCredit,
+          ledgerDataForMaterials,
         })
       } else {
         this.setState({ updatingDetails: false })
@@ -82,12 +107,10 @@ class Billing extends Component {
       }
       this.clearValues()
       toast(<Notification text="Updated Successfully" showSuccessIcon />)
-      this.setState({ updatingDetails: false })
-      if (billingData.shouldGenerateBill()) {
-        this.setState({
-          printDetails: { showPrintPreview: true, billDetails: billingData },
-        })
-      }
+      this.setState({
+        updatingDetails: false,
+        printDetails: { showPrintPreview: true, billDetails: billingData },
+      })
       console.log('transaction recorded successfully')
     } catch (err) {
       console.error('error while updating data', err)
@@ -108,6 +131,25 @@ class Billing extends Component {
     this.driveNameRef.current.value = driverName
     this.vehicleRef.current.value = vehicleNumber
     this.addressRef.current.value = primaryAddress
+  }
+
+  calculateReferenceTotal = () => {
+    const userSelectedParticularId = this.particularsRef.current.value
+    const { listOfParticulars } = this.state
+    const [selectedParticularDetail] = listOfParticulars.filter(
+      (detail) => detail.id === userSelectedParticularId
+    )
+    const units = Number(this.unitRef.current.value)
+    const subTotal = selectedParticularDetail.billingPrice * units
+    return getGrandTotalFromSubTotal(
+      subTotal,
+      selectedParticularDetail.cgstPercent,
+      selectedParticularDetail.sgstPercent
+    )
+  }
+
+  updateRefernceInUI = () => {
+    this.referenceTotalRef.current.value = this.calculateReferenceTotal()
   }
 
   clearValues() {
@@ -159,26 +201,37 @@ class Billing extends Component {
               ))}
             </select>
             <p>Unit</p>
-            <input type="text" autoComplete="nope" ref={this.unitRef} />
+            <input
+              type="number"
+              autoComplete="nope"
+              ref={this.unitRef}
+              onChange={this.updateRefernceInUI}
+            />
+            <p>Grand Total</p>
+            <input
+              type="text"
+              autoComplete="nope"
+              ref={this.referenceTotalRef}
+              disabled
+            />
+            <p>Amount Paid</p>
+            <input
+              type="text"
+              autoComplete="nope"
+              ref={this.amountPaidRef}
+              defaultValue={0}
+            />
           </div>
         </MainComponentHolder>
         {showPrintPreview && <Print billDetails={billDetails} />}
         <Footer>
           <button
             className="btn paper"
-            onClick={() => this.recordTransaction(PAYMENT_TYPE.CASH)}
+            onClick={() => this.isAmountValidToRecord(this.recordTransaction)}
             type="button"
             disabled={updatingDetails}
           >
-            Cash
-          </button>
-          <button
-            className="btn paper"
-            onClick={() => this.recordTransaction(PAYMENT_TYPE.CREDIT)}
-            type="button"
-            disabled={updatingDetails}
-          >
-            Credit
+            Print Bill
           </button>
         </Footer>
       </>

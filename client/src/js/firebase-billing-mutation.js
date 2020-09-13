@@ -1,29 +1,44 @@
 import { ref } from './firebase-helper'
 
+function updateLedgerData(ledgerData, billId, userId, firestoreTransaction) {
+  if (!ledgerData) return
+  if (ledgerData && billId) {
+    ledgerData.linkBillId(billId)
+  }
+  ledgerData.linkCustomerId(userId)
+  if (ledgerData.shouldUpdateToFirebase()) {
+    ledgerData.pushToDb(firestoreTransaction)
+  }
+}
 /**
  *
- * @param {{userData: CustomerDetail, billingData: BillingData, ledgerData: LedgerData}} param0
+ * @param {{userData: CustomerDetail, billingData: BillingData, ledgerDataForMaterials: LedgerData}} param0
  */
-function _updateBillingData({ userData, billingData = null, ledgerData }) {
+function _updateBillingData({ userData, billingData = null, ledgers }) {
   return ref().db.runTransaction(async (transaction) => {
     await userData.updateDueAndUserIdFromDb()
     userData.pushToDb(transaction)
     if (billingData) {
       billingData.linkCustomerId(userData.userId)
       billingData.pushToDb(transaction)
-      ledgerData.linkBillId(billingData.billId)
     }
-    ledgerData.linkCustomerId(userData.userId)
-    ledgerData.pushToDb(transaction)
+    ledgers.forEach((ledger) => {
+      updateLedgerData(ledger, billingData?.billId, userData.userId, transaction)
+    })
   })
 }
 
-export async function updateBillingData({ userData, billingData, ledgerData }) {
+export async function updateBillingData({
+  userData,
+  billingData,
+  ledgerDataForMaterials,
+  ledgerDataForCredit,
+}) {
   try {
     await _updateBillingData({
       userData,
       billingData,
-      ledgerData,
+      ledgers: [ledgerDataForCredit, ledgerDataForMaterials],
     })
     console.log('billing data updated')
   } catch (err) {
@@ -36,7 +51,7 @@ export async function updateCustomerDue({ userData, ledgerData }) {
   try {
     await _updateBillingData({
       userData,
-      ledgerData,
+      ledgers: [ledgerData],
     })
     console.log('updated customer data')
   } catch (err) {

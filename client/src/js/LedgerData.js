@@ -14,23 +14,14 @@ export const PAID_FOR = {
 }
 
 export default class LedgerData {
-  constructor(total, netTotal, paymentType, paidFor) {
-    this.total = Number(total)
+  constructor(netTotal, paymentType, paidFor) {
     this.paymentType = paymentType
     this.netTotal = Number(netTotal)
     this.paidFor = paidFor
   }
 
   isFieldsValid() {
-    return (
-      typeof this.netTotal === 'number' &&
-      typeof this.paymentType === 'number' &&
-      typeof this.paidFor === 'number'
-    )
-  }
-
-  shouldGenerateBill() {
-    return this.paymentType === PAYMENT_TYPE.CASH
+    return typeof this.paymentType === 'number' && typeof this.paidFor === 'number'
   }
 
   linkBillId(billId) {
@@ -46,7 +37,6 @@ export default class LedgerData {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       customerId: this.customerId,
       staffId: firebase.auth().currentUser.uid,
-      total: Number(this.total),
       netTotal: Number(this.netTotal),
       paymentType: this.paymentType,
       paidFor: this.paidFor,
@@ -55,6 +45,10 @@ export default class LedgerData {
       snapshot.billId = this.billId
     }
     return snapshot
+  }
+
+  shouldUpdateToFirebase() {
+    return this.netTotal > 0
   }
 
   pushToDb = (transaction) => {

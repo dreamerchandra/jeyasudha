@@ -1,42 +1,30 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { ref } from './firebase-helper'
-import { PAYMENT_TYPE } from './LedgerData'
-
-const CGST = 5
-const SGST = 5
 
 export default class BillingData {
-  constructor(name, address, vehicleNumber, orderDetails, total, typeOfPayment) {
+  constructor(
+    name,
+    address,
+    vehicleNumber,
+    orderDetails,
+    subTotal,
+    grandTotal,
+    cgstTotal,
+    sgstTotal
+  ) {
     this.name = name
     this.address = address
     this.vehicleNumber = vehicleNumber
     this.orderDetails = orderDetails
-    this.subTotal = Number(total)
-    this.typeOfPayment = typeOfPayment
-    this.cgstTotal = Number((CGST * total) / 100)
-    this.sgstTotal = Number((SGST * total) / 100)
-    this.grandTotal = Number(total + this.cgstTotal + this.sgstTotal)
-  }
-
-  static getGrandTotal(total) {
-    const totalInNumber = Number(total)
-    return Number(
-      totalInNumber + (CGST * totalInNumber) / 100 + (SGST * totalInNumber) / 100
-    )
+    this.subTotal = Number(subTotal)
+    this.cgstTotal = Number(cgstTotal)
+    this.sgstTotal = Number(sgstTotal)
+    this.grandTotal = Number(grandTotal)
   }
 
   isFieldsValid() {
-    return (
-      typeof this.grandTotal === 'number' &&
-      this.name &&
-      this.address &&
-      typeof this.typeOfPayment === 'number'
-    )
-  }
-
-  shouldGenerateBill() {
-    return this.typeOfPayment === PAYMENT_TYPE.CASH
+    return typeof this.grandTotal === 'number' && this.name && this.address
   }
 
   linkCustomerId(customerId) {
@@ -50,11 +38,10 @@ export default class BillingData {
       name: this.name,
       address: this.address,
       vehicleNumber: this.vehicleNumber,
-      paymentType: this.typeOfPayment,
       createdAt: this.createdAt,
       subTotal: Number(this.subTotal),
-      sgstCost: Number((SGST * this.subTotal) / 100),
-      cgstCost: Number((CGST * this.subTotal) / 100),
+      sgstCost: Number(this.sgstTotal),
+      cgstCost: Number(this.cgstTotal),
       grandTotal: Number(this.grandTotal),
     }
     if (this.orderDetails) {
