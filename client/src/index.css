@@ -16,14 +16,12 @@
   height: 100%;
 }
 
-
-
 :root {
   --blue1: #ecf5ff;
-  --blue2: #ACCBE1;
-  --blue3: #7C98B3;
+  --blue2: #accbe1;
+  --blue3: #7c98b3;
   --blue4: #637081;
-  --blue5: #536B78;
+  --blue5: #536b78;
   background-color: var(--blue1);
   font-size: 62.5%;
 }
@@ -74,7 +72,6 @@ h4 {
 
 /* ----END BUTTON---- */
 
-
 .paper {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
     0 0 40px rgba(128, 128, 128, 0.1) inset;
@@ -101,7 +98,8 @@ h4 {
 }
 
 .paper-raise-flatten:hover:before {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(128, 128, 128, 0.1) inset;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+    0 0 40px rgba(128, 128, 128, 0.1) inset;
 }
 
 /* ----END PAPER RAISED EFFECT----  */
@@ -109,19 +107,19 @@ h4 {
 /* ----PAPER BUTTON DISBALED------ */
 
 .disabled-btn {
-  background-color: #EAEAEA !important;
-  color: #A8A8A8 !important;
+  background-color: #eaeaea !important;
+  color: #a8a8a8 !important;
   cursor: auto;
   transition: none;
 }
 
 .disabled-btn::before {
   box-shadow: none;
-  border-color: #EAEAEA !important;
+  border-color: #eaeaea !important;
 }
 
 .disabled-btn:hover {
-  border-color: #EAEAEA !important;
+  border-color: #eaeaea !important;
 }
 
 .disabled-btn:hover::before {
@@ -130,4 +128,14 @@ h4 {
 
 .hide {
   display: none;
+}
+
+@media print {
+  html,
+  body {
+    height: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+  }
 }

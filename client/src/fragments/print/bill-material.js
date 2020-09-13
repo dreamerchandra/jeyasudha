@@ -21,11 +21,11 @@ const BillMaterials = ({ billDetails }) => (
           </td>
           <td className="unitRs text-right">
             Rs.
-            {floatToMoney(billDetails.orderDetails.particularDetails.actualPrice)}
+            {floatToMoney(billDetails.orderDetails.particularDetails.govtPrice)}
           </td>
           <td className="qty">{billDetails.orderDetails.unit}</td>
           <td className="total">
-            Rs.{floatToMoney(billDetails.orderDetails.total)}
+            Rs.{floatToMoney(billDetails.orderDetails.govtPrice)}
           </td>
         </tr>
       </tbody>

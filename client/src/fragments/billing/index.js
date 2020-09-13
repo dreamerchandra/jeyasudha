@@ -13,6 +13,7 @@ import LoaderHoc from '../../components/loading'
 import Notification from '../../components/notification-view'
 import Print from '../print'
 import { getGrandTotalFromSubTotal } from '../../js/helper/taxhelper'
+import { floatToMoney } from '../../js/helper/utils'
 
 class Billing extends Component {
   constructor() {
@@ -149,7 +150,9 @@ class Billing extends Component {
   }
 
   updateRefernceInUI = () => {
-    this.referenceTotalRef.current.value = this.calculateReferenceTotal()
+    this.referenceTotalRef.current.value = floatToMoney(
+      this.calculateReferenceTotal()
+    )
   }
 
   clearValues() {
@@ -223,7 +226,15 @@ class Billing extends Component {
             />
           </div>
         </MainComponentHolder>
-        {showPrintPreview && <Print billDetails={billDetails} />}
+        <Print
+          billDetails={billDetails}
+          showPrintPreview={showPrintPreview}
+          afterPrintCb={() =>
+            this.setState({
+              printDetails: { showPrintPreview: false, billDetails: [] },
+            })
+          }
+        />
         <Footer>
           <button
             className="btn paper"

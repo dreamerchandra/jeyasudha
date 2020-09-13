@@ -1,5 +1,14 @@
 import React from 'react'
 
+const getFormattedDate = () => {
+  const date = new Date()
+  const str = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  return str
+}
+const getFormattedTime = () => {
+  const date = new Date()
+  return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+}
 const BillInfo = ({ billDetails }) => (
   <div className="bill-info">
     <span>
@@ -8,7 +17,7 @@ const BillInfo = ({ billDetails }) => (
     </span>
     <span>
       <h6>Date</h6>
-      <p>{new Date(billDetails.createdAt).getDate()}</p>
+      <p>{getFormattedDate()}</p>
     </span>
     <span>
       <h6>Name/ID</h6>
@@ -16,7 +25,7 @@ const BillInfo = ({ billDetails }) => (
     </span>
     <span>
       <h6>Time</h6>
-      <p>{new Date(billDetails.createdAt).getTime()}</p>
+      <p>{getFormattedTime()}</p>
     </span>
     <span>
       <h6>Address</h6>

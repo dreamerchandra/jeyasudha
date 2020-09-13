@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BillBody from './bill-body'
 import './print/index.css'
 
@@ -9,7 +9,18 @@ const PrintContainer = ({ billDetails }) => (
   </div>
 )
 
-const Print = ({ billDetails = { orders: [] } }) => {
+const Print = ({ billDetails = { orders: [] }, showPrintPreview, afterPrintCb }) => {
+  useEffect(() => {
+    window.addEventListener('afterprint', afterPrintCb)
+  }, [])
+  useEffect(() => {
+    if (showPrintPreview) {
+      window.print()
+    }
+  }, [showPrintPreview])
+  if (!showPrintPreview) {
+    return null
+  }
   return (
     <section className="print">
       <PrintContainer billDetails={billDetails} />
