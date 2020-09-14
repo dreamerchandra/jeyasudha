@@ -1,0 +1,33 @@
+.db-table {
+  table-layout: fixed;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.db-table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 15px;
+  color: black;
+}
+
+.db-table thead {
+  font-size: 1.5rem !important;
+}
+
+.db-id {
+  width: 25%;
+}
+
+.db-cus-name {
+  width: 30%;
+}
+
+.db-ph {
+  width: 20%;
+}
+
+.db-due {
+  width: 20%;
+}
