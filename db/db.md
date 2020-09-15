@@ -14,7 +14,6 @@
       createdAt: <server_time>,
       customerId: <customer-id>,
       staffId: <user-id>,
-      total: <number>,
       netTotal: <number>, //with tax
       billId: <bill-id>,
       paymentType: <CASH: 0, CREDIT: 1>
@@ -28,14 +27,15 @@
       address: <string>,
       vehicleNumber: <string>,
       createdAt: <timestamp>,
-      paymentType: <CASH: 0, CREDIT: 1>
       orders: [
         {
           particular: {
-            particularId: <product-id>,
-            displayString: <string>,
-            fixedPrice: <string>,
-            actualPrice: <string>,
+            id: <product-id>,
+            uniqueName: <string>,
+            billingPrice: <string>,
+            govtPrice: <string>,
+            sgstPercent: <number>,
+            cgstPercent: <number>,
           },
           quantity: <number>,
         },
@@ -48,9 +48,12 @@
   },
   productPricing: {
     <product-id>: {
+      id: <product-id>,
       uniqueName: <string>,
-      fixedPrice: <string>,
-      actualPrice: <string>,
+      billingPrice: <string>,
+      govtPrice: <string>,
+      sgstPercent: <number>,
+      cgstPercent: <number>,
     }
   }
 }
