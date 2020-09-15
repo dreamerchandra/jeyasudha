@@ -7,24 +7,26 @@ const CustomerTable = ({ customerData }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td className="db-id">Id</td>
+          <td className="db-id">Address</td>
           <td className="db-cus-name">Customer Name</td>
           <td className="db-ph">Phone number</td>
           <td className="db-due">Overall due</td>
         </tr>
       </thead>
       <tbody>
-        {customerData.map(({ id, name, phoneNumber, overallDue }) => (
-          <tr id={id}>
-            <td className="db-id">
-              <p>{id}</p>
-              <span className="tooltip">{id}</span>
-            </td>
-            <td>{name}</td>
-            <td>{phoneNumber}</td>
-            <td>Rs.{floatToMoney(overallDue)}</td>
-          </tr>
-        ))}
+        {customerData.map(
+          ({ id, name, phoneNumber, overallDue, primaryAddress }) => (
+            <tr id={id}>
+              <td className="db-id">
+                <p>{primaryAddress}</p>
+                <span className="tooltip">{primaryAddress}</span>
+              </td>
+              <td>{name}</td>
+              <td>{phoneNumber}</td>
+              <td>Rs.{floatToMoney(overallDue)}</td>
+            </tr>
+          )
+        )}
       </tbody>
     </table>
   )
