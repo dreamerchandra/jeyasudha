@@ -2,22 +2,16 @@
   display: flex;
   height: 80vh;
   width: 75vw;
-  justify-content: center;
-  align-items: center;
   margin: 0 auto;
   overflow-y: auto;
 }
 
 @media only screen and (max-width: 650px) {
-
   .main-container {
     display: flex;
     height: 80vh;
     width: 60vw;
-    justify-content: center;
-    align-items: center;
     margin: 0 auto;
     overflow-y: auto;
   }
-
 }

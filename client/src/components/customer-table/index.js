@@ -16,7 +16,10 @@ const CustomerTable = ({ customerData }) => {
       <tbody>
         {customerData.map(({ id, name, phoneNumber, overallDue }) => (
           <tr id={id}>
-            <td>{id}</td>
+            <td className="db-id">
+              <p>{id}</p>
+              <span className="tooltip">{id}</span>
+            </td>
             <td>{name}</td>
             <td>{phoneNumber}</td>
             <td>Rs.{floatToMoney(overallDue)}</td>
