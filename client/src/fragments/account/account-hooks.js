@@ -6,7 +6,6 @@ import AccountData from '../../js/AccountData'
 export const accountPurposeList = [
   { id: 1, value: 'Conveyance' },
   { id: 2, value: 'Allowances' },
-  { id: 3, value: 'Salary Advance' },
   { id: 4, value: 'Site', subField: 'Site Name' },
   { id: 5, value: 'PO', subField: 'Po Number' },
   { id: 6, value: 'Crushers' },
@@ -31,6 +30,10 @@ export default function useAccountHooks() {
       setUpdateDetails(true)
       await accountData.pushToDb()
       toast(<Notification showSuccessIcon text="Successfully updated" />)
+      nameRef.current.value = ''
+      purposeRef.current.value = ''
+      amountRef.current.value = ''
+      setExtraField({ show: false, fieldName: '' })
     } catch (err) {
       toast(<Notification showSuccessIcon={false} text={err.message} />)
     }

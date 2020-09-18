@@ -2,10 +2,28 @@ import Billing from '../fragments/billing'
 import PriceUpdate from '../fragments/price-update'
 import CustomerData from '../fragments/customer-data'
 import Receipt from '../fragments/receipt'
-import CustomerDb from '../fragments/CustomerDb'
+import CustomerDb from '../fragments/customer-db'
+import AccountDb from '../fragments/account-db'
 import Accounts from '../fragments/account'
+import DBRouter from '../fragments/db-router'
+
+export const dbSubRoutes = [
+  {
+    path: '/db/customer',
+    component: CustomerDb,
+    linkName: 'CUSTOMER DB',
+    hideFromNav: true,
+  },
+  {
+    path: '/db/account',
+    component: AccountDb,
+    linkName: 'ACCOUNTS DB',
+    hideFromNav: true,
+  },
+]
 
 const routerConfig = [
+  ...dbSubRoutes,
   {
     path: '/billing',
     component: Billing,
@@ -27,15 +45,15 @@ const routerConfig = [
     linkName: 'RECEIPT',
   },
   {
-    path: '/db/customer',
-    component: CustomerDb,
-    linkName: 'CUSTOMER DB',
-  },
-  {
     path: '/account',
     component: Accounts,
     linkName: 'ACCOUNTS',
   },
+  {
+    path: '/db',
+    component: DBRouter,
+    linkName: 'DB',
+    subRoutes: dbSubRoutes,
+  },
 ]
-
 export default routerConfig

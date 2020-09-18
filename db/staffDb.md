@@ -9,5 +9,13 @@
     <loan-id>: {
       
     }
+  },
+  staffDetails: {
+    <staff-id>: {
+      empId: <str>,
+      name: <str>,
+      payCycle: <MONTH:0, WEEK: 1>,
+      salary: <number>,
+    }
   }
 }
