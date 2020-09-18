@@ -14,6 +14,7 @@ export const ref = () => {
     billing: db.collection('billing'),
     ledger: db.collection('ledger'),
     productPricing: db.collection('productPricing'),
+    account: db.collection('account'),
     db,
   }
 }

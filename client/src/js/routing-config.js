@@ -3,6 +3,7 @@ import PriceUpdate from '../fragments/price-update'
 import CustomerData from '../fragments/customer-data'
 import Receipt from '../fragments/receipt'
 import CustomerDb from '../fragments/CustomerDb'
+import Accounts from '../fragments/account'
 
 const routerConfig = [
   {
@@ -29,6 +30,11 @@ const routerConfig = [
     path: '/db/customer',
     component: CustomerDb,
     linkName: 'CUSTOMER DB',
+  },
+  {
+    path: '/account',
+    component: Accounts,
+    linkName: 'ACCOUNTS',
   },
 ]
 

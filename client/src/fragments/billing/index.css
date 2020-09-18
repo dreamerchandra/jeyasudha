@@ -28,6 +28,10 @@
   background-color: var(--blue2);
 }
 
+.main input:invalid {
+  background-color: rgb(200, 70, 70);
+}
+
 .main input:disabled {
   background-color: #63708170;
 }

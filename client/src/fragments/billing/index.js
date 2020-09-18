@@ -194,7 +194,7 @@ class Billing extends Component {
             <p>Vehicle Number</p>
             <input type="text" autoComplete="nope" ref={this.vehicleRef} />
             <p>Phone number</p>
-            <input type="text" autoComplete="nope" ref={this.phNumRef} />
+            <input type="tel" autoComplete="nope" ref={this.phNumRef} />
             <p>Particulars</p>
             <select ref={this.particularsRef}>
               {listOfParticulars.map((details) => (
@@ -209,6 +209,7 @@ class Billing extends Component {
               autoComplete="nope"
               ref={this.unitRef}
               onChange={this.updateRefernceInUI}
+              min={0}
             />
             <p>Grand Total</p>
             <input
@@ -223,6 +224,7 @@ class Billing extends Component {
               autoComplete="nope"
               ref={this.amountPaidRef}
               defaultValue={0}
+              min={0}
             />
           </div>
         </MainComponentHolder>
