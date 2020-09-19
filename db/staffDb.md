@@ -7,9 +7,26 @@
   },
   staffLoan: {
     <loan-id>: {
-      
+      status: <PENDING:0, PAID: 1>,
+      amount: <number>,
+      type: <EMI: 0, ADVANCE: 1>,
+      lenderEmpId: <staffDetails.empId>,
+      lenderStaffId: <staff-id>,
+      issuedBy: <login-id>,
+      createdAt: <timestamp>,
     }
   },
+  loanRepayment: {
+    <repayment-id>: {
+      createdAt: <timestamp>,
+      lenderEmpId: <staffDetails.empId>,
+      lenderStaffId: <staff-id>,
+      receivedBy: <login-id>,
+      amount: <number>,
+      pendingAmount: <number>,
+      loanId: <loan-id>
+    }
+  }
   staffDetails: {
     <staff-id>: {
       empId: <str>,

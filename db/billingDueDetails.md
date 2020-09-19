@@ -1,3 +1,5 @@
+For cross checking and for future reference
+
 # Calculating methods
 cross verification is only based upon ledger data
 `Material cash` isn't considered for calculating overall due

@@ -4,6 +4,15 @@
   width: 75vw;
   margin: 0 auto;
   overflow-y: auto;
+  position: relative;
+}
+
+.main-container > .ref {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 2rem;
+  display: block;
 }
 
 @media only screen and (max-width: 650px) {

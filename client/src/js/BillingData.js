@@ -21,6 +21,9 @@ export default class BillingData {
     this.cgstTotal = Number(cgstTotal)
     this.sgstTotal = Number(sgstTotal)
     this.grandTotal = Number(grandTotal)
+    const newBillingRef = ref().billing.doc()
+    this.billingDbRef = newBillingRef
+    this.billId = this.billingDbRef.id
   }
 
   isFieldsValid() {
@@ -29,6 +32,10 @@ export default class BillingData {
 
   linkCustomerId(customerId) {
     this.customerId = customerId
+  }
+
+  getBillId() {
+    return this.billId
   }
 
   convertThisToFirestore = () => {
@@ -56,10 +63,7 @@ export default class BillingData {
   }
 
   pushToDb = (transaction) => {
-    const newBillingRef = ref().billing.doc()
-    transaction.set(newBillingRef, this.convertThisToFirestore())
-    this.billingDbRef = newBillingRef
-    this.billId = this.billingDbRef.id
+    transaction.set(this.billingDbRef, this.convertThisToFirestore())
     console.log('pushed billing data to db', this.billId)
     return this.billingDbRef.id
   }

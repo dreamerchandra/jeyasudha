@@ -27,11 +27,16 @@ class Billing extends Component {
     this.vehicleRef = createRef()
     this.referenceTotalRef = createRef()
     this.amountPaidRef = createRef()
+    this.billStates = {
+      GENERATE_ID: 'Generate Bill Id',
+      PRINT_BILL: 'PRINT BILL',
+    }
     this.state = {
       listOfParticulars: [],
       loadingParticulars: true,
       updatingDetails: false,
       printDetails: { showPrintPreview: false, billDetails: null },
+      billState: this.billStates.GENERATE_ID,
     }
   }
 
@@ -60,36 +65,60 @@ class Billing extends Component {
     recordCb()
   }
 
+  generateBillId = () => {
+    const phoneNumber = this.phNumRef.current.value
+    const name = this.nameRef.current.value
+    const driverName = this.driveNameRef.current.value
+    const userSelectedParticularId = this.particularsRef.current.value
+    const unit = Number(this.unitRef.current.value)
+    const primaryAddress = this.addressRef.current.value
+    const vehicleNumber = this.vehicleRef.current.value
+    const amountPaid = this.amountPaidRef.current.value
+    const { listOfParticulars } = this.state
+    const [selectedParticularDetail] = listOfParticulars.filter(
+      (detail) => detail.id === userSelectedParticularId
+    )
+    const {
+      billingData,
+      userData,
+      ledgerDataForCredit,
+      ledgerDataForMaterials,
+    } = paymentAdapterForMaterials({
+      name,
+      primaryAddress,
+      vehicleNumber,
+      driverName,
+      particularDetails: selectedParticularDetail,
+      phoneNumber,
+      unit,
+      amountPaid,
+    })
+    if (
+      billingData.isFieldsValid() &&
+      ledgerDataForCredit.isFieldsValid() &&
+      userData.isFieldsValid() &&
+      ledgerDataForMaterials.isFieldsValid()
+    ) {
+      this.billingData = billingData
+      this.userData = userData
+      this.ledgerDataForCredit = ledgerDataForCredit
+      this.ledgerDataForMaterials = ledgerDataForMaterials
+      this.setState({ billState: this.billStates.PRINT_BILL })
+    } else {
+      return toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
+    }
+    return null
+  }
+
   recordTransaction = async () => {
     try {
       this.setState({ updatingDetails: true })
-      const phoneNumber = this.phNumRef.current.value
-      const name = this.nameRef.current.value
-      const driverName = this.driveNameRef.current.value
-      const userSelectedParticularId = this.particularsRef.current.value
-      const unit = Number(this.unitRef.current.value)
-      const primaryAddress = this.addressRef.current.value
-      const vehicleNumber = this.vehicleRef.current.value
-      const amountPaid = this.amountPaidRef.current.value
-      const { listOfParticulars } = this.state
-      const [selectedParticularDetail] = listOfParticulars.filter(
-        (detail) => detail.id === userSelectedParticularId
-      )
       const {
         billingData,
-        userData,
         ledgerDataForCredit,
+        userData,
         ledgerDataForMaterials,
-      } = paymentAdapterForMaterials({
-        name,
-        primaryAddress,
-        vehicleNumber,
-        driverName,
-        particularDetails: selectedParticularDetail,
-        phoneNumber,
-        unit,
-        amountPaid,
-      })
+      } = this
       if (
         billingData.isFieldsValid() &&
         ledgerDataForCredit.isFieldsValid() &&
@@ -103,7 +132,10 @@ class Billing extends Component {
           ledgerDataForMaterials,
         })
       } else {
-        this.setState({ updatingDetails: false })
+        this.setState({
+          updatingDetails: false,
+          billState: this.billStates.GENERATE_ID,
+        })
         return toast(<Notification text="Invalid Fields" showSuccessIcon={false} />)
       }
       this.clearValues()
@@ -111,11 +143,15 @@ class Billing extends Component {
       this.setState({
         updatingDetails: false,
         printDetails: { showPrintPreview: true, billDetails: billingData },
+        billState: this.billStates.GENERATE_ID,
       })
       console.log('transaction recorded successfully')
     } catch (err) {
       console.error('error while updating data', err)
-      this.setState({ updatingDetails: false })
+      this.setState({
+        updatingDetails: false,
+        billState: this.billStates.GENERATE_ID,
+      })
       toast(<Notification text="Invalid field" showSuccessIcon={false} />)
     }
     return null
@@ -162,13 +198,45 @@ class Billing extends Component {
     this.unitRef.current.value = ''
     this.addressRef.current.value = ''
     this.vehicleRef.current.value = ''
+    this.referenceTotalRef.current.value = ''
+    this.amountPaidRef.current.value = ''
+    this.userData = null
+    this.billingData = null
+    this.ledgerDataForCredit = null
+    this.ledgerDataForMaterials = null
+  }
+
+  renderProceedButton = () => {
+    const { billState, updatingDetails } = this.state
+    const { billStates } = this
+    if (billState === billStates.GENERATE_ID) {
+      return (
+        <button
+          className="btn paper"
+          onClick={() => this.isAmountValidToRecord(this.generateBillId)}
+          type="button"
+          disabled={updatingDetails}
+        >
+          {billState}
+        </button>
+      )
+    }
+    return (
+      <button
+        className="btn paper"
+        onClick={() => this.isAmountValidToRecord(this.recordTransaction)}
+        type="button"
+        disabled={updatingDetails}
+      >
+        {billState}
+      </button>
+    )
   }
 
   render() {
     const {
       loadingParticulars,
       listOfParticulars,
-      updatingDetails,
       printDetails: { showPrintPreview, billDetails },
     } = this.state
     return (
@@ -179,6 +247,9 @@ class Billing extends Component {
           </LoaderHoc>
         )}
         <MainComponentHolder>
+          {this.billingData?.getBillId() && (
+            <span className="ref">Bill Id: {this.billingData?.getBillId()}</span>
+          )}
           <div className="main">
             <p>Customer Name/ID</p>
             <SuggestibleInput
@@ -237,16 +308,7 @@ class Billing extends Component {
             })
           }
         />
-        <Footer>
-          <button
-            className="btn paper"
-            onClick={() => this.isAmountValidToRecord(this.recordTransaction)}
-            type="button"
-            disabled={updatingDetails}
-          >
-            Print Bill
-          </button>
-        </Footer>
+        <Footer>{this.renderProceedButton()}</Footer>
       </>
     )
   }
