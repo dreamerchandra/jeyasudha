@@ -1,4 +1,4 @@
-import { ref } from './firebase-helper'
+import { getServerTimeStamp, ref } from './firebase-helper'
 
 export default class AccountData {
   constructor({ name, amount, purpose, extraField }) {
@@ -17,6 +17,7 @@ export default class AccountData {
       name: accountData.name,
       amount: accountData.amount,
       purpose: accountData.purpose,
+      createdAt: getServerTimeStamp(),
     }
     if (accountData.extraField) {
       data.extraField = accountData.extraField

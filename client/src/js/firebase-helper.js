@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/auth'
 
 export const ref = () => {
   const db = firebase.firestore()
@@ -36,4 +37,12 @@ export const getDataFromQuerySnapShot = (idKey, documentData) => {
     }
   })
   return returnResult
+}
+
+export function getServerTimeStamp() {
+  return firebase.firestore.FieldValue.serverTimestamp()
+}
+
+export function getCurrentUserId() {
+  return firebase.auth().currentUser.uid
 }

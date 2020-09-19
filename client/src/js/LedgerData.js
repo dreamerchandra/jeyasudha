@@ -1,7 +1,4 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
-import 'firebase/auth'
-import { ref } from './firebase-helper'
+import { getCurrentUserId, getServerTimeStamp, ref } from './firebase-helper'
 
 export const PAYMENT_TYPE = {
   CASH: 0,
@@ -34,9 +31,9 @@ export default class LedgerData {
 
   convertThisToFirestore = () => {
     const snapshot = {
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      createdAt: getServerTimeStamp(),
       customerId: this.customerId,
-      staffId: firebase.auth().currentUser.uid,
+      staffId: getCurrentUserId(),
       netTotal: Number(this.netTotal),
       paymentType: this.paymentType,
       paidFor: this.paidFor,

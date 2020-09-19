@@ -2,7 +2,15 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 export const loginWithEmail = ({ email, password }) => {
-  firebase.auth().signInWithEmailAndPassword(email, password)
+  if (email === 'jeyasudhaconstructions999@gmail.com') {
+    return firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+      })
+  }
+  return firebase.auth().signInWithEmailAndPassword(email, password)
 }
 
 export const signupWithEmail = ({ email, password }) => {

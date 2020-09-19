@@ -7,21 +7,23 @@ const AccountTable = ({ accountData }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td className="db-id">Name</td>
-          <td className="db-cus-name">purpose</td>
-          <td className="db-ph">Amount</td>
-          <td className="db-due">Description</td>
+          <td>Name</td>
+          <td>purpose</td>
+          <td>Amount</td>
+          <td>Created At</td>
+          <td>Description</td>
         </tr>
       </thead>
       <tbody>
-        {accountData.map(({ id, amount, extraField, purpose, name }) => (
-          <tr id={id}>
-            <td className="db-id">
-              <p>{name}</p>
-              <span className="tooltip">{name}</span>
-            </td>
+        {accountData.map(({ id, amount, createdAt, extraField, purpose, name }) => (
+          <tr key={id}>
+            <td>{name}</td>
             <td>{purpose}</td>
             <td>Rs.{floatToMoney(amount)}</td>
+            <td>
+              {createdAt &&
+                new Date(createdAt.seconds * 1000).toLocaleString('en-IN')}
+            </td>
             <td>{extraField || ''}</td>
           </tr>
         ))}

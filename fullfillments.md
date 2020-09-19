@@ -4,5 +4,7 @@
 - filter in tables
 - display logo in background
 
+
 # Done
 - display bill id in billing component
+- admin account should be automatically logged out
