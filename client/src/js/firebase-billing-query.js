@@ -7,6 +7,7 @@ export async function getCustomerDetailBasedOnSearchString({
   const documentData = await ref()
     .customer.where('name', '>=', searchString)
     .where('name', '<=', `${searchString}~`)
+    .limit(4)
     .get()
   return getDataFromQuerySnapShot(id, documentData)
 }

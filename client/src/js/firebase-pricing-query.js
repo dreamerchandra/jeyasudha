@@ -7,6 +7,7 @@ export async function getProductDetailBasedOnSearchString({
   const documentData = await ref()
     .productPricing.where('uniqueName', '>=', searchString)
     .where('uniqueName', '<=', `${searchString}~`)
+    .limit(4)
     .get()
   return getDataFromQuerySnapShot(id, documentData)
 }
