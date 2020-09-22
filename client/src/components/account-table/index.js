@@ -1,8 +1,8 @@
 import React from 'react'
 import { floatToMoney } from '../../js/helper/utils'
 
-const AccountTable = ({ accountData }) => {
-  if (!accountData) return null
+const AccountTable = ({ data }) => {
+  if (!data) return null
   return (
     <table className="db-table">
       <thead>
@@ -15,7 +15,7 @@ const AccountTable = ({ accountData }) => {
         </tr>
       </thead>
       <tbody>
-        {accountData.map(({ id, amount, createdAt, extraField, purpose, name }) => (
+        {data.map(({ id, amount, createdAt, extraField, purpose, name }) => (
           <tr key={id}>
             <td>{name}</td>
             <td>{purpose}</td>

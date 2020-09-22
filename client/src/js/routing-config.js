@@ -6,6 +6,7 @@ import CustomerDb from '../fragments/customer-db'
 import AccountDb from '../fragments/account-db'
 import Accounts from '../fragments/account'
 import DBRouter from '../fragments/db-router'
+import ProductDb from '../fragments/product-db'
 
 export const dbSubRoutes = [
   {
@@ -18,6 +19,12 @@ export const dbSubRoutes = [
     path: '/db/account',
     component: AccountDb,
     linkName: 'ACCOUNTS DB',
+    hideFromNav: true,
+  },
+  {
+    path: '/db/product',
+    component: ProductDb,
+    linkName: 'PRODUCT DB',
     hideFromNav: true,
   },
 ]

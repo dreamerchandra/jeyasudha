@@ -40,13 +40,10 @@ const fieldPaths = [
 ]
 
 function AccountDb() {
-  const {
-    docRef,
-    onReadyToFetch,
-    setFieldPath,
-    setValue,
-    fieldPath,
-  } = useDbFetcher()
+  const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
+  const { docRef, onReadyToFetch, setFieldPath, setValue, fieldPath } = useDbFetcher(
+    ref().account.where('createdAt', '>=', yesterday)
+  )
   return (
     <DbComponentHolder>
       <div className="main">

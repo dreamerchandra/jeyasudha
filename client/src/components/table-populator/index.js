@@ -14,13 +14,13 @@ function TablePopulator({ Table, docRef }) {
           <h1>Downloading accounts data</h1>
         </LoaderHoc>
       )}
-      {data && <Table accountData={data} />}
+      {data && <Table data={data} />}
     </>
   )
 }
 
 const areEqual = (preProps, nextProps) => {
-  return preProps.docRef.isEqual(nextProps.docRef)
+  return preProps?.docRef?.isEqual(nextProps?.docRef)
 }
 
 const MemoizedTablePopulator = memo(TablePopulator, areEqual)
