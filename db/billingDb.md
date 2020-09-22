@@ -42,7 +42,8 @@
           quantity: <number>,
         },
       ],
-      orderNames: [<productUniqueName>]
+      orderNames: [<productUniqueName>],
+      orderIds: [<order-id>]
       subTotal: <number>, 
       sgstCost: <number>,
       cgstCost: <number>,

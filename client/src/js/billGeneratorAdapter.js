@@ -25,12 +25,14 @@ export function paymentAdapterForMaterials({
     phoneNumber
   )
   const orderNames = [particularDetails.uniqueName]
+  const orderIds = [particularDetails.id]
   const billingData = new BillingData(
     name,
     primaryAddress,
     vehicleNumber,
     orderDetails,
     orderNames,
+    orderIds,
     phoneNumber,
     driverName,
     amountPaid,

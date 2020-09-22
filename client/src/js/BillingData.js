@@ -9,6 +9,7 @@ export default class BillingData {
     vehicleNumber,
     orderDetails,
     orderNames,
+    orderIds,
     phoneNumber,
     driverName,
     amountPaid,
@@ -25,6 +26,7 @@ export default class BillingData {
     this.driverName = driverName
     this.amountPaid = amountPaid
     this.orderNames = orderNames
+    this.orderIds = orderIds
     this.subTotal = Number(subTotal)
     this.cgstTotal = Number(cgstTotal)
     this.sgstTotal = Number(sgstTotal)
@@ -70,6 +72,7 @@ export default class BillingData {
         },
       ]
       snapshot.orderNames = this.orderNames
+      snapshot.orderIds = this.orderIds
     }
     return snapshot
   }

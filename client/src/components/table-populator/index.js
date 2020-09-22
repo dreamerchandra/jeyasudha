@@ -14,7 +14,13 @@ function TablePopulator({ Table, docRef }) {
           <h1>Downloading accounts data</h1>
         </LoaderHoc>
       )}
-      {data && <Table data={data} />}
+      {data?.length ? (
+        <Table data={data} />
+      ) : (
+        <p style={{ fontSize: '3rem', textAlign: 'center', color: 'var(--blue5)' }}>
+          No data to show
+        </p>
+      )}
     </>
   )
 }
