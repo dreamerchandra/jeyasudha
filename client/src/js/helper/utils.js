@@ -1,5 +1,5 @@
 export function floatToMoney(num) {
-  if (num.toLocaleString) {
+  if (num?.toLocaleString) {
     return num.toLocaleString('en-IN', {
       maximumFractionDigits: 2,
     })

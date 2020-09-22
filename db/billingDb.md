@@ -23,6 +23,8 @@
   billing: {
     <bill-id>: { // for credit billing data will be created in DB for order reference but bill won't be generated
       customerId: <customer-id>,
+      phoneNumber: <string>,
+      driverName: <string>,
       name: <string>,
       address: <string>,
       vehicleNumber: <string>,
@@ -40,10 +42,12 @@
           quantity: <number>,
         },
       ],
+      orderNames: [<productUniqueName>]
       subTotal: <number>, 
       sgstCost: <number>,
       cgstCost: <number>,
       grandTotal: <number>,
+      amountPaid: <number>,
     },
   },
   productPricing: {

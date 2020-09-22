@@ -8,6 +8,10 @@ export default class BillingData {
     address,
     vehicleNumber,
     orderDetails,
+    orderNames,
+    phoneNumber,
+    driverName,
+    amountPaid,
     subTotal,
     grandTotal,
     cgstTotal,
@@ -17,6 +21,10 @@ export default class BillingData {
     this.address = address
     this.vehicleNumber = vehicleNumber
     this.orderDetails = orderDetails
+    this.phoneNumber = phoneNumber
+    this.driverName = driverName
+    this.amountPaid = amountPaid
+    this.orderNames = orderNames
     this.subTotal = Number(subTotal)
     this.cgstTotal = Number(cgstTotal)
     this.sgstTotal = Number(sgstTotal)
@@ -50,6 +58,9 @@ export default class BillingData {
       sgstCost: Number(this.sgstTotal),
       cgstCost: Number(this.cgstTotal),
       grandTotal: Number(this.grandTotal),
+      amountPaid: Number(this.amountPaid),
+      phoneNumber: this.phoneNumber,
+      driverName: this.driverName,
     }
     if (this.orderDetails) {
       snapshot.orders = [
@@ -58,6 +69,7 @@ export default class BillingData {
           quantity: this.orderDetails.unit,
         },
       ]
+      snapshot.orderNames = this.orderNames
     }
     return snapshot
   }
