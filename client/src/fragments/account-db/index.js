@@ -1,59 +1,52 @@
 import React, { useState } from 'react'
-import useCollectionDataOnce from '../../common-hoooks/use-firestore-wrapper'
 import AccountTable from '../../components/account-table'
-import LoaderHoc from '../../components/loading'
-import MainComponentHolder from '../../components/main-component-holder'
+import DbComponentHolder from '../../components/DbComponentHolder'
+import TablePopulator from '../../components/table-populator'
 import { ref } from '../../js/firebase-helper'
-import { accountPurposeList } from '../account/account-hooks'
-
-function AccountFetcher({ option }) {
-  const { data: accountData, loading } = useCollectionDataOnce({
-    ref: ref().account.where('purpose', '==', option),
-    idField: 'id',
-  })
-  return (
-    <>
-      {' '}
-      {loading && (
-        <LoaderHoc>
-          <h1>Downloading accounts data</h1>
-        </LoaderHoc>
-      )}
-      {accountData && <AccountTable accountData={accountData} />}
-    </>
-  )
-}
+import AccountQueryValueProvider from './account-query-value-provier'
 
 function AccountDb() {
-  const [option, setOption] = useState()
+  const fieldPaths = ['name', 'amount', 'purpose']
+  const [fieldPath, setFieldPath] = useState()
+  const [value, setValue] = useState()
+  const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
+  const [docRef, setDocRef] = useState(() =>
+    ref().account.where('createdAt', '>=', yesterday)
+  )
+  const onReadyToFetch = () => {
+    console.log('fetching', fieldPath, value)
+    window.ref = ref().account.where(fieldPath, '==', value)
+    setDocRef(ref().account.where(fieldPath, '==', value))
+  }
   return (
-    <MainComponentHolder>
-      {option && <AccountFetcher option={option} />}
-      {!option && (
-        <div className="main">
-          <p>Select Data to show</p>
+    <DbComponentHolder>
+      <div className="main">
+        <span>
+          <p>Select </p>
           <select
             onInput={({ target }) => {
-              setOption(target.value)
+              setFieldPath(target.value)
             }}
           >
-            <option disabled selected value>
-              -- select an option --
+            <option disabled defaultValue selected>
+              -- select an type --
             </option>
-            {accountPurposeList.map((details) => (
-              <option
-                key={details.id}
-                value={details.value}
-                itemID={details.id}
-                id={details.id}
-              >
-                {details.value}
+            {fieldPaths.map((path) => (
+              <option key={path} value={path}>
+                {path}
               </option>
             ))}
           </select>
-        </div>
-      )}
-    </MainComponentHolder>
+          <p> to show</p>
+        </span>
+        <AccountQueryValueProvider
+          fieldValue={fieldPath}
+          setValue={setValue}
+          onReadyToFetch={onReadyToFetch}
+        />
+      </div>
+      <TablePopulator docRef={docRef} Table={AccountTable} />
+    </DbComponentHolder>
   )
 }
 

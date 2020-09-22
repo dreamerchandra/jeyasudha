@@ -23,7 +23,7 @@ const Accounts = () => {
           <input type="number" min={0} ref={amountRef} />
           <p>Purpose</p>
           <select ref={purposeRef}>
-            <option disabled selected value>
+            <option disabled selected defaultValue>
               -- select an option --
             </option>
             {accountPurposeList.map((details) => (

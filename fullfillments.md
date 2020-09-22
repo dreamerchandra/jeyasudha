@@ -1,8 +1,8 @@
 # Pending
 - make billing component multi page
 - show all db along with createdAt 
-- filter in tables
 - display logo in background
+- filter in tables
 
 
 # Done

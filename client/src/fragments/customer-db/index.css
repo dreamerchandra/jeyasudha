@@ -1,6 +1,5 @@
 .db-table {
   table-layout: fixed;
-  width: 80%;
   white-space: nowrap;
   margin: auto;
   border-collapse: collapse;

@@ -1,0 +1,9 @@
+.db-container {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 75vw;
+  margin: 0 auto;
+  overflow-y: auto;
+  position: relative;
+}
