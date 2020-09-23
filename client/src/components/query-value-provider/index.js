@@ -10,10 +10,15 @@ export default function QueryValueProvider({
   return (
     <>
       <div className="query-wrapper">
-        <p>Enter appropriate value</p>
-        {Component && <Component setValue={setValue} {...componentProps} />}
-        <button type="button" onClick={onReadyToFetch}>
-          Fetch details
+        {Component ? (
+          <Component setValue={setValue} {...componentProps} />
+        ) : (
+          <input disabled placeholder="👈 Select" />
+        )}
+        <button type="button" onClick={onReadyToFetch} className="paper">
+          <span role="img" aria-label="find">
+            🔍
+          </span>
         </button>
       </div>
     </>

@@ -1,21 +1,38 @@
 .query-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-.query-wrapper > button {
-  align-self: center;
-  text-align: right;
-  font-size: 1.5rem;
-  background-color: var(--blue5);
-  padding: 1px 10px;
+  position: relative;
 }
 
-.query-wrapper > p {
-  align-self: center;
-  align-items: center;
-  font-size: 1.5rem;
-  max-width: 30rem;
-  max-height: 4rem;
-  overflow: hidden;
-  color: var(--blue5);
+.query-wrapper > button {
+  position: absolute;
+  right: 2px;
+  top: 6px;
+  background: #fff;
+  padding: 5px;
+  border: solid 1px #000;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+
+.query-wrapper > select {
+  appearance: none;
+  /* background: transparent; */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 85%;
+  background-position-y: 50%;
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  margin-right: 2rem;
+  padding: 1rem;
+  padding-right: 2rem;
+}
+
+.query-wrapper span {
+  font-size: 0.75rem;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  top: 50%;
 }
