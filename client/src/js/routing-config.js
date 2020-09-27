@@ -9,6 +9,7 @@ import DBRouter from '../fragments/db-router'
 import ProductDb from '../fragments/product-db'
 import BillingDb from '../fragments/billing-db'
 import StaffUpdate from '../fragments/staff-update'
+import Attendance from '../fragments/attendance'
 
 export const dbSubRoutes = [
   {
@@ -78,6 +79,11 @@ const routerConfig = [
     path: '/staff/salary',
     component: DBRouter,
     linkName: 'STAFF SALARY',
+  },
+  {
+    path: '/staff/attendance',
+    component: Attendance,
+    linkName: 'ATTENDANCE',
   },
   {
     path: '/db',

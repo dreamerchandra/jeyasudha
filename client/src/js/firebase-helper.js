@@ -18,6 +18,7 @@ export const ref = () => {
     account: db.collection('account'),
     metaData: db.collection('metaData'),
     staffDetails: db.collection('staffDetails'),
+    attendance: db.collection('attendance'),
     db,
   }
 }
