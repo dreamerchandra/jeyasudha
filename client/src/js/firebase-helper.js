@@ -17,6 +17,7 @@ export const ref = () => {
     productPricing: db.collection('productPricing'),
     account: db.collection('account'),
     metaData: db.collection('metaData'),
+    staffDetails: db.collection('staffDetails'),
     db,
   }
 }

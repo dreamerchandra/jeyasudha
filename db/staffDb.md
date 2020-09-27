@@ -14,6 +14,7 @@
       lenderStaffId: <staff-id>,
       issuedBy: <login-id>,
       createdAt: <timestamp>,
+      emiAmount: <number>
     }
   },
   loanRepayment: {
@@ -32,7 +33,7 @@
       empId: <str>,
       name: <str>,
       payCycle: <MONTH:0, WEEK: 1>,
-      salary: <number>,
+      salary: <number>
     }
   }
 }
