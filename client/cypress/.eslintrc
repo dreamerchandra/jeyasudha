@@ -1,0 +1,12 @@
+{
+  "root": true,
+  "plugins": ["eslint-plugin-cypress"],
+  "extends": ["react-app", "plugin:cypress/recommended"],
+  "env": {
+    "cypress/globals": true
+  },
+  "rules": {
+    "cypress/no-unnecessary-waiting": 0,
+    "no-unused-expressions": 0
+  }
+}
