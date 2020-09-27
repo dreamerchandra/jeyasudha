@@ -65,7 +65,7 @@ class Billing extends Component {
     recordCb()
   }
 
-  generateBillId = () => {
+  generateBillId = async () => {
     const phoneNumber = this.phNumRef.current.value
     const name = this.nameRef.current.value
     const driverName = this.driveNameRef.current.value
@@ -83,7 +83,7 @@ class Billing extends Component {
       userData,
       ledgerDataForCredit,
       ledgerDataForMaterials,
-    } = paymentAdapterForMaterials({
+    } = await paymentAdapterForMaterials({
       name,
       primaryAddress,
       vehicleNumber,
@@ -247,8 +247,8 @@ class Billing extends Component {
           </LoaderHoc>
         )}
         <MainComponentHolder>
-          {this.billingData?.getBillId() && (
-            <span className="ref">Bill Id: {this.billingData?.getBillId()}</span>
+          {this.billingData?.numberedBillId && (
+            <span className="ref">Bill Id: {this.billingData?.numberedBillId}</span>
           )}
           <div className="main">
             <p>Customer Name/ID</p>

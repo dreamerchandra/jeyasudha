@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { ref } from './firebase-helper'
 
+const MAX_BILL_ID = 9999
 export default class BillingData {
   constructor(
     name,
@@ -37,15 +38,11 @@ export default class BillingData {
   }
 
   isFieldsValid() {
-    return typeof this.grandTotal === 'number' && this.name && this.address
+    return typeof this.grandTotal === 'number' && this.address && this.phoneNumber
   }
 
   linkCustomerId(customerId) {
     this.customerId = customerId
-  }
-
-  getBillId() {
-    return this.billId
   }
 
   convertThisToFirestore = () => {
@@ -54,6 +51,7 @@ export default class BillingData {
       customerId: this.customerId,
       name: this.name,
       address: this.address,
+      numberedBillId: this.numberedBillId,
       vehicleNumber: this.vehicleNumber,
       createdAt: this.createdAt,
       subTotal: Number(this.subTotal),
@@ -77,9 +75,34 @@ export default class BillingData {
     return snapshot
   }
 
-  pushToDb = (transaction) => {
+  pushToDb = async (transaction) => {
+    await this.upsetNumberedBillId(transaction)
     transaction.set(this.billingDbRef, this.convertThisToFirestore())
     console.log('pushed billing data to db', this.billId)
     return this.billingDbRef.id
+  }
+
+  /**
+   *
+   * @param {firebase.firestore.Transaction} transaction
+   */
+  upsetNumberedBillId = async (transaction) => {
+    if (typeof this.numberedBillId !== 'number')
+      throw new Error('Bill Id not generated')
+    const billingMetaRef = ref().metaData.doc('billing')
+    transaction.update(billingMetaRef, {
+      numberedBillId: this.numberedBillId,
+    })
+  }
+
+  generateNumberedBillId = async () => {
+    const billingMetaRef = ref().metaData.doc('billing')
+    const metaSnap = await billingMetaRef.get()
+    if (!metaSnap.exists) {
+      this.numberedBillId = 0
+    } else {
+      const preCount = metaSnap.data().numberedBillId
+      this.numberedBillId = preCount > MAX_BILL_ID + 1 ? 0 : preCount + 1
+    }
   }
 }

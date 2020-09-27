@@ -16,6 +16,7 @@ export const ref = () => {
     ledger: db.collection('ledger'),
     productPricing: db.collection('productPricing'),
     account: db.collection('account'),
+    metaData: db.collection('metaData'),
     db,
   }
 }

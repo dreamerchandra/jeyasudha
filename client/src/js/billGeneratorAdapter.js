@@ -3,7 +3,7 @@ import BillingData from './BillingData'
 import LedgerData, { PAYMENT_TYPE, PAID_FOR } from './LedgerData'
 import OrderDetail from './OrderDetail'
 
-export function paymentAdapterForMaterials({
+export async function paymentAdapterForMaterials({
   name,
   primaryAddress,
   vehicleNumber,
@@ -41,6 +41,7 @@ export function paymentAdapterForMaterials({
     orderDetails.govtCgstCost,
     orderDetails.govtSgstCost
   )
+  await billingData.generateNumberedBillId()
   console.log('bill details created', billingData)
   const ledgerDataForMaterials = new LedgerData(
     amountPaid,

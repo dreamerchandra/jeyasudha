@@ -29,6 +29,7 @@
       address: <string>,
       vehicleNumber: <string>,
       createdAt: <timestamp>,
+      numberedBillId: <number>,
       orders: [
         {
           particular: {
@@ -59,6 +60,11 @@
       govtPrice: <string>,
       sgstPercent: <number>,
       cgstPercent: <number>,
+    }
+  }
+  metaData: {
+    billing: {
+      numberedBillId: <number>,
     }
   }
 }
