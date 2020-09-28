@@ -10,8 +10,10 @@ import ProductDb from '../fragments/product-db'
 import BillingDb from '../fragments/billing-db'
 import StaffUpdate from '../fragments/staff-update'
 import Attendance from '../fragments/attendance'
+import StaffRouter from '../fragments/staff-router'
+import StaffLoan from '../fragments/staff-loan'
 
-export const dbSubRoutes = [
+const dbSubRoutes = [
   {
     path: '/db/customer',
     component: CustomerDb,
@@ -38,8 +40,36 @@ export const dbSubRoutes = [
   },
 ]
 
+const staffSubRoutes = [
+  {
+    path: '/staff/update',
+    component: StaffUpdate,
+    linkName: 'STAFF UPDATE',
+    hideFromNav: true,
+  },
+  {
+    path: '/staff/loan',
+    component: StaffLoan,
+    linkName: 'STAFF LOAN',
+    hideFromNav: true,
+  },
+  {
+    path: '/staff/salary',
+    component: DBRouter,
+    linkName: 'STAFF SALARY',
+    hideFromNav: true,
+  },
+  {
+    path: '/staff/attendance',
+    component: Attendance,
+    linkName: 'ATTENDANCE',
+    hideFromNav: true,
+  },
+]
+
 const routerConfig = [
   ...dbSubRoutes,
+  ...staffSubRoutes,
   {
     path: '/billing',
     component: Billing,
@@ -66,24 +96,10 @@ const routerConfig = [
     linkName: 'ACCOUNTS',
   },
   {
-    path: '/staff/update',
-    component: StaffUpdate,
-    linkName: 'STAFF UPDATE',
-  },
-  {
-    path: '/staff/loan',
-    component: DBRouter,
-    linkName: 'STAFF LOAN',
-  },
-  {
-    path: '/staff/salary',
-    component: DBRouter,
-    linkName: 'STAFF SALARY',
-  },
-  {
-    path: '/staff/attendance',
-    component: Attendance,
-    linkName: 'ATTENDANCE',
+    path: '/staff',
+    component: StaffRouter,
+    linkName: 'STAFF',
+    subRoutes: staffSubRoutes,
   },
   {
     path: '/db',
