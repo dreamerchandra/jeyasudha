@@ -12,6 +12,7 @@ import StaffUpdate from '../fragments/staff-update'
 import Attendance from '../fragments/attendance'
 import StaffRouter from '../fragments/staff-router'
 import StaffLoan from '../fragments/staff-loan'
+import StaffSalary from '../fragments/staff-salary'
 
 const dbSubRoutes = [
   {
@@ -55,7 +56,7 @@ const staffSubRoutes = [
   },
   {
     path: '/staff/salary',
-    component: DBRouter,
+    component: StaffSalary,
     linkName: 'STAFF SALARY',
     hideFromNav: true,
   },

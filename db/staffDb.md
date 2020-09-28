@@ -24,7 +24,6 @@
       lenderStaffId: <staff-id>,
       receivedBy: <login-id>,
       amount: <number>,
-      pendingAmount: <number>,
       loanId: <loan-id>
     }
   }
@@ -34,6 +33,19 @@
       name: <str>,
       payCycle: <MONTH:0, WEEK: 1>,
       salary: <number>
+    }
+  },
+  salaryCredit: {
+    <credited-id>: {
+      empId: <staffDetails.empId>,
+      staffId: <staff-id>,
+      createdAt: <timestamp>,
+      name: <string>,
+      workingDays: <days>,
+      salary: <amount>,
+      deductions: <amount>,
+      netSalary: <amount>,
+      payCycleStart: <timestamp>
     }
   }
 }

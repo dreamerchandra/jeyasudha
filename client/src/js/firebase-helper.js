@@ -20,6 +20,8 @@ export const ref = () => {
     staffDetails: db.collection('staffDetails'),
     attendance: db.collection('attendance'),
     staffLoan: db.collection('staffLoan'),
+    salaryCredit: db.collection('salaryCredit'),
+    loanRepayment: db.collection('loanRepayment'),
     db,
   }
 }

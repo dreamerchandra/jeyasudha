@@ -5,7 +5,7 @@ import MainComponentHolder from '../../components/main-component-holder'
 import Notification from '../../components/notification-view'
 import { createNewLoan } from '../../js/firebase-loan-mutation'
 import { STAFF_LOAN_ENUM } from '../../js/firebase-loan-query'
-import { proceedIfLoanEligible } from '../../js/loan-creation'
+import { proceedIfLoanEligible } from '../../js/loan'
 
 const typeOfLoan = [
   {

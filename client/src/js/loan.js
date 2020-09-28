@@ -42,3 +42,9 @@ export async function proceedIfLoanEligible({
     staffDetails,
   }
 }
+
+export async function getLoanDetails(empId) {
+  const loans = await getActiveLoans(empId)
+  const deduction = loans.reduce(sumPending, 0)
+  return { deduction, loans }
+}
