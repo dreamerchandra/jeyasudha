@@ -247,8 +247,8 @@ class Billing extends Component {
           </LoaderHoc>
         )}
         <MainComponentHolder>
-          {this.billingData?.numberedBillId && (
-            <span className="ref">Bill Id: {this.billingData?.numberedBillId}</span>
+          {typeof this.billingData?.numberedBillId === 'number' && (
+            <span className="ref">Bill Id: {this.billingData.numberedBillId}</span>
           )}
           <div className="main">
             <p>Customer Name/ID</p>

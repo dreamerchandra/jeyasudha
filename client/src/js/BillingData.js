@@ -90,7 +90,7 @@ export default class BillingData {
     if (typeof this.numberedBillId !== 'number')
       throw new Error('Bill Id not generated')
     const billingMetaRef = ref().metaData.doc('billing')
-    transaction.update(billingMetaRef, {
+    transaction.set(billingMetaRef, {
       numberedBillId: this.numberedBillId,
     })
   }
