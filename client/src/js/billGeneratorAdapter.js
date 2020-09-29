@@ -46,12 +46,14 @@ export async function paymentAdapterForMaterials({
   const ledgerDataForMaterials = new LedgerData(
     amountPaid,
     PAYMENT_TYPE.CASH,
-    PAID_FOR.MATERIALS
+    PAID_FOR.MATERIALS,
+    phoneNumber
   )
   const ledgerDataForCredit = new LedgerData(
     due,
     PAYMENT_TYPE.CREDIT,
-    PAID_FOR.MATERIALS
+    PAID_FOR.MATERIALS,
+    phoneNumber
   )
   console.log('ledger data created', ledgerDataForMaterials)
   return {
@@ -78,7 +80,7 @@ export function paymentAdapterForCustomer({
   } else {
     userData.updateCurrentDue(grandTotal)
   }
-  const ledgerData = new LedgerData(grandTotal, typeOfPayment, paidFor)
+  const ledgerData = new LedgerData(grandTotal, typeOfPayment, paidFor, phoneNumber)
   console.log('ledger data created', ledgerData)
   return {
     userData,

@@ -16,8 +16,9 @@
       staffId: <user-id>,
       netTotal: <number>, //with tax
       billId: <bill-id>,
-      paymentType: <CASH: 0, CREDIT: 1>
-      paidFor: <MATERIALS: 0, DUE: 1>
+      paymentType: <CASH: 0, CREDIT: 1>,
+      paidFor: <MATERIALS: 0, DUE: 1>,
+      phoneNumber: <string>
     }
   },
   billing: {

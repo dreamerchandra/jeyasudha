@@ -11,10 +11,11 @@ export const PAID_FOR = {
 }
 
 export default class LedgerData {
-  constructor(netTotal, paymentType, paidFor) {
+  constructor(netTotal, paymentType, paidFor, phoneNumber) {
     this.paymentType = paymentType
     this.netTotal = Number(netTotal)
     this.paidFor = paidFor
+    this.phoneNumber = phoneNumber
   }
 
   isFieldsValid() {
@@ -37,6 +38,7 @@ export default class LedgerData {
       netTotal: Number(this.netTotal),
       paymentType: this.paymentType,
       paidFor: this.paidFor,
+      phoneNumber: this.phoneNumber,
     }
     if (this.billId) {
       snapshot.billId = this.billId

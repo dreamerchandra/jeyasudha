@@ -13,6 +13,7 @@ import Attendance from '../fragments/attendance'
 import StaffRouter from '../fragments/staff-router'
 import StaffLoan from '../fragments/staff-loan'
 import StaffSalary from '../fragments/staff-salary'
+import LedgerDb from '../fragments/ledger-db'
 
 const dbSubRoutes = [
   {
@@ -37,6 +38,12 @@ const dbSubRoutes = [
     path: '/db/billing',
     component: BillingDb,
     linkName: 'BILLING DB',
+    hideFromNav: true,
+  },
+  {
+    path: '/db/ledger',
+    component: LedgerDb,
+    linkName: 'LEDGER DB',
     hideFromNav: true,
   },
 ]
