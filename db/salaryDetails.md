@@ -47,4 +47,123 @@ totalSalary - numberOfDayLeave * (totalSalary/numberOfWorkingDays)
 
 ## Calculating loan repayment
 - check for `pending` status in `staffLoan` collection
-- If any do query in `loanRepayment` with `loanId` equals `staff-loan-id`
+- If any do query in `loanRepayment` with `loanId` equals `staff-loan-id` and sum up the `amount` field
+- If totalPaidAmount is greater than loan amount update `pending` status as `PAID` else if advance try to reduce to pending amount else try to reduce the monthlyEMI
+
+### eg data
+for getting loan repayment of staffId: 125 with loan amount Rs. 2,000 on emi of Rs.1,000 with an salary on Rs.4,000
+After loan has been issued db sample
+```
+{
+  staffLoan: {
+    basdfsajdf: {
+      status: 0,
+      amount: 2,000,
+      type: 0,
+      lenderEmpId: asdfasdf,
+      lenderStaffId: 125,
+      issuedBy: adfsasfdasdvvasdf,
+      createdAt: <some day>,
+      emiAmount: 1,000
+    }
+  },
+  staffDetails: {
+    <staff-id>: {
+      empId: 125,
+      name: kumar,
+      payCycle: 1,
+      salary: 4000,
+    }
+  }
+}
+```
+
+Salary calculation in next week
+staffLoan.lenderStaffId === 125 && staffLoan.status === 0 =====> `basdfsajdf`
+loanRepayment.loanId === 'basdfsajdf' ====> null
+
+Hence deduction should be staffLoan.basdfsajdf.emiAmount ======> 1,000
+
+DB Snapshot after 1 week salary
+``` diff
+{
+  staffLoan: {
+    basdfsajdf: {
+      status: 0,
+      amount: 2,000,
+      type: 0,
+      lenderEmpId: 125,
+      lenderStaffId: asdfasdf,
+      issuedBy: adfsasfdasdvvasdf,
+      createdAt: <some day>,
+      emiAmount: 1,000
+    }
+  },
++ loanRepayment: {
++   asdfasdfasdfsadfasdfasdf: {
++    createdAt: <timestamp>,
++    lenderEmpId: 125,
++     lenderStaffId: asdfasdf,
++     receivedBy: dksnksdkfl,
++     amount: 1,000,
++     pendingAmount: 1,000,
++     loanId: basdfsajdf
++   }
++  }
+  staffDetails: {
+    asdfasdf: {
+      empId: 125,
+      name: kumar,
+      payCycle: 1,
+      salary: 4000,
+    }
+  }
+}
+```
+
+DB snap after 2 week
+``` diff
+{
+  staffLoan: {
+    basdfsajdf: {
+-      status: 0,
++      status: 1,
+      amount: 2,000,
+      type: 0,
+      lenderEmpId: 125,
+      lenderStaffId: asdfasdf,
+      issuedBy: adfsasfdasdvvasdf,
+      createdAt: <some day>,
+      emiAmount: 1,000
+    }
+  },
+  loanRepayment: {
+    asdfasdfasdfsadfasdfasdf: {
+      createdAt: <timestamp>,
+      lenderEmpId: 125,
+      lenderStaffId: asdfasdf,
+      receivedBy: dksnksdkfl,
+      amount: 1,000,
+      pendingAmount: 1,000,
+      loanId: basdfsajdf
+    }
++    bcxvzvzsdfwsf: {
++      createdAt: <timestamp>,
++      lenderEmpId: 125,
++      lenderStaffId: asdfasdf,
++      receivedBy: dksnksdkfl,
++      amount: 1,000,
++      pendingAmount: 0,
++      loanId: basdfsajdf
++    }
++  }
+  staffDetails: {
+    asdfasdf: {
+      empId: 125,
+      name: kumar,
+      payCycle: 1,
+      salary: 4000,
+    }
+  }
+}
+```

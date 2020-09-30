@@ -1,0 +1,24 @@
+.clip-wrapper > p {
+  padding: 5px;
+  display: inline-block;
+  max-width: 15rem;
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.clip-wrapper {
+  border: 1px solid black;
+  background-color: var(--blue1);
+  color: var(--blue5);
+  width: fit-content;
+  padding: 5px 10px 5px 5px;
+  border-radius: 30px;
+  user-select: none;
+  display: inline-block;
+  margin: 2px;
+}
+
+.clip-wrapper > svg {
+  height: 32px;
+}

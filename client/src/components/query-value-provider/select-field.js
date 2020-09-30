@@ -12,7 +12,7 @@ export default function SelectInput({ setValue, list }) {
       </option>
       {list.map((item) => (
         <option key={item.id} value={item.value} itemID={item.id} id={item.id}>
-          {item.value}
+          {item.label ? item.label : item.value}
         </option>
       ))}
     </select>

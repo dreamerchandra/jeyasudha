@@ -1,5 +1,7 @@
 import React from 'react'
 import './index.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 export default function QueryValueProvider({
   queryDetails,
@@ -15,9 +17,9 @@ export default function QueryValueProvider({
         ) : (
           <input disabled placeholder="👈 Select" />
         )}
-        <button type="button" onClick={onReadyToFetch} className="paper">
+        <button type="button" onClick={onReadyToFetch}>
           <span role="img" aria-label="find">
-            🔍
+            <FontAwesomeIcon icon={faSearch} size="lg" />
           </span>
         </button>
       </div>

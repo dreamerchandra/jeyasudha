@@ -18,7 +18,7 @@ export default class CustomerDetail {
   }
 
   isFieldsValid() {
-    return this.name && this.phoneNumber
+    return this.phoneNumber
   }
 
   updateCurrentDue(currentDue) {

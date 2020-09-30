@@ -3,7 +3,7 @@ import BillingData from './BillingData'
 import LedgerData, { PAYMENT_TYPE, PAID_FOR } from './LedgerData'
 import OrderDetail from './OrderDetail'
 
-export function paymentAdapterForMaterials({
+export async function paymentAdapterForMaterials({
   name,
   primaryAddress,
   vehicleNumber,
@@ -41,16 +41,19 @@ export function paymentAdapterForMaterials({
     orderDetails.govtCgstCost,
     orderDetails.govtSgstCost
   )
+  await billingData.generateNumberedBillId()
   console.log('bill details created', billingData)
   const ledgerDataForMaterials = new LedgerData(
     amountPaid,
     PAYMENT_TYPE.CASH,
-    PAID_FOR.MATERIALS
+    PAID_FOR.MATERIALS,
+    phoneNumber
   )
   const ledgerDataForCredit = new LedgerData(
     due,
     PAYMENT_TYPE.CREDIT,
-    PAID_FOR.MATERIALS
+    PAID_FOR.MATERIALS,
+    phoneNumber
   )
   console.log('ledger data created', ledgerDataForMaterials)
   return {
@@ -77,7 +80,7 @@ export function paymentAdapterForCustomer({
   } else {
     userData.updateCurrentDue(grandTotal)
   }
-  const ledgerData = new LedgerData(grandTotal, typeOfPayment, paidFor)
+  const ledgerData = new LedgerData(grandTotal, typeOfPayment, paidFor, phoneNumber)
   console.log('ledger data created', ledgerData)
   return {
     userData,

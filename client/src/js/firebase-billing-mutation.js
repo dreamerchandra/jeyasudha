@@ -14,13 +14,13 @@ function updateLedgerData(ledgerData, billId, userId, firestoreTransaction) {
  *
  * @param {{userData: CustomerDetail, billingData: BillingData, ledgerDataForMaterials: LedgerData}} param0
  */
-function _updateBillingData({ userData, billingData = null, ledgers }) {
+async function _updateBillingData({ userData, billingData = null, ledgers }) {
   return ref().db.runTransaction(async (transaction) => {
     await userData.updateDueAndUserIdFromDb()
     userData.pushToDb(transaction)
     if (billingData) {
       billingData.linkCustomerId(userData.userId)
-      billingData.pushToDb(transaction)
+      await billingData.pushToDb(transaction)
     }
     ledgers.forEach((ledger) => {
       updateLedgerData(ledger, billingData?.billId, userData.userId, transaction)
