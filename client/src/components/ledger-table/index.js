@@ -19,8 +19,8 @@ const LedgerTable = ({ data }) => {
           ({ id, createdAt, paymentType, paidFor, netTotal, phoneNumber }) => (
             <tr id={id}>
               <td>{phoneNumber}</td>
-              <td>{paymentType ? 'CASH' : 'CREDIT'}</td>
-              <td>{paidFor ? 'MATERIALS' : 'DUE'}</td>
+              <td>{paymentType ? 'CREDIT' : 'CASH'}</td>
+              <td>{paidFor ? 'DUE' : 'MATERIALS'}</td>
               <td>Rs.{floatToMoney(netTotal)}</td>
               <td>{new Date(createdAt.seconds * 1000).toLocaleString('en-IN')}</td>
             </tr>
