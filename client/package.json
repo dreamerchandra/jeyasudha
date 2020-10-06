@@ -27,7 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && firebase deploy"
+    "deploy": "yarn build && firebase deploy",
+    "cypress": "export CYPRESS_TEST_UID=yB4RDeqv9Ge71wXn2OfGjOXZ1An2 && ./node_modules/.bin/cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,6 +48,7 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "cypress": "^5.2.0",
+    "cypress-firebase": "^1.4.5",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-alias": "^1.1.2",
