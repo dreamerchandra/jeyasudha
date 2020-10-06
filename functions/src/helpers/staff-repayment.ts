@@ -45,16 +45,17 @@ async function getRepaymentFor(loanId: string, db: FirebaseFirestore.Firestore):
   return loans
 }
 
-export async function isPaymentPending(empId: string, loanId: string, db: FirebaseFirestore.Firestore) {
+export async function getLoanStatus(empId: string, loanId: string, db: FirebaseFirestore.Firestore): Promise<{ pendingAmount: Number, status: STAFF_LOAN_STATUS_ENUM }> {
   const associatedLoan: Loan = await getLoanById(loanId, db)
   const loanAmount = associatedLoan.amount
   const loansPaid: Array<LoanRepayment> = await getRepaymentFor(loanId, db)
   const rePaidAmt = loansPaid.reduce(repaidSum, 0)
   functions.logger.info("loanAmount", loanAmount);
   functions.logger.info("rePaidAmt", rePaidAmt);
-  return loanAmount > rePaidAmt
+  const isPending = loanAmount > rePaidAmt;
+  return { pendingAmount: loanAmount - rePaidAmt, status: isPending ? STAFF_LOAN_STATUS_ENUM.PENDING : STAFF_LOAN_STATUS_ENUM.PAID }
 }
 
-export function setPendingAsPaid(loanId: string, db: FirebaseFirestore.Firestore) {
-  return db.collection('staffLoan').doc(loanId).update({ status: STAFF_LOAN_STATUS_ENUM.PAID })
+export function setPendingAsPaid(status: { pendingAmount: Number, status: STAFF_LOAN_STATUS_ENUM }, loanId: string, db: FirebaseFirestore.Firestore) {
+  return db.collection('staffLoan').doc(loanId).set(status, { mergeFields: ["pendingAmount", "status"] })
 }

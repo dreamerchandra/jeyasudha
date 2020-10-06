@@ -14,7 +14,8 @@
       lenderStaffId: <staff-id>,
       issuedBy: <login-id>,
       createdAt: <timestamp>,
-      emiAmount: <number>
+      emiAmount: <number>,
+      pendingAmount: <number>,
     }
   },
   loanRepayment: {

@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { isPaymentPending, setPendingAsPaid } from './helpers/staff-repayment';
+import { getLoanStatus, setPendingAsPaid } from './helpers/staff-repayment';
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -17,13 +17,9 @@ export const updateStaffLoan = functions
     const data = snapshot.data()
     const empId = data.lenderEmpId
     const loanId = data.loanId
-    const isPending = await isPaymentPending(empId, loanId, db)
-    functions.logger.info("is payment Pending", isPending);
-    if (!isPending) {
-      await setPendingAsPaid(loanId, db)
-      functions.logger.info(`updated ${loanId} as PAID`);
-      return
-    }
-    functions.logger.info(`${loanId} is still pending`);
-    return null
+    const {pendingAmount, status} = await getLoanStatus(empId, loanId, db)
+    functions.logger.info(`Loan status: pendingAmount: pendingAmount: ${pendingAmount}, status: ${status}`);
+    await setPendingAsPaid({ pendingAmount, status }, loanId, db);
+    functions.logger.info(`updated ${loanId} as PAID`);
+    return
   })
