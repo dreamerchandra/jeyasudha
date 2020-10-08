@@ -52,3 +52,19 @@ export function getServerTimeStamp() {
 export function getCurrentUserId() {
   return firebase.auth().currentUser.uid
 }
+
+export function constructQuerySelectorBasedOnCreatedAt({
+  docRef,
+  date = new Date(),
+  fieldPath = 'createdAt',
+}) {
+  const start = new Date(date)
+  const end = new Date(date)
+  start.setMinutes(0)
+  start.setHours(0)
+  start.setSeconds(0)
+  end.setMinutes(59)
+  end.setHours(23)
+  end.setSeconds(59)
+  return docRef.where(fieldPath, '>=', start).where(fieldPath, '<=', end)
+}

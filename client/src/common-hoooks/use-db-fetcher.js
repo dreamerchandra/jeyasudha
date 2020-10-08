@@ -15,7 +15,17 @@ export default function useDbFetcher(initialRef) {
     return null
   })
   const onReadyToFetch = () => {
-    setDocRef(fieldPath.getQuery(value))
+    try {
+      if (fieldPath.onAssert) {
+        fieldPath.onAssert(value)
+      }
+      if (value) {
+        setDocRef(fieldPath.getQuery(value))
+      }
+      throw new Error('Query string is required')
+    } catch (err) {
+      toast(<Notification showSuccessIcon={false} text={err.message} />)
+    }
   }
   return {
     setFieldPath,

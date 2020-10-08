@@ -6,3 +6,10 @@ export function floatToMoney(num) {
   }
   return Math.round((num + Number.EPSILON) * 100) / 100
 }
+
+export function assert(assertion, exception) {
+  if (!assertion) {
+    throw exception
+  }
+  return true
+}

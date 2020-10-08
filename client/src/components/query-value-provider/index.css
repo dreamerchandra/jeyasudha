@@ -5,12 +5,18 @@
 .query-wrapper > button {
   position: absolute;
   right: 14px;
-  top: 6px;
+  top: 8px;
   background: rgba(255, 255, 255, 0);
   padding: 5px;
   height: 25px;
   width: fit-content;
   border-radius: 50%;
+}
+
+.query-wrapper > input[type="date"] + button,
+.query-wrapper > input[type="number"] + button,
+.query-wrapper > select + button {
+  right: 37px;
 }
 
 .query-wrapper > button:focus {
@@ -23,7 +29,7 @@
   /* background: transparent; */
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;
-  background-position-x: 85%;
+  background-position-x: 100%;
   background-position-y: 50%;
   border: 1px solid #dfdfdf;
   border-radius: 2px;
