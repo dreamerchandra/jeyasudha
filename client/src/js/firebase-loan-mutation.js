@@ -16,6 +16,7 @@ export async function createNewLoan({
     lenderStaffId: staffDocId,
     issuedBy: getCurrentUserId(),
     createdAt: getServerTimeStamp(),
+    pendingAmount: loanAmount,
   }
   if (typeOfLoan === STAFF_LOAN_ENUM.TYPE.EMI) dataSnap.emiAmount = emiAmount
   return ref().staffLoan.doc().set(dataSnap)

@@ -14,6 +14,8 @@ import StaffRouter from '../fragments/staff-router'
 import StaffLoan from '../fragments/staff-loan'
 import StaffSalary from '../fragments/staff-salary'
 import LedgerDb from '../fragments/ledger-db'
+import StaffDetailsDb from '../fragments/staff-details-db'
+import StaffLoanDb from '../fragments/staff-loan-db'
 
 const dbSubRoutes = [
   {
@@ -44,6 +46,18 @@ const dbSubRoutes = [
     path: '/db/ledger',
     component: LedgerDb,
     linkName: 'LEDGER DB',
+    hideFromNav: true,
+  },
+  {
+    path: '/db/staff/details',
+    component: StaffDetailsDb,
+    linkName: 'STAFF DETAILS',
+    hideFromNav: true,
+  },
+  {
+    path: '/db/staff/loan',
+    component: StaffLoanDb,
+    linkName: 'STAFF LOAN',
     hideFromNav: true,
   },
 ]
