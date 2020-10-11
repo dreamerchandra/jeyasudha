@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import MainComponentHolder from '../../components/main-component-holder'
 
-export default function DBRouter({ subRoutes }) {
+export default function SubRouter({ subRoutes }) {
   return (
     <>
       <MainComponentHolder>

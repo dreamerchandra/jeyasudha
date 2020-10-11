@@ -57,14 +57,24 @@ export function constructQuerySelectorBasedOnCreatedAt({
   docRef,
   date = new Date(),
   fieldPath = 'createdAt',
+  positiveOffsetDays = 0,
+  negativeOffsetDays = 0,
 }) {
   const start = new Date(date)
   const end = new Date(date)
   start.setMinutes(0)
   start.setHours(0)
   start.setSeconds(0)
+  start.setDate(date.getDate() - negativeOffsetDays)
   end.setMinutes(59)
   end.setHours(23)
   end.setSeconds(59)
+  end.setDate(date.getDate() + positiveOffsetDays)
   return docRef.where(fieldPath, '>=', start).where(fieldPath, '<=', end)
+}
+
+export function convertFirebaseTimeStampToString(firebaseTimeStamp) {
+  if (firebaseTimeStamp)
+    return new Date(firebaseTimeStamp.seconds * 1000).toLocaleString('en-IN')
+  return 'NA'
 }

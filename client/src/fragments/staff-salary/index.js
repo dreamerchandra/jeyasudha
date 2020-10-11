@@ -37,7 +37,7 @@ export default function StaffSalaryFragment() {
                   payableSalary,
                   staff,
                   workingDay,
-                } = await staffSalary.getSalaryPayOutDetails({ empId, startDate })
+                } = await staffSalary.getSalaryPayOutDetails()
                 setStaffSalary(staffSalary)
                 setName(staff.name)
                 setSalary(staff.salary)

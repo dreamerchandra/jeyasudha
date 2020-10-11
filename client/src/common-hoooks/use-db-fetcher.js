@@ -21,6 +21,7 @@ export default function useDbFetcher(initialRef) {
       }
       if (value) {
         setDocRef(fieldPath.getQuery(value))
+        return
       }
       throw new Error('Query string is required')
     } catch (err) {

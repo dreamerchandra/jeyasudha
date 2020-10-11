@@ -46,7 +46,8 @@
       salary: <amount>,
       deductions: <amount>,
       netSalary: <amount>,
-      payCycleStart: <timestamp>
+      payCycleStart: <timestamp>,
+      payCycle: <MONTH:0, WEEK: 1>,
     }
   }
 }

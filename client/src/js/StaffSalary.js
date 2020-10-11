@@ -44,18 +44,24 @@ export default class StaffSalary {
     }
   }
 
+  convertThisToSalaryCreditSnap = () => ({
+    empId: this.empId,
+    staffId: this.staff.docId,
+    createdAt: getServerTimeStamp(),
+    name: this.staff.name,
+    workingDays: this.workingDay,
+    salary: this.staff.salary,
+    deductions: this.deductions,
+    netSalary: this.payableSalary,
+    payCycleStart: this.startDate,
+    payCycle: this.staff.payCycle,
+  })
+
   recordPayout = (transaction) => {
-    return transaction.set(ref().salaryCredit.doc(), {
-      empId: this.empId,
-      staffId: this.staff.docId,
-      createdAt: getServerTimeStamp(),
-      name: this.staff.name,
-      workingDays: this.workingDay,
-      salary: this.staff.salary,
-      deductions: this.deductions,
-      netSalary: this.payableSalary,
-      payCycleStart: this.startDate,
-    })
+    return transaction.set(
+      ref().salaryCredit.doc(),
+      this.convertThisToSalaryCreditSnap()
+    )
   }
 
   recordLoanRepayment = (transaction) => {
@@ -80,5 +86,16 @@ export default class StaffSalary {
       this.recordLoanRepayment(transaction)
       return Promise.resolve()
     })
+  }
+
+  static calculateNetSalaryList({ staffDetails, startDate }) {
+    if (!staffDetails) return null
+    return Promise.all(
+      staffDetails.map(async (staff) => {
+        const staffSalary = new StaffSalary(staff.empId, startDate)
+        await staffSalary.getSalaryPayOutDetails()
+        return staffSalary
+      })
+    )
   }
 }

@@ -5,7 +5,7 @@ import Receipt from '../fragments/receipt'
 import CustomerDb from '../fragments/customer-db'
 import AccountDb from '../fragments/account-db'
 import Accounts from '../fragments/account'
-import DBRouter from '../fragments/db-router'
+import SubRouter from '../fragments/sub-router'
 import ProductDb from '../fragments/product-db'
 import BillingDb from '../fragments/billing-db'
 import StaffUpdate from '../fragments/staff-update'
@@ -16,6 +16,8 @@ import StaffSalary from '../fragments/staff-salary'
 import LedgerDb from '../fragments/ledger-db'
 import StaffDetailsDb from '../fragments/staff-details-db'
 import StaffLoanDb from '../fragments/staff-loan-db'
+import { StaffPayoutListBy } from '../fragments/staff-payouts-list'
+import { PAY_CYCLE_ENUM } from './firbase-attendance-query'
 
 const dbSubRoutes = [
   {
@@ -62,7 +64,23 @@ const dbSubRoutes = [
   },
 ]
 
+const staffPayoutSubRoutes = [
+  {
+    path: '/staff/payouts/weekly',
+    component: StaffPayoutListBy({ payCycle: PAY_CYCLE_ENUM.WEEKLY }),
+    linkName: 'WEEKLY',
+    hideFromNav: true,
+  },
+  {
+    path: '/staff/payouts/monthly',
+    component: StaffPayoutListBy({ payCycle: PAY_CYCLE_ENUM.MONTHLY }),
+    linkName: 'MONTHLY',
+    hideFromNav: true,
+  },
+]
+
 const staffSubRoutes = [
+  ...staffPayoutSubRoutes,
   {
     path: '/staff/update',
     component: StaffUpdate,
@@ -86,6 +104,13 @@ const staffSubRoutes = [
     component: Attendance,
     linkName: 'ATTENDANCE',
     hideFromNav: true,
+  },
+  {
+    path: '/staff/payouts/',
+    component: SubRouter,
+    linkName: 'STAFF PAYOUT LIST',
+    hideFromNav: true,
+    subRoutes: staffPayoutSubRoutes,
   },
 ]
 
@@ -125,7 +150,7 @@ const routerConfig = [
   },
   {
     path: '/db',
-    component: DBRouter,
+    component: SubRouter,
     linkName: 'DB',
     subRoutes: dbSubRoutes,
   },
