@@ -11,7 +11,7 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 });
 
 
-export const updateStaffLoan = functions
+export const updateStaffLoan = functions.region('asia-east2')
   .firestore.document('loanRepayment/{repaymentId}')
   .onCreate(async (snapshot) => {
     const data = snapshot.data()

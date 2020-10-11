@@ -80,7 +80,6 @@ const staffPayoutSubRoutes = [
 ]
 
 const staffSubRoutes = [
-  ...staffPayoutSubRoutes,
   {
     path: '/staff/update',
     component: StaffUpdate,
@@ -115,8 +114,9 @@ const staffSubRoutes = [
 ]
 
 const routerConfig = [
-  ...dbSubRoutes,
-  ...staffSubRoutes,
+  // ...dbSubRoutes,
+  // ...staffSubRoutes,
+  // ...staffPayoutSubRoutes,
   {
     path: '/billing',
     component: Billing,
