@@ -1,11 +1,15 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import useCollectionDataOnce from '../../common-hoooks/use-firestore-wrapper'
 import LoaderHoc from '../loading'
 
-function TablePopulator({ Table, docRef }) {
+function TablePopulator({ Table, docRef, formatFetchedDataCb }) {
   const { data, loading } = useCollectionDataOnce({
     ref: docRef,
     idField: 'id',
+  })
+  const formattedData = formatFetchedDataCb?.(data) ?? data
+  useEffect(() => {
+    console.log('rerender')
   })
   return (
     <>
@@ -15,7 +19,7 @@ function TablePopulator({ Table, docRef }) {
         </LoaderHoc>
       )}
       {data?.length ? (
-        <Table data={data} />
+        <Table data={formattedData} />
       ) : (
         <p style={{ fontSize: '3rem', textAlign: 'center', color: 'var(--blue5)' }}>
           No data to show
@@ -26,6 +30,7 @@ function TablePopulator({ Table, docRef }) {
 }
 
 const areEqual = (preProps, nextProps) => {
+  if (!nextProps?.docRef) return true
   return preProps?.docRef?.isEqual(nextProps?.docRef)
 }
 

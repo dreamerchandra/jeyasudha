@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import useDidUpdateEffect from '../../common-hoooks/use-did-update-hooks'
 
 import useCollectionDataOnce from '../../common-hoooks/use-firestore-wrapper'
@@ -18,12 +19,13 @@ function getPayDate(payCycle) {
   return new Date(new Date().setDate(new Date().getDate() - days))
 }
 
-export function StaffPayoutListBy({ payCycle, payDate = null }) {
+export default function StaffPayoutListBy({ payCycle, payDate = null }) {
   if (payDate) {
     return function StaffPayoutListByDate() {
+      const { date } = useParams()
       const salaryCreditRef = constructQuerySelectorBasedOnCreatedAt({
         docRef: ref().salaryCredit,
-        date: payDate,
+        date: new Date(date),
         fieldPath: 'payCycleStart',
       })
       if (payCycle) {

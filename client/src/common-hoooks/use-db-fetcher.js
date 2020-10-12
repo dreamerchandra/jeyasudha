@@ -14,6 +14,9 @@ export default function useDbFetcher(initialRef) {
     }
     return null
   })
+  const formatter = (data) => {
+    return fieldPath?.formatData?.(value, data) ?? data
+  }
   const onReadyToFetch = () => {
     try {
       if (fieldPath.onAssert) {
@@ -34,5 +37,6 @@ export default function useDbFetcher(initialRef) {
     docRef,
     onReadyToFetch,
     fieldPath,
+    formatter,
   }
 }

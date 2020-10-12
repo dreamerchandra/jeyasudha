@@ -16,8 +16,10 @@ import StaffSalary from '../fragments/staff-salary'
 import LedgerDb from '../fragments/ledger-db'
 import StaffDetailsDb from '../fragments/staff-details-db'
 import StaffLoanDb from '../fragments/staff-loan-db'
-import { StaffPayoutListBy } from '../fragments/staff-payouts-list'
+import StaffPayoutListBy from '../fragments/staff-payouts-list'
 import { PAY_CYCLE_ENUM } from './firbase-attendance-query'
+import StaffSalaryDb from '../fragments/staff-salary-db'
+import StaffAttendanceDb from '../fragments/staff-attendance-db'
 
 const dbSubRoutes = [
   {
@@ -62,6 +64,18 @@ const dbSubRoutes = [
     linkName: 'STAFF LOAN',
     hideFromNav: true,
   },
+  {
+    path: '/db/staff/salary',
+    component: StaffSalaryDb,
+    linkName: 'STAFF SALARY',
+    hideFromNav: true,
+  },
+  {
+    path: '/db/staff/attendance',
+    component: StaffAttendanceDb,
+    linkName: 'STAFF ATTENDANCE',
+    hideFromNav: true,
+  },
 ]
 
 const staffPayoutSubRoutes = [
@@ -75,6 +89,12 @@ const staffPayoutSubRoutes = [
     path: '/staff/payouts/monthly',
     component: StaffPayoutListBy({ payCycle: PAY_CYCLE_ENUM.MONTHLY }),
     linkName: 'MONTHLY',
+    hideFromNav: true,
+  },
+  {
+    path: '/staff/payouts/archive/:date',
+    component: StaffPayoutListBy({ payDate: true }),
+    linkName: '',
     hideFromNav: true,
   },
 ]
@@ -114,9 +134,6 @@ const staffSubRoutes = [
 ]
 
 const routerConfig = [
-  // ...dbSubRoutes,
-  // ...staffSubRoutes,
-  // ...staffPayoutSubRoutes,
   {
     path: '/billing',
     component: Billing,
