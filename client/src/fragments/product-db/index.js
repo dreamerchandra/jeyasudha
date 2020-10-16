@@ -1,7 +1,7 @@
 import React from 'react'
 import useDbFetcher from '../../common-hoooks/use-db-fetcher'
 import DbComponentHolder from '../../components/DbComponentHolder'
-import ProductTable from '../../components/product-table'
+import ProductTable from './product-table'
 import QueryPathProvider from '../../components/query-path-provider'
 import QueryValueProvider, {
   InputField,

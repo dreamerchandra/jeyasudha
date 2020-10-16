@@ -1,6 +1,6 @@
 import React from 'react'
 import useDbFetcher from '../../common-hoooks/use-db-fetcher'
-import CustomerTable from '../../components/customer-table'
+import CustomerTable from './customer-table'
 import DbComponentHolder from '../../components/DbComponentHolder'
 import QueryPathProvider from '../../components/query-path-provider'
 import QueryValueProvider, {

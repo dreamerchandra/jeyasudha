@@ -5,7 +5,7 @@ import QueryPathProvider from '../../components/query-path-provider'
 import QueryValueProvider, {
   InputField,
 } from '../../components/query-value-provider'
-import StaffLoanTable from '../../components/staff-loan-table'
+import StaffLoanTable from './staff-loan-table'
 import TablePopulator from '../../components/table-populator'
 import { ref } from '../../js/firebase-helper'
 

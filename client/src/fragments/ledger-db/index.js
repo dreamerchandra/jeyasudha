@@ -1,7 +1,7 @@
 import React from 'react'
 import useDbFetcher from '../../common-hoooks/use-db-fetcher'
 import DbComponentHolder from '../../components/DbComponentHolder'
-import LedgerTable from '../../components/ledger-table'
+import LedgerTable from './ledger-table'
 import QueryPathProvider from '../../components/query-path-provider'
 import QueryValueProvider, {
   InputField,
