@@ -7,7 +7,10 @@ import QueryValueProvider, {
   InputField,
 } from '../../components/query-value-provider'
 import TablePopulator from '../../components/table-populator'
-import { ref } from '../../js/firebase-helper'
+import {
+  constructQuerySelectorBasedOnCreatedAt,
+  ref,
+} from '../../js/firebase-helper'
 
 const fieldPaths = [
   {
@@ -28,6 +31,20 @@ const fieldPaths = [
       ref().billing.where('orderNames', 'array-contains', queryValue),
     inputComponent: InputField,
     id: 2,
+  },
+  {
+    displayName: 'Created At',
+    getQuery: (queryValue) =>
+      constructQuerySelectorBasedOnCreatedAt({
+        docRef: ref().billing,
+        fieldPath: 'createdAt',
+        date: new Date(queryValue),
+      }),
+    inputComponent: InputField,
+    componentProps: {
+      type: 'date',
+    },
+    id: 3,
   },
 ]
 

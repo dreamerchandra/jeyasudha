@@ -3,6 +3,7 @@
   white-space: nowrap;
   margin: auto;
   border-collapse: collapse;
+  width: 90%;
 }
 
 .db-table td {
