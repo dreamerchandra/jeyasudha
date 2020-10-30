@@ -68,10 +68,12 @@ const fieldPaths = [
 
 function AccountDb() {
   const { docRef, onReadyToFetch, setFieldPath, setValue, fieldPath } = useDbFetcher(
-    constructQuerySelectorBasedOnCreatedAt({
-      docRef: ref().account,
-      date: new Date(),
-    })
+    {
+      initialRef: constructQuerySelectorBasedOnCreatedAt({
+        docRef: ref().account,
+        date: new Date(),
+      }),
+    }
   )
   return (
     <DbComponentHolder>

@@ -5,3 +5,9 @@
   overflow-y: auto;
   position: relative;
 }
+.db-container > .list-all {
+  position: absolute;
+  right: 20%;
+  top: 35px;
+  padding: 15px;
+}

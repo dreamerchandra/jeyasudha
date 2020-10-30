@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import Notification from '../components/notification-view'
 
-export default function useDbFetcher(initialRef) {
+export default function useDbFetcher({ initialRef = null, listAllRef = null } = {}) {
   const [fieldPath, setFieldPath] = useState()
   const [value, setValue] = useState()
   const [docRef, setDocRef] = useState(() => {
@@ -31,6 +31,9 @@ export default function useDbFetcher(initialRef) {
       toast(<Notification showSuccessIcon={false} text={err.message} />)
     }
   }
+  const onListAll = () => {
+    setDocRef(listAllRef)
+  }
   return {
     setFieldPath,
     setValue,
@@ -38,5 +41,6 @@ export default function useDbFetcher(initialRef) {
     onReadyToFetch,
     fieldPath,
     formatter,
+    onListAll,
   }
 }

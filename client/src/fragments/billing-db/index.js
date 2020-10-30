@@ -50,11 +50,22 @@ const fieldPaths = [
 
 function BillingDb() {
   const yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
-  const { docRef, onReadyToFetch, setFieldPath, setValue, fieldPath } = useDbFetcher(
-    ref().billing.where('createdAt', '>=', yesterday)
-  )
+  const {
+    docRef,
+    onReadyToFetch,
+    setFieldPath,
+    setValue,
+    fieldPath,
+    onListAll,
+  } = useDbFetcher({
+    initialRef: ref().billing.where('createdAt', '>=', yesterday),
+    listAllRef: ref().billing,
+  })
   return (
     <DbComponentHolder>
+      <button type="button" className="list-all paper" onClick={onListAll}>
+        List All
+      </button>
       <div className="main">
         <QueryPathProvider options={fieldPaths} setOption={setFieldPath} />
         <QueryValueProvider
