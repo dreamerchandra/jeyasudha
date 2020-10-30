@@ -13,7 +13,11 @@ export default function QueryValueProvider({
     <>
       <div className="query-wrapper">
         {Component ? (
-          <Component setValue={setValue} {...componentProps} />
+          <Component
+            setValue={setValue}
+            {...componentProps}
+            onReadyToFetch={onReadyToFetch}
+          />
         ) : (
           <input disabled placeholder="👈 Select" />
         )}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function InputField({ setValue, type = 'string' }) {
+export default function InputField({ setValue, type = 'string', onReadyToFetch }) {
   return (
     <input
       placeholder="Enter query string"
@@ -11,6 +11,11 @@ export default function InputField({ setValue, type = 'string' }) {
           setValue(Number(value))
         } else {
           setValue(value)
+        }
+      }}
+      onKeyPress={(event) => {
+        if (event.key === 'Enter' && onReadyToFetch instanceof Function) {
+          onReadyToFetch()
         }
       }}
       type={type}

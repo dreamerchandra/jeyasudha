@@ -204,6 +204,7 @@ class Billing extends Component {
     this.billingData = null
     this.ledgerDataForCredit = null
     this.ledgerDataForMaterials = null
+    this.phNumRef.current.disabled = false
   }
 
   renderProceedButton = () => {
@@ -277,6 +278,7 @@ class Billing extends Component {
             <p>Unit</p>
             <input
               type="number"
+              step="0.01"
               autoComplete="nope"
               ref={this.unitRef}
               onChange={this.updateRefernceInUI}
