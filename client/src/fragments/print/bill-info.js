@@ -13,7 +13,7 @@ const BillInfo = ({ billDetails }) => (
   <div className="bill-info">
     <span>
       <h6>Bill Number</h6>
-      <p>{billDetails.billId}</p>
+      <p>{billDetails.numberedBillId}</p>
     </span>
     <span>
       <h6>Date</h6>
