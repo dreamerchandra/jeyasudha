@@ -1,8 +1,18 @@
 @media print {
-  .g-print-holder:not() {
-    display: none;
+  body:not(.g-print-holder) {
+    visibility: hidden;
   }
   .g-print-holder {
-    display: block;
+    visibility: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .main-body-holder {
+    transform: none !important;
   }
 }
