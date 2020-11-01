@@ -1,0 +1,8 @@
+@media print {
+  .g-print-holder:not() {
+    display: none;
+  }
+  .g-print-holder {
+    display: block;
+  }
+}

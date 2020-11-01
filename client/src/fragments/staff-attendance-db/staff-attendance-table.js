@@ -7,8 +7,8 @@ const StaffAttendDanceTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td>Emp ID</td>
-          <td>Created At</td>
+          <th>Emp ID</th>
+          <th>Created At</th>
         </tr>
       </thead>
       <tbody>

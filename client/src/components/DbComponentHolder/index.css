@@ -5,9 +5,21 @@
   overflow-y: auto;
   position: relative;
 }
+
 .db-container > .list-all {
   position: absolute;
-  right: 20%;
-  top: 35px;
-  padding: 15px;
+  right: 10%;
+  padding: 10px;
+}
+
+.db-container > .main {
+  display: grid;
+  grid-gap: 2rem;
+  gap: 2rem;
+  height: 50px;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
 }

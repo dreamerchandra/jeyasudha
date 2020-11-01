@@ -4,8 +4,12 @@
   margin: auto;
   border-collapse: collapse;
   width: 90%;
+  max-height: 90%;
+  display: block;
+  overflow-y: scroll;
 }
 
+.db-table th,
 .db-table td {
   white-space: nowrap;
   overflow: hidden;
@@ -16,8 +20,18 @@
   font-size: 1.5rem;
 }
 
+.db-table th {
+  background-color: var(--blue4);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .db-table thead {
   font-weight: 500;
+  position: sticky;
+  top: 0;
 }
 
 .db-id {
@@ -52,4 +66,11 @@
 
 .db-due {
   width: 25%;
+}
+
+.db-table-save {
+  position: absolute;
+  bottom: 10px;
+  padding: 10px;
+  left: 50%;
 }

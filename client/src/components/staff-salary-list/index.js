@@ -8,15 +8,15 @@ const StaffSalaryTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td>Emp ID</td>
-          <td>Name</td>
-          <td>payCycle</td>
-          <td>salary</td>
-          <td>Working Days</td>
-          <td>Deductions</td>
-          <td>Net Salary</td>
-          <td>Credited At</td>
-          <td>Cycle Start Date</td>
+          <th>Emp ID</th>
+          <th>Name</th>
+          <th>payCycle</th>
+          <th>salary</th>
+          <th>Working Days</th>
+          <th>Deductions</th>
+          <th>Net Salary</th>
+          <th>Credited At</th>
+          <th>Cycle Start Date</th>
         </tr>
       </thead>
       <tbody>

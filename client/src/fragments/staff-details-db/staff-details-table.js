@@ -7,10 +7,10 @@ const StaffDetailsTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td>Emp ID</td>
-          <td>Name</td>
-          <td>payCycle</td>
-          <td>salary</td>
+          <th>Emp ID</th>
+          <th>Name</th>
+          <th>payCycle</th>
+          <th>salary</th>
         </tr>
       </thead>
       <tbody>

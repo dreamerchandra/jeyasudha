@@ -7,10 +7,10 @@ const CustomerTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td>Address</td>
-          <td>Customer Name</td>
-          <td>Phone number</td>
-          <td>Overall due</td>
+          <th>Address</th>
+          <th>Customer Name</th>
+          <th>Phone number</th>
+          <th>Overall due</th>
         </tr>
       </thead>
       <tbody>

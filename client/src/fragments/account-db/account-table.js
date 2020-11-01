@@ -7,11 +7,11 @@ const AccountTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td>Name</td>
-          <td>purpose</td>
-          <td>Amount</td>
-          <td>Created At</td>
-          <td>Description</td>
+          <th>Name</th>
+          <th>purpose</th>
+          <th>Amount</th>
+          <th>Created At</th>
+          <th>Description</th>
         </tr>
       </thead>
       <tbody>

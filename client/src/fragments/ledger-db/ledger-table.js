@@ -7,11 +7,11 @@ const LedgerTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td>Phone number</td>
-          <td>Payment Type</td>
-          <td>Paid For</td>
-          <td>Amount</td>
-          <td>Created At</td>
+          <th>Phone number</th>
+          <th>Payment Type</th>
+          <th>Paid For</th>
+          <th>Amount</th>
+          <th>Created At</th>
         </tr>
       </thead>
       <tbody>

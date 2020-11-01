@@ -7,11 +7,11 @@ const ProductTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <td>Particulars</td>
-          <td>Selling Price</td>
-          <td>Billing Price</td>
-          <td>CGST</td>
-          <td>SGST</td>
+          <th>Particulars</th>
+          <th>Selling Price</th>
+          <th>Billing Price</th>
+          <th>CGST</th>
+          <th>SGST</th>
         </tr>
       </thead>
       <tbody>
