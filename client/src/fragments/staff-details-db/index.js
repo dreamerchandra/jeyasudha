@@ -31,9 +31,15 @@ function StaffDetailsDb() {
     setFieldPath,
     setValue,
     fieldPath,
-  } = useDbFetcher()
+    onListAll,
+  } = useDbFetcher({
+    listAllRef: ref().staffDetails,
+  })
   return (
     <DbComponentHolder>
+      <button className="list-all paper" type="button" onClick={onListAll}>
+        List All
+      </button>
       <div className="main">
         <QueryPathProvider options={fieldPaths} setOption={setFieldPath} />
         <QueryValueProvider
