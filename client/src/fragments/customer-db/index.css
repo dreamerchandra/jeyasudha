@@ -1,3 +1,7 @@
+.db-table-wrapper {
+  height: 100%;
+}
+
 .db-table {
   table-layout: fixed;
   white-space: nowrap;
@@ -5,7 +9,6 @@
   border-collapse: collapse;
   max-width: 90%;
   max-height: 90%;
-  display: block;
   overflow-y: scroll;
 }
 
