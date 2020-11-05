@@ -2,10 +2,9 @@
   background-color: white;
   padding: 25px;
   width: 80%;
-  height: 80%;
 }
 
-.print-container>h1 {
+.print-container > h1 {
   font-size: 18px;
   text-align: center;
   width: 100%;

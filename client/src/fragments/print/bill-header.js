@@ -4,7 +4,7 @@ const BillHeader = () => (
   <div className="print-header">
     <span className="header-items">
       <h6>GST Number</h6>
-      <p>Lorem ipsum dolor sit amet </p>
+      <p>33ACFPV9402L1Z9</p>
     </span>
     <h6>Sri Arudaiammal Thunai</h6>
     <span>

@@ -138,8 +138,4 @@ h4 {
     padding: 0 !important;
     overflow: hidden;
   }
-  .main-body-holder {
-    transform: none !important;
-    width: 100% !important;
-  }
 }
