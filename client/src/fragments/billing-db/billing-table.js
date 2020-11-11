@@ -31,7 +31,7 @@ const BillingTable = forwardRef(({ data, onSave }, ref) => {
               address,
               name,
               orders,
-              grandTotal,
+              billingPriceGrandTotal,
               amountPaid,
             }) => (
               <tr key={id}>
@@ -40,7 +40,7 @@ const BillingTable = forwardRef(({ data, onSave }, ref) => {
                 <td>{phoneNumber}</td>
                 <td>{orders[0].particular.uniqueName}</td>
                 <td>{orders[0].quantity}</td>
-                <td>Rs.{floatToMoney(grandTotal)}</td>
+                <td>Rs.{floatToMoney(billingPriceGrandTotal)}</td>
                 <td>Rs.{floatToMoney(amountPaid)}</td>
                 <td>
                   {createdAt &&

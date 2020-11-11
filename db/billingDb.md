@@ -51,6 +51,7 @@
       cgstCost: <number>,
       grandTotal: <number>,
       amountPaid: <number>,
+      billingPriceGrandTotal: <number>,
     },
   },
   productPricing: {

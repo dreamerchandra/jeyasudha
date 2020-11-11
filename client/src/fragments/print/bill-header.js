@@ -9,7 +9,7 @@ const BillHeader = () => (
     <h6>Sri Arudaiammal Thunai</h6>
     <span>
       <h6>Mobile Number</h6>
-      <p>000000000000</p>
+      <p>7373722254 / 7373722252</p>
     </span>
   </div>
 )

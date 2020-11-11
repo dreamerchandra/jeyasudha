@@ -71,6 +71,7 @@ export default class BillingData {
       ]
       snapshot.orderNames = this.orderNames
       snapshot.orderIds = this.orderIds
+      snapshot.billingPriceGrandTotal = this.orderDetails.netBillingCost
     }
     return snapshot
   }

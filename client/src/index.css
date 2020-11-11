@@ -16,6 +16,11 @@
   height: 100%;
 }
 
+.s-center {
+  display: grid;
+  place-content: center;
+}
+
 :root {
   --blue1: #ecf5ff;
   --blue2: #accbe1;
