@@ -5811,6 +5811,16 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
+goober@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.0.3.tgz#5069eb8b63644b9496dfd1662c6b31c2d3b22158"
+  integrity sha512-4CgkQXsNWlJiI2ckYde2JWhwli/MKYyVPwxj3WyCE0uEMjNhFyQcbCtvlmtSFAwkmTJda4y3Ujw2PdX/cDZfYg==
+
+goober@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/goober/-/goober-2.0.13.tgz#91d5e10e4f5ecbb70d8ef7223fe7e39d377d9818"
+  integrity sha512-ia68VcSmprfp8wLeqmpx0qJ4icKZ5tAAUT2le0SlZgyW1uM+2zGzwLzCg67A/HtuawQ+DkXCuxNpzp1qx2xNLQ==
+
 google-auth-library@^6.0.0:
   version "6.0.6"
   resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-6.0.6.tgz#5102e5c643baab45b4c16e9752cd56b8861f3a82"
@@ -9967,6 +9977,13 @@ react-loading-skeleton@^2.1.1:
   integrity sha512-+fGvgG9ieUw4D5QVgpqJkJ75jhzUdz96GRsA0HjTlR0Mpj9DJUEFc0AKELs7ZkqWVH8/DiroaaufSrOPld1kGA==
   dependencies:
     "@emotion/core" "^10.0.22"
+
+react-multistep@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-multistep/-/react-multistep-5.1.0.tgz#4260731fe42097f7e3b6a11e2163cd3f1ed97eee"
+  integrity sha512-xYoDx8lsonmGsYlmqyH5x/CE95ZUTsDf7Sb7EAIX4Ggbr1XcIXeGFw4nr3BpOdDA/41mM5z8m6RPUxtiVgmlLA==
+  dependencies:
+    goober "2.0.3"
 
 react-outside-click-handler@^1.3.0:
   version "1.3.0"

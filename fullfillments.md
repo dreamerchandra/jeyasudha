@@ -1,7 +1,9 @@
 # Pending
 - make billing component multi page
 - display logo in background
-- Added date to all db which has created at
+- Billing grand total wrong
+- Add cash/credit in bill
+- Add admin only funality
 
 # Done
 - display bill id in billing component

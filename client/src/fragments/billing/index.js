@@ -1,11 +1,11 @@
 import React, { Component, createRef } from 'react'
 import { toast } from 'react-toastify'
+import Multistep from '../../components/multistep'
 import MainComponentHolder from '../../components/main-component-holder'
 import './index.css'
 import SuggestionItem from '../../components/user-suggestion-list'
 import { getCustomerDetailBasedOnSearchString } from '../../js/firebase-billing-query'
 import Footer from '../../components/footer'
-import SuggestibleInput from '../../components/suggestable-input'
 import { updateBillingData } from '../../js/firebase-billing-mutation'
 import { paymentAdapterForMaterials } from '../../js/billGeneratorAdapter'
 import ProductPricingList from '../../js/ProductPricingList'
@@ -14,6 +14,8 @@ import Notification from '../../components/notification-view'
 import Print from '../print'
 import { getGrandTotalFromSubTotal } from '../../js/helper/taxhelper'
 import { floatToMoney } from '../../js/helper/utils'
+import BillingStep1 from './billing-step1'
+import BillingStep2 from './billing-step2'
 
 class Billing extends Component {
   constructor() {
@@ -27,6 +29,7 @@ class Billing extends Component {
     this.vehicleRef = createRef()
     this.referenceTotalRef = createRef()
     this.amountPaidRef = createRef()
+    window.state = this
     this.billStates = {
       GENERATE_ID: 'Generate Bill Id',
       PRINT_BILL: 'PRINT BILL',
@@ -234,12 +237,52 @@ class Billing extends Component {
     )
   }
 
+  renderStep1 = () => {
+    const {
+      nameRef,
+      addressRef,
+      driveNameRef,
+      vehicleRef,
+      phNumRef,
+      onSuggestionItemSelected,
+    } = this
+    return (
+      <BillingStep1
+        ref={{ nameRef, addressRef, driveNameRef, vehicleRef, phNumRef }}
+        onSuggestionItemSelected={onSuggestionItemSelected}
+        getCustomerDetailBasedOnSearchString={getCustomerDetailBasedOnSearchString}
+        SuggestionItem={SuggestionItem}
+      />
+    )
+  }
+
+  renderStep2 = () => {
+    const {
+      particularsRef,
+      unitRef,
+      referenceTotalRef,
+      amountPaidRef,
+      updateRefernceInUI,
+    } = this
+    const { listOfParticulars } = this.state
+    return (
+      <BillingStep2
+        ref={{ particularsRef, unitRef, referenceTotalRef, amountPaidRef }}
+        listOfParticulars={listOfParticulars}
+        updateRefernceInUI={updateRefernceInUI}
+      />
+    )
+  }
+
   render() {
     const {
       loadingParticulars,
-      listOfParticulars,
       printDetails: { showPrintPreview, billDetails },
     } = this.state
+    const steps = [
+      { name: 'Customer Details', component: this.renderStep1() },
+      { name: 'Product Details', component: this.renderStep2() },
+    ]
     return (
       <>
         {loadingParticulars && (
@@ -251,55 +294,11 @@ class Billing extends Component {
           {typeof this.billingData?.numberedBillId === 'number' && (
             <span className="ref">Bill Id: {this.billingData.numberedBillId}</span>
           )}
-          <div className="main">
-            <p>Customer Name/ID</p>
-            <SuggestibleInput
-              inputRef={this.nameRef}
-              onSuggestionItemSelected={this.onSuggestionItemSelected}
-              SuggestionItem={SuggestionItem}
-              fetchDetailsBasedOnSearchString={getCustomerDetailBasedOnSearchString}
-            />
-            <p>Address</p>
-            <input type="text" autoComplete="nope" ref={this.addressRef} />
-            <p>Driver Name</p>
-            <input type="text" autoComplete="nope" ref={this.driveNameRef} />
-            <p>Vehicle Number</p>
-            <input type="text" autoComplete="nope" ref={this.vehicleRef} />
-            <p>Phone number</p>
-            <input type="tel" autoComplete="nope" ref={this.phNumRef} />
-            <p>Particulars</p>
-            <select ref={this.particularsRef}>
-              {listOfParticulars.map((details) => (
-                <option key={details.id} value={details.id}>
-                  {details.uniqueName}
-                </option>
-              ))}
-            </select>
-            <p>Unit</p>
-            <input
-              type="number"
-              step="0.01"
-              autoComplete="nope"
-              ref={this.unitRef}
-              onChange={this.updateRefernceInUI}
-              min={0}
-            />
-            <p>Grand Total</p>
-            <input
-              type="text"
-              autoComplete="nope"
-              ref={this.referenceTotalRef}
-              disabled
-            />
-            <p>Amount Paid</p>
-            <input
-              type="text"
-              autoComplete="nope"
-              ref={this.amountPaidRef}
-              defaultValue={0}
-              min={0}
-            />
-          </div>
+          <Multistep
+            showNavigation
+            steps={steps}
+            inactiveComponentClassName="hide"
+          />
         </MainComponentHolder>
         <Print
           billDetails={billDetails}

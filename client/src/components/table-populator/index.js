@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import useCollectionDataOnce from '../../common-hoooks/use-firestore-wrapper'
 import LoaderHoc from '../loading'
 
@@ -8,9 +8,6 @@ function TablePopulator({ Table, docRef, formatFetchedDataCb }) {
     idField: 'id',
   })
   const formattedData = formatFetchedDataCb?.(data) ?? data
-  useEffect(() => {
-    console.log('rerender')
-  })
   return (
     <>
       {loading && (
