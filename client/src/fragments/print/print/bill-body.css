@@ -3,6 +3,11 @@
   flex-direction: column;
   border: 2px solid;
   border-radius: 10px;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("../../../assert/logo-crop.png") no-repeat center;
 }
 
 .print-header {
@@ -14,20 +19,20 @@
   justify-items: center;
 }
 
-.print-header>h3 {
+.print-header > h3 {
   align-self: center;
   transform: translate(-18px, 3px);
 }
 
-.print-header>* {
+.print-header > * {
   font-size: 80%;
 }
 
-.bill-body>.print-header>.print-header-items>p {
+.bill-body > .print-header > .print-header-items > p {
   font-size: 8px;
 }
 
-.bill-body>.title {
+.bill-body > .title {
   align-self: center;
   margin: 20px 0;
   padding: 7px 125px;
@@ -35,6 +40,6 @@
   border-radius: 10px;
 }
 
-.bill-body>.title>h2 {
+.bill-body > .title > h2 {
   font-size: 16px;
 }

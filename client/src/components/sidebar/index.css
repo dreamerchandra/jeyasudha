@@ -4,6 +4,7 @@
 
 .nav {
   width: var(--nav-width);
+  z-index: 15;
   /* margin-left: calc(-1 * var(--nav-width)); */
   height: 100vh;
   background-color: var(--blue5);
@@ -12,7 +13,7 @@
   left: 0;
   z-index: 5;
   overflow-y: auto;
-  transition: margin-left .5s ease;
+  transition: margin-left 0.5s ease;
 }
 
 .open {
@@ -34,7 +35,7 @@
     width: 100vw;
     height: 100vh;
     margin-left: -100vw;
-    transition: margin-left .5s ease;
+    transition: margin-left 0.5s ease;
   }
 
   .open {

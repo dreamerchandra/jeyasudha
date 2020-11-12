@@ -1,5 +1,4 @@
 # Pending
-- display logo in background
 - Add admin only funality
 
 # Done
@@ -18,3 +17,4 @@
 - Salary db (crdectedDate, staffId, amount, deducation, netpay)
 - Billing db should print billing grand total instead of government total
 - Add cash/credit in bill
+- display logo in background
