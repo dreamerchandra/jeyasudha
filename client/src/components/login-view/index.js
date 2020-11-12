@@ -3,24 +3,30 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react'
 import './index.css'
+import { toast } from 'react-toastify'
 import Input from '../input'
 import {
   loginWithEmail,
   signupWithEmail,
   sendPasswordResetEmail,
 } from '../../js/firebase-auth'
+import Notification from '../notification-view'
 
 const useToLogin = ({ onLogin, onSignup, sendPasswordReset }) => {
   const [email, _setEmail] = useState('')
   const [password, _setPassword] = useState('')
-  const loginCb = () => {
-    if (email && password) {
-      onLogin({ email, password })
+  const loginCb = async () => {
+    try {
+      await onLogin({ email, password })
+    } catch (err) {
+      toast(<Notification showSuccessIcon={false} text={err.message} />)
     }
   }
-  const signupCb = () => {
-    if (email && password) {
-      onSignup({ email, password })
+  const signupCb = async () => {
+    try {
+      await onSignup({ email, password })
+    } catch (err) {
+      toast(<Notification showSuccessIcon={false} text={err.message} />)
     }
   }
   const setEmail = (event) => _setEmail(event.target.value)

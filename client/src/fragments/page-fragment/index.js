@@ -8,19 +8,21 @@ import './index.css'
 
 const PageFragment = ({ children }) => {
   return (
-    <AuthenticatedView>
-      <NavBar />
-      <div className="main-body-holder">
-        <Header />
-        <>{children}</>
-      </div>
+    <>
       <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar
         closeOnClick
       />
-    </AuthenticatedView>
+      <AuthenticatedView>
+        <NavBar />
+        <div className="main-body-holder">
+          <Header />
+          <>{children}</>
+        </div>
+      </AuthenticatedView>
+    </>
   )
 }
 
