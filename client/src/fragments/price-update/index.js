@@ -8,6 +8,7 @@ import Footer from '../../components/footer'
 import { upsertProduct } from '../../js/firebase-pricing-mutation'
 import SuggestibleInput from '../../components/suggestable-input'
 import Notification from '../../components/notification-view'
+import AuthorizedView from '../../components/authorized-view'
 
 export default class PriceUpdate extends Component {
   constructor() {
@@ -78,35 +79,37 @@ export default class PriceUpdate extends Component {
     })
     return (
       <>
-        <MainComponentHolder>
-          <div className="main">
-            <p>Particulars</p>
-            <SuggestibleInput
-              inputRef={this.productRef}
-              onSuggestionItemSelected={this.onSuggestionItemSelected}
-              SuggestionItem={SuggestionItem}
-              fetchDetailsBasedOnSearchString={getProductDetailBasedOnSearchString}
-            />
-            <p>Government Price</p>
-            <input type="text" ref={this.govtPriceRef} />
-            <p>Billing Price</p>
-            <input type="text" ref={this.billingPriceRef} />
-            <p>CGST percentage</p>
-            <input type="text" ref={this.cgstPercent} defaultValue={5} />
-            <p>SGST percentage</p>
-            <input type="text" ref={this.sgstPercent} defaultValue={5} />
-          </div>
-        </MainComponentHolder>
-        <Footer>
-          <button
-            className={updateButtonCx}
-            onClick={this.updateProduct}
-            type="button"
-            disabled={disableUpdate}
-          >
-            {disableUpdate ? 'Updating' : 'Update'}
-          </button>
-        </Footer>
+        <AuthorizedView>
+          <MainComponentHolder>
+            <div className="main">
+              <p>Particulars</p>
+              <SuggestibleInput
+                inputRef={this.productRef}
+                onSuggestionItemSelected={this.onSuggestionItemSelected}
+                SuggestionItem={SuggestionItem}
+                fetchDetailsBasedOnSearchString={getProductDetailBasedOnSearchString}
+              />
+              <p>Government Price</p>
+              <input type="text" ref={this.govtPriceRef} />
+              <p>Billing Price</p>
+              <input type="text" ref={this.billingPriceRef} />
+              <p>CGST percentage</p>
+              <input type="text" ref={this.cgstPercent} defaultValue={5} />
+              <p>SGST percentage</p>
+              <input type="text" ref={this.sgstPercent} defaultValue={5} />
+            </div>
+          </MainComponentHolder>
+          <Footer>
+            <button
+              className={updateButtonCx}
+              onClick={this.updateProduct}
+              type="button"
+              disabled={disableUpdate}
+            >
+              {disableUpdate ? 'Updating' : 'Update'}
+            </button>
+          </Footer>
+        </AuthorizedView>
       </>
     )
   }

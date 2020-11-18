@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import UserRole from './user-role'
 
 export const loginWithEmail = async ({ email, password }) => {
   if (email === 'jeyasudhaconstructions999@gmail.com') {
@@ -10,6 +11,7 @@ export const loginWithEmail = async ({ email, password }) => {
         firebase
           .auth()
           .signInWithEmailAndPassword(email, password)
+          .then(UserRole.updateRole)
           .catch((err) => {
             console.error(`login with firebase failed with ${err.message}`)
           })
