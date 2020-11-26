@@ -78,7 +78,9 @@ class Billing extends Component {
     const unit = Number(this.unitRef.current.value)
     const primaryAddress = this.addressRef.current.value
     const vehicleNumber = this.vehicleRef.current.value
-    const amountPaid = this.amountPaidRef.current.value
+    const amountPaid = getNumberFromFormattedCurrency(
+      this.amountPaidRef.current.value
+    )
     const { listOfParticulars } = this.state
     const [selectedParticularDetail] = listOfParticulars.filter(
       (detail) => detail.id === userSelectedParticularId

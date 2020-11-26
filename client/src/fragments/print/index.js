@@ -15,7 +15,7 @@ const Print = ({ billDetails = { orders: [] }, showPrintPreview, afterPrintCb })
   }, [])
   useEffect(() => {
     if (showPrintPreview) {
-      // window.print()
+      window.print()
     }
   }, [showPrintPreview])
   if (!showPrintPreview) {
