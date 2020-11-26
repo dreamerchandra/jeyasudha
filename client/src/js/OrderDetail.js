@@ -17,9 +17,7 @@ export default class OrderDetail {
       (particularDetails.sgstPercent / 100) * this.govtPrice
     )
     this.netGovtCost = Number(this.govtPrice + this.govtCgstCost + this.govtSgstCost)
-    this.netBillingCost = Number(
-      this.billingCost + this.billingCgstCost + this.billingSgstCost
-    )
+    this.netBillingCost = Number(this.billingCost)
   }
 
   isFieldsValid() {
