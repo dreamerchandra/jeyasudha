@@ -29,7 +29,6 @@ class Billing extends Component {
     this.vehicleRef = createRef()
     this.referenceTotalRef = createRef()
     this.amountPaidRef = createRef()
-    window.state = this
     this.billStates = {
       GENERATE_ID: 'Generate Bill Id',
       PRINT_BILL: 'PRINT BILL',

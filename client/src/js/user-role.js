@@ -33,5 +33,3 @@ export default class UserRole {
     this.roleChangeListeners.push(onChange)
   }
 }
-
-window.UserRole = UserRole
