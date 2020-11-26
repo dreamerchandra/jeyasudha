@@ -18,6 +18,8 @@
   max-height: 4rem;
   overflow: hidden;
   color: var(--blue5);
+  font-weight: 900;
+  font-size: 1.75rem;
 }
 
 .main input,
