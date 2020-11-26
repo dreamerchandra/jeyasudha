@@ -1,4 +1,5 @@
 import React, { forwardRef } from 'react'
+import CurrencyInput from '../../components/currency-input-field'
 
 const BillingStep2 = forwardRef(({ listOfParticulars, updateRefernceInUI }, ref) => {
   const { particularsRef, unitRef, referenceTotalRef, amountPaidRef } = ref
@@ -24,12 +25,12 @@ const BillingStep2 = forwardRef(({ listOfParticulars, updateRefernceInUI }, ref)
       <p>Grand Total</p>
       <input type="text" autoComplete="nope" ref={referenceTotalRef} disabled />
       <p>Amount Paid</p>
-      <input
-        type="text"
+      <CurrencyInput
         autoComplete="nope"
         ref={amountPaidRef}
         defaultValue={0}
         min={0}
+        isIndianNumberSystem
       />
     </div>
   )

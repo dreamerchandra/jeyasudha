@@ -1,9 +1,11 @@
 import React, { Component, createRef } from 'react'
 import { toast } from 'react-toastify'
+import CurrencyInput from '../../components/currency-input-field'
 import Footer from '../../components/footer'
 import MainComponentHolder from '../../components/main-component-holder'
 import Notification from '../../components/notification-view'
 import StaffDetails from '../../js/StaffDetails'
+import { getNumberFromFormattedCurrency } from '../../js/helper/utils'
 
 const payCycle = [
   {
@@ -30,10 +32,10 @@ export default class StaffUpdate extends Component {
 
   getValuesFromUI() {
     return {
-      name: this.staffNameRef.current.value,
-      empId: this.empIdRef.current.value,
-      payCycle: Number(this.payCycleRef.current.value),
-      salary: Number(this.salaryRef.current.value),
+      name: this.staffNameRef?.current?.value,
+      empId: this.empIdRef?.current?.value,
+      payCycle: Number(this.payCycleRef?.current?.value),
+      salary: getNumberFromFormattedCurrency(this.salaryRef?.current?.value),
     }
   }
 
@@ -76,7 +78,12 @@ export default class StaffUpdate extends Component {
               ))}
             </select>
             <p>Salary</p>
-            <input type="number" min={0} ref={this.salaryRef} />
+            <CurrencyInput
+              min={0}
+              ref={this.salaryRef}
+              decimalsLimit={2}
+              isIndianNumberSystem
+            />
           </div>
         </MainComponentHolder>
         <Footer>

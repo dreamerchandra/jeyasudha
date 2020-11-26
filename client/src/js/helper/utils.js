@@ -7,6 +7,12 @@ export function floatToMoney(num) {
   return Math.round((num + Number.EPSILON) * 100) / 100
 }
 
+export function getNumberFromFormattedCurrency(num) {
+  if (!num) return NaN
+  // replaces non digits by nothing
+  return Number(num.replaceAll(/[^0-9.]/g, ''))
+}
+
 export function assert(assertion, exception) {
   if (!assertion) {
     throw exception

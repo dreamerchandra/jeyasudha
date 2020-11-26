@@ -13,7 +13,7 @@ import LoaderHoc from '../../components/loading'
 import Notification from '../../components/notification-view'
 import Print from '../print'
 import { getGrandTotalFromSubTotal } from '../../js/helper/taxhelper'
-import { floatToMoney } from '../../js/helper/utils'
+import { floatToMoney, getNumberFromFormattedCurrency } from '../../js/helper/utils'
 import BillingStep1 from './billing-step1'
 import BillingStep2 from './billing-step2'
 
@@ -55,7 +55,9 @@ class Billing extends Component {
 
   isAmountValidToRecord = (recordCb) => {
     const referenceToal = this.calculateReferenceTotal()
-    const amountPaid = Number(this.amountPaidRef.current.value)
+    const amountPaid = getNumberFromFormattedCurrency(
+      this.amountPaidRef.current.value
+    )
     if (amountPaid > referenceToal) {
       toast(
         <Notification
@@ -179,13 +181,13 @@ class Billing extends Component {
     const [selectedParticularDetail] = listOfParticulars.filter(
       (detail) => detail.id === userSelectedParticularId
     )
+    if (!selectedParticularDetail) {
+      toast(<Notification showSuccessIcon={false} text="Particulars not selected" />)
+      return NaN
+    }
     const units = Number(this.unitRef.current.value)
     const subTotal = selectedParticularDetail.billingPrice * units
-    return getGrandTotalFromSubTotal(
-      subTotal,
-      selectedParticularDetail.cgstPercent,
-      selectedParticularDetail.sgstPercent
-    )
+    return getGrandTotalFromSubTotal(subTotal, 0, 0)
   }
 
   updateRefernceInUI = () => {
