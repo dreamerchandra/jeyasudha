@@ -84,7 +84,7 @@ export default class SuggestibleInput extends Component {
         list: suggestionList,
       },
     } = this.state
-    const { inputRef, onSuggestionItemSelected, SuggestionItem } = this.props
+    const { inputRef, onSuggestionItemSelected, SuggestionItemList } = this.props
     const loading = suggestionState === SUGGESTION_STATE.FETCHING
     return (
       <OutsideClickHandler
@@ -99,7 +99,7 @@ export default class SuggestibleInput extends Component {
           />
           {showSuggestion && (
             <SuggestionHolder>
-              <SuggestionItem
+              <SuggestionItemList
                 suggestionList={suggestionList}
                 isLoading={loading}
                 onItemSelected={(itemId, item) => {

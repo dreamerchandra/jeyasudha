@@ -7,6 +7,11 @@ export const ROLE = {
   STAFF: '1',
 }
 
+/**
+ * This callback is a part of userRole change
+ * @callback UserRoleOnRoleChange
+ * @param {string} userRole
+ */
 export default class UserRole {
   static role = ROLE.NA
 
@@ -29,6 +34,10 @@ export default class UserRole {
     })
   }
 
+  /**
+   *
+   * @param {UserRoleOnRoleChange} onChange
+   */
   static onRoleChange = (onChange) => {
     this.roleChangeListeners.push(onChange)
   }

@@ -3,7 +3,7 @@ import cx from 'classnames'
 import { toast } from 'react-toastify'
 import MainComponentHolder from '../../components/main-component-holder'
 import { getProductDetailBasedOnSearchString } from '../../js/firebase-pricing-query'
-import SuggestionItem from '../../components/product-suggestion-list'
+import ProductSuggestionItem from '../../components/product-suggestion-list'
 import Footer from '../../components/footer'
 import { upsertProduct } from '../../js/firebase-pricing-mutation'
 import SuggestibleInput from '../../components/suggestable-input'
@@ -86,7 +86,7 @@ export default class PriceUpdate extends Component {
               <SuggestibleInput
                 inputRef={this.productRef}
                 onSuggestionItemSelected={this.onSuggestionItemSelected}
-                SuggestionItem={SuggestionItem}
+                SuggestionItemList={ProductSuggestionItem}
                 fetchDetailsBasedOnSearchString={getProductDetailBasedOnSearchString}
               />
               <p>Government Price</p>

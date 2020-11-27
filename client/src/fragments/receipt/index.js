@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react'
 import { toast } from 'react-toastify'
 import MainComponentHolder from '../../components/main-component-holder'
 import SuggestibleInput from '../../components/suggestable-input'
-import SuggestionItem from '../../components/user-suggestion-list'
+import UserSuggestionListItem from '../../components/user-suggestion-list'
 import { getCustomerDetailBasedOnSearchString } from '../../js/firebase-billing-query'
 import Footer from '../../components/footer'
 import { paymentAdapterForCustomer } from '../../js/billGeneratorAdapter'
@@ -77,7 +77,7 @@ export default class Receipt extends Component {
             <SuggestibleInput
               inputRef={this.nameRef}
               onSuggestionItemSelected={this.onSuggestionItemSelected}
-              SuggestionItem={SuggestionItem}
+              SuggestionItemList={UserSuggestionListItem}
               fetchDetailsBasedOnSearchString={getCustomerDetailBasedOnSearchString}
             />
             <p>Phone number</p>

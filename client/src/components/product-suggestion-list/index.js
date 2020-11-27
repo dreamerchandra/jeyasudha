@@ -5,7 +5,7 @@ import React from 'react'
 import './index.css'
 import Skeleton from 'react-loading-skeleton'
 
-export default function SuggestionItem({
+export default function ProductSuggestionItem({
   suggestionList,
   isLoading,
   onItemSelected,

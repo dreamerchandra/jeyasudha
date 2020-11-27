@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-
-import UserRole, { ROLE } from '../../js/user-role'
+import React from 'react'
+import { useRole } from '../../common-hoooks/use-role'
+import { ROLE } from '../../js/user-role'
 
 const DefaultUnAuthorizedComponent = () => {
   return (
@@ -15,12 +15,8 @@ const AuthorizedView = ({
   UnAuthorizedComponent = DefaultUnAuthorizedComponent,
   allowedRoles = [ROLE.OWNER],
 }) => {
-  const [isUserAuthored, setAuthorized] = useState(
-    allowedRoles.includes(UserRole.role)
-  )
-  UserRole.onRoleChange((role) => {
-    if (allowedRoles.includes(role)) setAuthorized(true)
-  })
+  const role = useRole()
+  const isUserAuthored = allowedRoles.includes(role)
   return <>{isUserAuthored ? <>{children}</> : <UnAuthorizedComponent />}</>
 }
 

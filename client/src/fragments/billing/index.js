@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import Multistep from '../../components/multistep'
 import MainComponentHolder from '../../components/main-component-holder'
 import './index.css'
-import SuggestionItem from '../../components/user-suggestion-list'
+import UserSuggestionListItem from '../../components/user-suggestion-list'
 import { getCustomerDetailBasedOnSearchString } from '../../js/firebase-billing-query'
 import Footer from '../../components/footer'
 import { updateBillingData } from '../../js/firebase-billing-mutation'
@@ -254,7 +254,7 @@ class Billing extends Component {
         ref={{ nameRef, addressRef, driveNameRef, vehicleRef, phNumRef }}
         onSuggestionItemSelected={onSuggestionItemSelected}
         getCustomerDetailBasedOnSearchString={getCustomerDetailBasedOnSearchString}
-        SuggestionItem={SuggestionItem}
+        SuggestionItemList={UserSuggestionListItem}
       />
     )
   }

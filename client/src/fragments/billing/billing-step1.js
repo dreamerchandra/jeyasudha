@@ -6,7 +6,7 @@ const BillingStep1 = forwardRef(
     {
       onSuggestionItemSelected,
       getCustomerDetailBasedOnSearchString,
-      SuggestionItem,
+      SuggestionItemList,
     },
     ref
   ) => {
@@ -17,7 +17,7 @@ const BillingStep1 = forwardRef(
         <SuggestibleInput
           inputRef={nameRef}
           onSuggestionItemSelected={onSuggestionItemSelected}
-          SuggestionItem={SuggestionItem}
+          SuggestionItemList={SuggestionItemList}
           fetchDetailsBasedOnSearchString={getCustomerDetailBasedOnSearchString}
         />
         <p>Address</p>
