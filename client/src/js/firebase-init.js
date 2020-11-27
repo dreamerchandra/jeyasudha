@@ -1,4 +1,6 @@
-import { initializeApp } from 'firebase/app'
+import firebase from 'firebase'
+import 'firebase/firestore'
+import 'firebase/auth'
 
 export default function initializeFirebase() {
   const firebaseConfig = {
@@ -10,6 +12,14 @@ export default function initializeFirebase() {
     messagingSenderId: '913579087424',
     appId: '1:913579087424:web:f9ff1e7c725cd02d30f1a5',
   }
-  initializeApp(firebaseConfig)
+  firebase.initializeApp(firebaseConfig)
+  if (window.location.hostname === 'localhost') {
+    const db = firebase.firestore()
+    db.settings({
+      host: 'localhost:8080',
+      ssl: false,
+    })
+    firebase.auth().useEmulator('http://localhost:9099/')
+  }
   console.log('initalizing app')
 }

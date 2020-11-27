@@ -11,7 +11,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "classnames": "^2.2.6",
-    "firebase": "^7.19.1",
+    "firebase": "^8.1.1",
     "goober": "^2.0.13",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
