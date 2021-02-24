@@ -7,8 +7,9 @@ export const accountPurposeList = [
   { id: 1, value: 'Conveyance' },
   { id: 2, value: 'Allowances' },
   { id: 4, value: 'Site', subField: 'Site Name' },
-  { id: 5, value: 'Crushers' },
-  { id: 6, value: 'Others', subField: 'Description' },
+  { id: 5, value: 'Crushers', subField: 'Description' },
+  { id: 6, value: 'Capital', subField: 'Income' },
+  { id: 7, value: 'Others', subField: 'Description' },
 ]
 
 export default function useAccountHooks() {

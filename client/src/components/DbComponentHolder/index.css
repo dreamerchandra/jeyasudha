@@ -4,6 +4,8 @@
   height: 80vh;
   overflow-y: auto;
   position: relative;
+  width: calc(100% - var(--nav-width));
+  margin-left: auto;
 }
 
 .db-container > .list-all {
