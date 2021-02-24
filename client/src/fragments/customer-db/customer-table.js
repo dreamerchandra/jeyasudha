@@ -7,8 +7,8 @@ const CustomerTable = ({ data }) => {
     <table className="db-table">
       <thead>
         <tr>
-          <th>Address</th>
           <th>Customer Name</th>
+          <th>Address</th>
           <th>Phone number</th>
           <th>Overall due</th>
         </tr>
@@ -16,8 +16,8 @@ const CustomerTable = ({ data }) => {
       <tbody>
         {data.map(({ id, name, phoneNumber, overallDue, primaryAddress }) => (
           <tr id={id}>
-            <td>{primaryAddress}</td>
             <td>{name}</td>
+            <td>{primaryAddress}</td>
             <td>{phoneNumber}</td>
             <td>Rs.{floatToMoney(overallDue)}</td>
           </tr>
