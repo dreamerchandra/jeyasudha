@@ -1,11 +1,13 @@
 .footer {
   display: flex;
-  width: 50vw;
+  width: 100vw;
   margin: auto;
   align-content: center;
   height: auto;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 }
 
 .footer button {

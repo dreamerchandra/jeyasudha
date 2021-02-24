@@ -1,5 +1,7 @@
 .db-table-wrapper {
   height: 90%;
+  width: calc(100vw - 20rem);
+  margin-left: 20rem;
 }
 
 .db-table {

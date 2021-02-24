@@ -1,9 +1,9 @@
 .main-body-holder {
-  width: calc(100% - 250px);
+  width: 100%;
   overflow-y: auto;
   position: relative;
   height: 100vh;
-  margin: auto auto auto 250px;
+  margin: 0 auto;
 }
 
 .main-logo-background {
