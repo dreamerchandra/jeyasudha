@@ -2,8 +2,17 @@ import React, { forwardRef } from 'react'
 import withSaveAsPdf from '../../components/save-as-pdf-hoc'
 import { floatToMoney } from '../../js/helper/utils'
 
-const BillingTable = forwardRef(({ data, onSave }, ref) => {
+const BillingTable = forwardRef(({ data, onSave, setPdfCss }, ref) => {
   if (!data) return null
+  setPdfCss(`
+    table, td, th {
+      border: 1px solid black;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  `)
   return (
     <div className="db-table-wrapper">
       <button className="db-table-save paper" type="button" onClick={onSave}>
