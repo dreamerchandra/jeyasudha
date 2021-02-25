@@ -10,8 +10,8 @@ const AccountTable = ({ data }) => {
           <th>Name</th>
           <th>purpose</th>
           <th>Amount</th>
-          <th>Created At</th>
           <th>Description</th>
+          <th>Created At</th>
         </tr>
       </thead>
       <tbody>
@@ -20,11 +20,11 @@ const AccountTable = ({ data }) => {
             <td>{name}</td>
             <td>{purpose}</td>
             <td>Rs.{floatToMoney(amount)}</td>
+            <td>{extraField || ''}</td>
             <td>
               {createdAt &&
                 new Date(createdAt.seconds * 1000).toLocaleString('en-IN')}
             </td>
-            <td>{extraField || ''}</td>
           </tr>
         ))}
       </tbody>

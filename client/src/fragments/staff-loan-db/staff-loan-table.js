@@ -1,5 +1,5 @@
 import React from 'react'
-import { floatToMoney } from '../../js/helper/utils'
+import { floatToMoney, sort } from '../../js/helper/utils'
 
 const StaffLoanTable = ({ data }) => {
   if (!data) return null
@@ -15,15 +15,17 @@ const StaffLoanTable = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map(({ lenderEmpId, emiAmount, pendingAmount, type, amount, id }) => (
-          <tr key={id}>
-            <td>{lenderEmpId}</td>
-            <td>Rs.{floatToMoney(amount)}</td>
-            <td>{type ? 'ADVANCE' : 'EMI'}</td>
-            <td>{emiAmount ? `Rs.${floatToMoney(emiAmount)}` : 'NA'}</td>
-            <td>Rs.{floatToMoney(pendingAmount)}</td>
-          </tr>
-        ))}
+        {sort(data, 'lenderEmpId').map(
+          ({ lenderEmpId, emiAmount, pendingAmount, type, amount, id }) => (
+            <tr key={id}>
+              <td>{lenderEmpId}</td>
+              <td>Rs.{floatToMoney(amount)}</td>
+              <td>{type ? 'ADVANCE' : 'EMI'}</td>
+              <td>{emiAmount ? `Rs.${floatToMoney(emiAmount)}` : 'NA'}</td>
+              <td>Rs.{floatToMoney(pendingAmount)}</td>
+            </tr>
+          )
+        )}
       </tbody>
     </table>
   )

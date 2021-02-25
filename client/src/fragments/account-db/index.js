@@ -67,16 +67,25 @@ const fieldPaths = [
 ]
 
 function AccountDb() {
-  const { docRef, onReadyToFetch, setFieldPath, setValue, fieldPath } = useDbFetcher(
-    {
-      initialRef: constructQuerySelectorBasedOnCreatedAt({
-        docRef: ref().account,
-        date: new Date(),
-      }),
-    }
-  )
+  const {
+    docRef,
+    onReadyToFetch,
+    setFieldPath,
+    setValue,
+    fieldPath,
+    onListAll,
+  } = useDbFetcher({
+    initialRef: constructQuerySelectorBasedOnCreatedAt({
+      docRef: ref().account,
+      date: new Date(),
+    }),
+    listAllRef: ref().account,
+  })
   return (
     <DbComponentHolder>
+      <button type="button" className="list-all paper" onClick={onListAll}>
+        List All
+      </button>
       <div className="main">
         <QueryPathProvider options={fieldPaths} setOption={setFieldPath} />
         <QueryValueProvider

@@ -1,6 +1,6 @@
 import React from 'react'
 import { convertFirebaseTimeStampToString } from '../../js/firebase-helper'
-import { floatToMoney } from '../../js/helper/utils'
+import { floatToMoney, sort } from '../../js/helper/utils'
 
 const StaffSalaryTable = ({ data }) => {
   if (!data) return null
@@ -20,7 +20,7 @@ const StaffSalaryTable = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map(
+        {sort(data, 'empId').map(
           ({
             id,
             empId,

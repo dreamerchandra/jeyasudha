@@ -25,9 +25,15 @@ function LedgerDb() {
     setFieldPath,
     setValue,
     fieldPath,
-  } = useDbFetcher()
+    onListAll,
+  } = useDbFetcher({
+    listAllRef: ref().ledger,
+  })
   return (
     <DbComponentHolder>
+      <button type="button" className="list-all paper" onClick={onListAll}>
+        List All
+      </button>
       <div className="main">
         <QueryPathProvider options={fieldPaths} setOption={setFieldPath} />
         <QueryValueProvider

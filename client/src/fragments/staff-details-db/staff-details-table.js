@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import withSaveAsPdf from '../../components/save-as-pdf-hoc'
-import { floatToMoney } from '../../js/helper/utils'
+import { floatToMoney, sort } from '../../js/helper/utils'
 
 const StaffDetailsTable = forwardRef(({ data, onSave, setPdfCss }, ref) => {
   setPdfCss(`
@@ -28,7 +28,7 @@ const StaffDetailsTable = forwardRef(({ data, onSave, setPdfCss }, ref) => {
           </tr>
         </thead>
         <tbody>
-          {data.map(({ empId, name, payCycle, salary, id }) => (
+          {sort(data, 'empId').map(({ empId, name, payCycle, salary, id }) => (
             <tr key={id}>
               <td>{empId}</td>
               <td>{name}</td>

@@ -19,3 +19,19 @@ export function assert(assertion, exception) {
   }
   return true
 }
+
+export function sort(oriArray, by = 'name') {
+  const array = JSON.parse(JSON.stringify(oriArray))
+  array.sort((first, sec) => {
+    const nameA = first?.[by]?.toUpperCase?.() ?? ''
+    const nameB = sec?.[by]?.toUpperCase?.() ?? ''
+    if (nameA < nameB) {
+      return -1
+    }
+    if (nameA > nameB) {
+      return 1
+    }
+    return 0
+  })
+  return array
+}
