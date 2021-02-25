@@ -6,7 +6,7 @@
 .db-table {
   table-layout: fixed;
   white-space: nowrap;
-  margin: auto;
+  margin: 0 auto;
   border-collapse: collapse;
   width: 95%;
   max-height: 90%;
@@ -19,6 +19,12 @@
   font-size: 25px;
   top: 1rem;
   left: 0rem;
+  width: 250px;
+  overflow: hidden;
+}
+
+.db-total > div {
+  font-size: 15px;
 }
 
 .db-table th,

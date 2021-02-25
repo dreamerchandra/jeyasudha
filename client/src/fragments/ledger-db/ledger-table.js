@@ -7,10 +7,10 @@ const LedgerTable = ({ data }) => {
   const validData = data.filter(({ netTotal }) => Number(netTotal))
   const creditAmount = validData
     .filter(({ paymentType }) => paymentType === PAYMENT_TYPE.CREDIT)
-    .reduce((sum, { netTotal }) => sum + netTotal)
+    .reduce((sum, { netTotal }) => sum + netTotal, 0)
   const cashAmount = validData
     .filter(({ paymentType }) => paymentType === PAYMENT_TYPE.CASH)
-    .reduce((sum, { netTotal }) => sum + netTotal)
+    .reduce((sum, { netTotal }) => sum + netTotal, 0)
   return (
     <>
       <table className="db-table">
@@ -38,8 +38,8 @@ const LedgerTable = ({ data }) => {
         </tbody>
       </table>
       <div className="db-total">
-        Credit Total: Rs. {floatToMoney(creditAmount)} Cash Total: Rs.
-        {floatToMoney(cashAmount)}
+        <div>Credit Total: Rs. {floatToMoney(creditAmount)}</div>
+        <div>Cash Total: Rs. {floatToMoney(cashAmount)}</div>
       </div>
     </>
   )
