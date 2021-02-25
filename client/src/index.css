@@ -27,6 +27,7 @@
   --blue3: #7c98b3;
   --blue4: #637081;
   --blue5: #536b78;
+  --nav-width: 25rem;
   background-color: var(--blue1);
   font-size: 62.5%;
 }

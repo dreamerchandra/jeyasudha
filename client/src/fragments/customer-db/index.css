@@ -1,7 +1,6 @@
 .db-table-wrapper {
   height: 90%;
   width: calc(100vw - var(--nav-width));
-  margin-left: var(--nav-width);
 }
 
 .db-table {
@@ -9,9 +8,17 @@
   white-space: nowrap;
   margin: auto;
   border-collapse: collapse;
-  max-width: 90%;
+  width: 95%;
   max-height: 90%;
   overflow-y: scroll;
+}
+
+.db-total {
+  position: absolute;
+  text-align: center;
+  font-size: 25px;
+  top: 1rem;
+  left: 0rem;
 }
 
 .db-table th,
