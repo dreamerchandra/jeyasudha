@@ -37,9 +37,10 @@ const LedgerTable = ({ data }) => {
           )}
         </tbody>
       </table>
-      <div className="db-total">
-        <div>Credit Total: Rs. {floatToMoney(creditAmount)}</div>
-        <div>Cash Total: Rs. {floatToMoney(cashAmount)}</div>
+      <div className="db-total" style={{ top: 0 }}>
+        <div>Total: Rs. {floatToMoney(cashAmount + creditAmount)}</div>
+        <div>Paid: Rs. {floatToMoney(cashAmount)}</div>
+        <div>Balance: Rs. {floatToMoney(creditAmount)}</div>
       </div>
     </>
   )
