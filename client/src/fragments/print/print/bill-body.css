@@ -41,5 +41,10 @@
 }
 
 .bill-body > .title > h2 {
+  font-size: 24px;
+}
+
+.bill-body > .title > .address {
   font-size: 16px;
+  text-align: center;
 }
