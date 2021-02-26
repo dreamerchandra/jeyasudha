@@ -8,7 +8,7 @@
   white-space: nowrap;
   margin: 0 auto;
   border-collapse: collapse;
-  width: 95%;
+  width: auto;
   max-height: 90%;
   overflow-y: scroll;
 }
