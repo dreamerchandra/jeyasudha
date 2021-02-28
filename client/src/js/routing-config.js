@@ -143,6 +143,7 @@ const routerConfig = [
     path: '/product',
     component: PriceUpdate,
     linkName: 'PRICE UPDATE',
+    id: 'priceUpdate',
   },
   {
     path: '/due',
