@@ -62,7 +62,7 @@ export default class SuggestibleInput extends Component {
         show,
       },
     })
-    console.log('PRICE_UPDATE: fetching search result for ', searchString)
+    console.log('fetching search result for ', searchString)
     const suggestionItem = await fetchDetailsBasedOnSearchString({
       searchString,
       id: 'id',
@@ -84,7 +84,12 @@ export default class SuggestibleInput extends Component {
         list: suggestionList,
       },
     } = this.state
-    const { inputRef, onSuggestionItemSelected, SuggestionItemList } = this.props
+    const {
+      inputRef,
+      onSuggestionItemSelected,
+      SuggestionItemList,
+      placeholder = '',
+    } = this.props
     const loading = suggestionState === SUGGESTION_STATE.FETCHING
     return (
       <OutsideClickHandler
@@ -96,6 +101,7 @@ export default class SuggestibleInput extends Component {
             ref={inputRef}
             onChange={this.onInputChange}
             autoComplete="nope"
+            placeholder={placeholder}
           />
           {showSuggestion && (
             <SuggestionHolder>

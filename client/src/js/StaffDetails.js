@@ -45,6 +45,15 @@ export default class StaffDetails {
     return null
   }
 
+  static getStaffsBySearchString = async ({ id, searchString }) => {
+    const documentData = await ref()
+      .staffDetails.where('name', '>=', searchString)
+      .where('name', '<=', `${searchString}~`)
+      .limit(4)
+      .get()
+    return getDataFromQuerySnapShot(id, documentData)
+  }
+
   pushToDb = async () => {
     return ref().staffDetails.doc().set(this.toFirestore())
   }

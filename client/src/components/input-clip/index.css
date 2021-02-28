@@ -1,4 +1,14 @@
 .clips-holder {
   margin: 5px;
   width: 300px;
+  height: 150px;
+  overflow: scroll;
+}
+
+.clips-holder > span {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.75rem;
 }
