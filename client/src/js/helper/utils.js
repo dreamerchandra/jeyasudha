@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 export function floatToMoney(num) {
   if (num?.toLocaleString) {
     return num.toLocaleString('en-IN', {
@@ -34,4 +35,17 @@ export function sort(oriArray, by = 'name') {
     return 0
   })
   return array
+}
+
+export function dateRangeAssertion(value) {
+  if (!value.from) throw new Error('Select From date')
+  if (!value.to) throw new Error('Select To date')
+  assert(isFinite(value.to), new Error('InValid To Date'))
+  assert(isFinite(value.from), new Error('InValid From  Date'))
+  assert(value.from < value.to, new Error('From should be smaller than To'))
+}
+
+export function dateDiffInDays(date1, date2) {
+  // round to the nearest whole number
+  return Math.round((date2 - date1) / (1000 * 60 * 60 * 24))
 }

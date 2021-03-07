@@ -7,6 +7,7 @@ import QueryPathProvider from '../../components/query-path-provider'
 import QueryValueProvider, {
   SelectField,
   InputField,
+  DateRageField,
 } from '../../components/query-value-provider'
 
 import TablePopulator from '../../components/table-populator'
@@ -14,7 +15,7 @@ import {
   constructQuerySelectorBasedOnCreatedAt,
   ref,
 } from '../../js/firebase-helper'
-import { assert } from '../../js/helper/utils'
+import { assert, dateDiffInDays, dateRangeAssertion } from '../../js/helper/utils'
 import { accountPurposeList } from '../account/account-hooks'
 
 const fieldPaths = [
@@ -64,6 +65,18 @@ const fieldPaths = [
     },
     id: 3,
   },
+  {
+    displayName: 'Date Range',
+    getQuery: (queryValue) =>
+      constructQuerySelectorBasedOnCreatedAt({
+        docRef: ref().account,
+        date: queryValue.from,
+        positiveOffsetDays: dateDiffInDays(queryValue.from, queryValue.to),
+      }),
+    inputComponent: DateRageField,
+    onAssert: dateRangeAssertion,
+    id: 4,
+  },
 ]
 
 function AccountDb() {
@@ -74,6 +87,7 @@ function AccountDb() {
     setValue,
     fieldPath,
     onListAll,
+    value,
   } = useDbFetcher({
     initialRef: constructQuerySelectorBasedOnCreatedAt({
       docRef: ref().account,
@@ -92,6 +106,7 @@ function AccountDb() {
           queryDetails={fieldPath}
           setValue={setValue}
           onReadyToFetch={onReadyToFetch}
+          value={value}
         />
       </div>
       <TablePopulator docRef={docRef} Table={AccountTable} />

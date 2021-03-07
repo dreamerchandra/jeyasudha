@@ -4,6 +4,7 @@ import BillingTable from './billing-table'
 import DbComponentHolder from '../../components/DbComponentHolder'
 import QueryPathProvider from '../../components/query-path-provider'
 import QueryValueProvider, {
+  DateRageField,
   InputField,
 } from '../../components/query-value-provider'
 import TablePopulator from '../../components/table-populator'
@@ -11,6 +12,7 @@ import {
   constructQuerySelectorBasedOnCreatedAt,
   ref,
 } from '../../js/firebase-helper'
+import { dateDiffInDays, dateRangeAssertion } from '../../js/helper/utils'
 
 const fieldPaths = [
   {
@@ -45,6 +47,19 @@ const fieldPaths = [
       type: 'date',
     },
     id: 3,
+  },
+  {
+    displayName: 'Date Range',
+    getQuery: (queryValue) =>
+      constructQuerySelectorBasedOnCreatedAt({
+        docRef: ref().billing,
+        fieldPath: 'createdAt',
+        date: queryValue.from,
+        positiveOffsetDays: dateDiffInDays(queryValue.from, queryValue.to),
+      }),
+    inputComponent: DateRageField,
+    onAssert: dateRangeAssertion,
+    id: 4,
   },
 ]
 
