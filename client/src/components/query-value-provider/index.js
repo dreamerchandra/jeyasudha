@@ -7,6 +7,7 @@ export default function QueryValueProvider({
   queryDetails,
   setValue,
   onReadyToFetch,
+  value = null,
 }) {
   const { inputComponent: Component, componentProps } = queryDetails || {}
   return (
@@ -17,6 +18,7 @@ export default function QueryValueProvider({
             setValue={setValue}
             {...componentProps}
             onReadyToFetch={onReadyToFetch}
+            value={value}
           />
         ) : (
           <input disabled placeholder="👈 Select" />
@@ -33,3 +35,5 @@ export default function QueryValueProvider({
 
 export { default as InputField } from './input-field'
 export { default as SelectField } from './select-field'
+
+export { default as DateRageField } from './date-range'

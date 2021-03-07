@@ -14,9 +14,11 @@ export default function useDbFetcher({ initialRef = null, listAllRef = null } = 
     }
     return null
   })
+
   const formatter = (data) => {
     return fieldPath?.formatData?.(value, data) ?? data
   }
+
   const onReadyToFetch = () => {
     try {
       if (fieldPath.onAssert) {
@@ -31,9 +33,11 @@ export default function useDbFetcher({ initialRef = null, listAllRef = null } = 
       toast(<Notification showSuccessIcon={false} text={err.message} />)
     }
   }
+
   const onListAll = () => {
     setDocRef(listAllRef)
   }
+
   return {
     setFieldPath,
     setValue,
@@ -42,5 +46,6 @@ export default function useDbFetcher({ initialRef = null, listAllRef = null } = 
     fieldPath,
     formatter,
     onListAll,
+    value,
   }
 }

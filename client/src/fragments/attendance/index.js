@@ -34,7 +34,7 @@ export default function Attendance() {
     <>
       <MainComponentHolder>
         <div className="main">
-          <p>Customer Name/ID</p>
+          <p>Staff Name</p>
           <SuggestibleInput
             inputRef={nameRef}
             onSuggestionItemSelected={onSuggestionItemSelected}

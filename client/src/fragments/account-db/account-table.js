@@ -1,14 +1,27 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
+import withSaveAsPdf from '../../components/save-as-pdf-hoc'
 import { floatToMoney } from '../../js/helper/utils'
 
-const AccountTable = ({ data }) => {
+const AccountTable = forwardRef(({ data, onSave, setPdfCss }, ref) => {
   if (!data) return null
+  setPdfCss(`
+    table, td, th {
+      border: 1px solid black;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+  `)
   const total = data
     .filter(({ amount }) => Number(amount))
     .reduce((sum, { amount }) => sum + amount, 0)
   return (
-    <>
-      <table className="db-table">
+    <div className="db-table-wrapper">
+      <button className="db-table-save paper" type="button" onClick={onSave}>
+        Save
+      </button>
+      <table className="db-table" ref={ref}>
         <thead>
           <tr>
             <th>Name</th>
@@ -34,8 +47,8 @@ const AccountTable = ({ data }) => {
         </tbody>
       </table>
       <div className="db-total">Total: Rs. {floatToMoney(total)}</div>
-    </>
+    </div>
   )
-}
+})
 
-export default AccountTable
+export default withSaveAsPdf(AccountTable)
