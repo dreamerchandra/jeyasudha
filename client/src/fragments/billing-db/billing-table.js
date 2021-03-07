@@ -13,9 +13,13 @@ const BillingTable = forwardRef(({ data, onSave, setPdfCss }, ref) => {
       border-collapse: collapse;
     }
   `)
-  const total = data
+  const grandTotal = data
     .filter(({ billingPriceGrandTotal }) => Number(billingPriceGrandTotal))
     .reduce((sum, { billingPriceGrandTotal }) => sum + billingPriceGrandTotal, 0)
+  const paidTotal = data
+    .filter(({ amountPaid }) => Number(amountPaid))
+    .reduce((sum, { amountPaid }) => sum + amountPaid, 0)
+  const balance = grandTotal - paidTotal
   return (
     <div className="db-table-wrapper">
       <button className="db-table-save paper" type="button" onClick={onSave}>
@@ -63,7 +67,11 @@ const BillingTable = forwardRef(({ data, onSave, setPdfCss }, ref) => {
           )}
         </tbody>
       </table>
-      <div className="db-total">Total: Rs. {floatToMoney(total)}</div>
+      <div className="db-total" style={{ top: 0 }}>
+        <div>Total: Rs. {floatToMoney(grandTotal)}</div>
+        <div>Paid: Rs. {floatToMoney(paidTotal)}</div>
+        <div>Balance: Rs. {floatToMoney(balance)}</div>
+      </div>
     </div>
   )
 })
